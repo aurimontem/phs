@@ -2,7 +2,7 @@ Physics Help Session
 ====================
 
 Here are some guides (and other useful things) for Linux. Let me know if you
-want to contribute to them. Test test
+want to contribute to them.
 
 
 Topics we have guides on:
