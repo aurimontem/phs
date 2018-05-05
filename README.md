@@ -2,7 +2,9 @@ Programming Help Sessions
 =========================
 
 Here are some guides (and other useful things) for programming and Linux,
-targeted at physics majors. Let us know if you want to contribute to them.
+targeted at physics majors. Let us know if you want to contribute to them. If
+it is your first time programming, take a look at README.md in the [Week
+1](week_1) directory.
 
 If you're following along with Programming Help Sessions @ UCSB, take a look at
 our curriculum for:
