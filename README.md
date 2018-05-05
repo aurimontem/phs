@@ -1,13 +1,14 @@
-Programming Help Session
-========================
+Programming Help Sessions
+=========================
 
-Here are some guides (and other useful things) for Linux. Let me know if you
-want to contribute to them.
+Here are some guides (and other useful things) for programming and Linux,
+targeted at physics majors. Let us know if you want to contribute to them.
 
 If you're following along with Programming Help Sessions @ UCSB, take a look at
 our curriculum for:
--   [Week 1](week_1/)--- test
 
+-   [Week 1](week_1/) -- interact with the command line, type in vim, create a
+    simple python file in vim, and modify an existing python file in vim.
 
 Topics we have guides on:
 
