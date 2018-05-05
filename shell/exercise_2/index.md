@@ -7,7 +7,7 @@ open in a separate window so you can follow along. You'll need an internet
 connection for parts of this guide.
 
 
-Paramater Sweep
+Parameter Sweep
 ===============
 
 This will be using the program 'tsp.py' from the directory 'media/tsp', with
