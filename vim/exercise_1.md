@@ -1,4 +1,4 @@
-Vim Excercise 1
+Vim Exercise 1
 ===============
 
 Vim is a powerful text editor. This guide will demonstrate some of the features
