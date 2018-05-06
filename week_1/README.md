@@ -17,7 +17,7 @@ line, also known as a *shell*:
 - Ubuntu: Ctrl + Alt + T
 
 If you want to skip this introduction, feel free to reference the command line
-cheatsheet in the [shell](../shell) directory instead.
+cheatsheet (cheatsheet.md) in the [shell](../shell) directory instead.
 
 Basic shell commands + downloading PHS files with git
 -----------------------------------------------------
@@ -191,8 +191,8 @@ figuring out how .tar and .zip files were compressed!):
 You should now feel comfortable navigating up and down directories (```cd```,
 ```ls```) as well as displaying the text in files (```cat```, ```head```,
 ```tail```). These tools are hardly scratching the surface of command line
-tools: wait for future weeks to learn, or check out the [command line
-cheatsheet](../shell/shell_cheatsheet.md) if you are impatient. 
+tools: wait for future weeks to learn, or check out the command line cheatsheet
+(cheatsheet.md) in the [shell](../shell) directory if you are impatient. 
 
 Since everything is just a file or a directory, we will now learn how to
 manipulate text using the text-editor ```vim```.
