@@ -68,7 +68,11 @@ utility of Linux: super easy installation of programs. You will install
   tools you will ever need)
 - Linux: ```sudo apt-get install git```
 
-Notice the command ```sudo``` in these commands: TBC
+Notice the command ```sudo``` in these commands. ```sudo``` stands for
+'superuser do', and it executes whatever command follows with root (basically
+'admin') privileges. ```sudo``` is often needed for 'system level' commands
+(installation of software, for example) but it is also powerful-- with it, you
+can irreparably delete your entire operating system! Be careful.
 
 
 
