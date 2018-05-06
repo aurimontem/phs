@@ -16,8 +16,8 @@ line, also known as a *shell*:
 - Mac: Cmd + Spacebar, type Terminal
 - Ubuntu: Ctrl + Alt + T
 
-If you want to skip this introduction, feel free to reference this
-[command line cheatsheet](../shell/shell_cheatsheet.md) instead.
+If you want to skip this introduction, feel free to reference the command line
+cheatsheet in the [shell](../shell) directory instead.
 
 Basic shell commands + downloading PHS files with git
 -----------------------------------------------------
