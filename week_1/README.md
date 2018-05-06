@@ -17,7 +17,7 @@ line, also known as a *shell*:
 - Ubuntu: Ctrl + Alt + T
 
 If you want to skip this introduction, feel free to reference the command line
-cheatsheet (cheatsheet.md) in the [shell](../shell) directory instead.
+cheatsheet (shell_cheatsheet.md) in this directory instead.
 
 Basic shell commands + downloading PHS files with git
 -----------------------------------------------------
@@ -192,11 +192,40 @@ You should now feel comfortable navigating up and down directories (```cd```,
 ```ls```) as well as displaying the text in files (```cat```, ```head```,
 ```tail```). These tools are hardly scratching the surface of command line
 tools: wait for future weeks to learn, or check out the command line cheatsheet
-(cheatsheet.md) in the [shell](../shell) directory if you are impatient. 
+shell_cheatsheet.md in this directory if you are impatient. 
 
 Since everything is just a file or a directory, we will now learn how to
 manipulate text using the text-editor ```vim```.
 
 Text editing in ```vim```
 -------------------------
+```vim``` is not your standard text editor-- your mouse will not work! It is
+entirely keyboard based. You may exclaim "this is terrible!" at first, but once
+you overcome the barrier, you will be **significantly** faster at typing with
+vim than with a point-and-click text editor (e.g. the built in python editor,
+MATLAB, Microsoft Word). The main reason for this is that your mouse has two
+buttons, while your keyboard has around 100 (vim is case sensitive). Further,
+if you use ```vim```, it will become the ONLY text editor you will need-- it
+can write your LaTeX code, your python, your C++, your Julia, and whatever
+else. (A caveat: you don't *always* need to use vim. I use the built-in
+text editors for Gmail and Mathematica and iPython, but I often find myself
+wishing they had vim key-bindings!)
 
+Let's get started by by opening the file ```vim_exercise_1.md``` in vim:
+```
+    % ls
+    README.md  shell_cheatsheet.md  vim_cheatsheet.md  vim_exercise_1.md
+    % vim vim_exercise_1.md
+```
+
+(remember to tab complete after ```vim vim_e```) (as before, if you need to
+install vim use a ```sudo apt install vim``` command)
+
+This vim exercise is self-contained, so work through the examples. vim has
+different "modes": normal model, insert mode, and visual mode. You start out in
+normal mode (use 'h,j,k,l' to move), and you enter insert mode with 'i'. Escape
+insert mode back into normal mode with 'Esc'. When in normal model, undo your
+last command with 'u', and **w**rite and **q**uit (= save and close) the file
+with ':wq'. I know reaching for the Esc key all the time is annoying-- in
+future classes we will remap CapsLock to Esc, which is much better in my
+opinion. See you after you've completed ```vim_exercise_1.md```!

@@ -35,13 +35,19 @@ Inserting text
 --------------
 
 -   Press `i` to insert text at the cursor (enter insert mode)
+-   Press `a` to insert text after the cursor (enter insert mode)
 -   Press `I` at the beginning of a line, `A` at the end
 -   Press `Esc` to leave insert mode
+-   Press `u` when not in insert mode to undo the last action
+-   Press `Ctrl + r` when not in insert mode to redo the last action
 
 ```
 Navigate to the       and place the word 'blank' there.
 Using `A`, place the word that describes it's position at the
 the word 'Type' at the beginning of the line using `I`.
+
+Undo (with 'u') all of your last commands, then redo (with 'Ctrl + r') the
+previous commands
 ```
 
 
@@ -50,8 +56,9 @@ Copying and pasting
 
 -   Ensure that you are in 'Normal' mode by pressing `Esc`
 -   Yank (copy) a line of text using `yy`
--   Paste the line of text using `p`
+-   Paste the line of text using `p` (after cursor) or `P` (at cursor)
 -   Delete (cut) a line of text using `dd`
+-   Delete (cut) a word of text using `dw`
 -   Cut a character using `x`
 
 ```
@@ -65,6 +72,7 @@ This is a 'these' line.
 This is a 'these' line.
 
 Cut an 'o' from 'good' using `x` and paste it in 'hell'.
+Delete these words with 'dw' twice.
 ```
 
 -   Delete the rest of a line (from cursor on) using `Shift-d`
@@ -95,11 +103,13 @@ Protip: Abuse `u` and `Ctrl-R`, they remember quite a bit for you.
 Copying and pasting multiple lines
 ----------------------------------
 
--   Ensure you are in 'Normal' mode, then enter 'Visual' mode by pressing `v`.
+-   Ensure you are in 'Normal' mode by pressint Esc, then enter 'Visual' mode
+    by pressing `v`.
 -   Use normal navigation to select the text you want to copy/cut
--   `x` to cut the selected text
+-   `x` or `d` to cut the selected text
 -   `p` to paste the selected text
 -   Use the `.` operation to replay the last command.
+
 
 ```
 cut both this line
@@ -135,16 +145,15 @@ Came whiffling through the tulgey wood,
   And burbled as it came!
 ```
 
-
 String substitution
 -------------------
 
 -   From normal mode, go into command mode by pressing `:`
--   Command: `s/s/r` to replace 's' with 'r'
--   Command: `%s/s/r` to do it for every line in the file, for the first s in
+-   Command: `:s/x/y` to replace 'x' with 'y'
+-   Command: `:%s/x/y` to do it for every line in the file, for the first x in
     the line
--   Command: `s/s/r/g` to do it for every 's' in this line
--   Command: `s/s/r/gc` to do it globally for this line and ask for confirmation
+-   Command: `:s/x/y/g` to do it for every 'x' in this line
+-   Command: `:s/x/y/gc` to do it globally for this line and ask for confirmation
 
 ```
 Replace this 'foo' but not this 'foo' with 'bar' using `:s/foo/bar` on this line
@@ -157,7 +166,7 @@ Replace this 'foo', but not this 'foo', using the `.` command on this line.
 -   Undo your action with `u`
 
 ```
-Select the block below using `v`, then in visual mode use `:s/foo/bar/g`
+Select the block below using `v` or `V`, then in visual mode use `:s/foo/bar/g`
 This 'foo' should not turn into a 'bar'.
 
 Select the foo's in this paragraph starting here and pressing `v`
