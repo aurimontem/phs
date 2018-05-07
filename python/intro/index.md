@@ -404,6 +404,8 @@ might help to see the equivalent `for` + `append` loop expression:
 List comprehensions are much faster than for loops + append, especially for
 larger lists!
 
+*** GOT TO HERE IN WEEK 1 ***
+
 
 Functions
 =========
