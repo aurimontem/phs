@@ -1,4 +1,4 @@
-Programming Help Sessions: Week 1
+Programming Help Sessions (PHS): Week 1
 =================================
 
 Welcome to programming help sessions! The files in here were originally created
@@ -9,24 +9,34 @@ though, is that none of our names matter-- only the content does. So long
 as you act in this open-source manner, you and anyone you know may use,
 modify, and distribute this code.
 
-If you are already at this point, you probably already have access to a command
-line, also known as a *shell*:
+To participate in PHS, you will need to have access to a command line, also
+known as a **shell**:
 - Windows 10: https://tutorials.ubuntu.com/tutorial/tutorial-ubuntu-on-windows,
   then open the program Ubuntu
 - Mac: Cmd + Spacebar, type Terminal
 - Ubuntu: Ctrl + Alt + T
 
+Once installed, let's open up a second shell and update everything:
+- Windows 10: In the shell run `sudo apt update` (which updates the
+  Ubuntu repositories all shell programs are stored in) and then `sudo apt
+  upgrade` (which upgrades all of your out-of-date software), and wait for
+  everything to download and install
+- Mac: In the shell run `xcode-select --install` to download most of the
+  command line utilities you will ever need. If you are running mac and want to
+  download more command line programs, in your free time look up `homebrew`
+
 If you want to skip this introduction, feel free to reference the command line
 cheatsheet (shell_cheatsheet.md) in this directory instead.
 
-Basic shell commands + downloading PHS files with git
------------------------------------------------------
+Basic shell commands
+--------------------
 
-With the command line installed, you looked to see what is in your current
-directory by *listing* files in this directory by typing ```ls``` (then Enter).
-Then, you looked to see where you were located in your file system by *printing
-[your] working directory* with ```pwd```. It is common for shell commands to
-be formatted as:
+With the command line installed, look to see what is in your current directory
+by **l**i**s**ting the files in this directory by typing ```ls``` (then Enter).
+Then, look to see where you were located in your file system by **p**rinting
+your **w**orking **d**irectory with ```pwd```. I think of `pwd` as your
+'compass', since it will always tell you where you are in your file system. In
+this guide and elsewhere, shell commands will be formatted as:
 
 ```
     % ls 
@@ -35,15 +45,15 @@ be formatted as:
     /home/eric
 ```
 
-We want to make a new directory that we will use for PHS. We will *make a
-directory* called my_dir with ```mkdir my_dir```. Now, when we list the contents
-of this directory, we see:
+Let's make a new directory to practice moving around in the file system. We
+will **m**a**k**e a **dir**ectory called my_dir with ```mkdir my_dir```. Now,
+when we list the contents of our current directory, we see something like:
 ```
     % ls 
     my_dir  my_python_file.py   my_file_1.txt   my_image_1.pdf  my_webpage_1.html
 ```
 
-Let's *change directories* to this new folder with ```cd my_dir```. Now, when
+Let's **c**hange **d**irectories to this new folder with ```cd my_dir```. Now, when
 we look at where we are located we see:
 ```
     % pwd
@@ -53,12 +63,17 @@ we look at where we are located we see:
 If we wanted, we can go up a directory with ```cd ..```. then return back
 to the my_dir directory again with ```cd my_dir```. Notice that you could have
 also written ```cd my_d``` + Tab, and the rest of 'my_dir' will automatically
-fill in! This is called tab-completion, and you should use it constantly.
+fill in! This is called tab-completion, and you should abuse this feature.
+
+Now let's **r**e**m**ove (= delete) this temporary **dir**ectory by navigating
+to the parent directory of ``my_dir`` and then running ``rmdir my_dir``.
 
 ```ls``` and ```cd``` are the bread-and-butter of navigating the command
 line-- they are the equivalent of clicking on folders in a graphical file
 directory.
 
+Downloading PHS files with git
+------------------------------
 Now let's copy the entirety of the 'programming help sessions' files
 onto your computer from github, using the command ```git```. First, check if
 your computer has it installed by typing ```git``` (+ Enter) on the command
@@ -95,7 +110,11 @@ onto your computer with the command ```git clone``` + the github address:
 
 What is new? Check with ```ls```, and move into the new directory with ```cd
 phs```. Explore the new folders here using ```cd```, ```ls```, and ```cd ..```.
-Eventually, come back to the base phs folder with ```cd ~/phs```.
+Eventually, come back to the base phs folder with ```cd ~/phs```. Some command
+lines have access to the `tree` command which is a neat way to visualize the
+file structure; see if your system can do this with ``tree .``, once you are
+located in the `phs` directory. (Here `.` means 'in my current directory'.
+Therefore, `cd .` will leave you in the same directory)
 
 Reading from and manipulating files
 -----------------------------------
@@ -191,8 +210,9 @@ figuring out how .tar and .zip files were compressed!):
 You should now feel comfortable navigating up and down directories (```cd```,
 ```ls```) as well as displaying the text in files (```cat```, ```head```,
 ```tail```). These tools are hardly scratching the surface of command line
-tools: wait for future weeks to learn, or check out the command line cheatsheet
-shell_cheatsheet.md in this directory if you are impatient. 
+tools: wait for future weeks to learn more advanced tools, or check out the
+command line cheatsheet shell_cheatsheet.md in this directory if you are
+impatient. 
 
 Since everything is just a file or a directory, we will now learn how to
 manipulate text using the text-editor ```vim```.
@@ -209,17 +229,19 @@ if you use ```vim```, it will become the ONLY text editor you will need-- it
 can write your LaTeX code, your python, your C++, your Julia, and whatever
 else. (A caveat: you don't *always* need to use vim. I use the built-in
 text editors for Gmail and Mathematica and iPython, but I often find myself
-wishing they had vim key-bindings!)
+wishing they had vim key bindings!)
 
 Let's get started by by opening the file ```vim_exercise_1.md``` in vim:
 ```
+    % pwd
+    /home/eric/phs/week_1
     % ls
-    README.md  shell_cheatsheet.md  vim_cheatsheet.md  vim_exercise_1.md
+    jabberwocky  my_script.py  README.md  shell_cheatsheet.md  vim_cheatsheet.md  vim_exercise_1.md
     % vim vim_exercise_1.md
 ```
 
 (remember to tab complete after ```vim vim_e```) (as before, if you need to
-install vim use a ```sudo apt install vim``` command)
+install vim use ```sudo apt install vim``` command)
 
 This vim exercise is self-contained, so work through the examples. vim has
 different "modes": normal model, insert mode, and visual mode. You start out in
@@ -245,7 +267,7 @@ interpreter is good for testing out small snippets of code or ideas, while
 scripts are good for larger more extensive programs that you will revisit and
 modify. You should use python3 instead of python2 whenever possible, since it
 is morally proper to use up-to-date software. (A large part of the following
-text was originally in ```phs/python/intro/index.md```)
+text is taken from ```phs/python/intro/index.md```)
 
 Once in the interpreter (```python``` on the command line), you can use any
 commands you would use in python:
@@ -289,7 +311,7 @@ has that function defined - the `math` module. Modules consist of prebuilt
 commands that are constructed and peer-reviewed by a few open-source
 contributors. Once you learn to use these modules (especially `numpy`, `scipy`,
 `itertools`, and `matplotlib`), your code can worry more about implementing
-things than the implementation itself.
+ideas rather than the implementation itself.
 
 
 ```python
@@ -307,9 +329,10 @@ Then, take log(16), then (log(16) base 2). What function do you use, and how do
 you call it?  Google will have all the answers.  (google "python exponential",
 for example)
 
-You can also write your own modules. Create a python file called `my_module.py`,
-then you can import it using `import my_module`. The file `my_module.py` must be
-in the same directory you try to use it in.
+Eventually, you can also write your own modules that contain your own specific
+functions for your own specific task-- to do this, you can create a python file
+called `my_module.py`, and then import it in a python script with `import
+my_module`.
 
 
 ### Lists
@@ -352,9 +375,9 @@ Creating python scripts in vim
 ------------------------------
 
 A python script is a text file consisting of python commands on each line. When
-the script is executed, each line of the script is literally being sequentially
-executed in the interpreter. Blank lines are ignored, and on any line the text
-that follows a `#` is a comment and will be ignored.
+the script is executed, each line of the script is sequentially executed in the
+interpreter. Blank lines are ignored, and on any line the text that follows a
+`#` is a comment and will be ignored.
 
 Open the sample python file `my_script.py` in vim with `vim my_script.py`, and
 see that it consists of typical python commands.  You would like to execute
@@ -376,21 +399,23 @@ caveat, you could have originally executed the file without changing the file
 permissions with `python my_script.py`, but making files you want to execute
 executable with `chmod` is the proper way to do things in the command line)
 
-Now read through the python file in vim. Part A demonstrates a simple for loop,
-using the `range` command which effectively constructs a list of numbers that
-you can iterate through. Part B uses a for loop to perform the derivative of
-some (time, position) coordinates. Part C constructs and calls a simple
-function that adds numbers within a certain range. Part D contains an error,
-which you should find by reading the error message python gives you. Remedy
-this error in the file.
+Now read through the python file `my_script.py` in vim. Part A demonstrates a
+simple for loop, using the `range` command which effectively constructs a list
+of numbers that you can iterate through. Part B uses a for loop to perform the
+derivative of some (time, position) coordinates. Part C constructs and calls a
+simple function that adds numbers within a certain range. Part D contains an
+error, which you should find by reading the error message python gives you.
+Remedy this error in the file, save and close the file with `:wq` in vim, and
+rerun it to ensure there is no longer any error.
 
 Now you will make your own python file. Open a new file called
 `my_first_script.py` with `vim my_first_script.py`. Immediately write the file
 (= save) with `:w`.  In the first line in the file, place the 'sh-bang'
 `#!/usr/bin/python3`, which tells the shell that you are using python, and that
 it is located at `/usr/bin/python3`. Ensure that this is the right location on
-your own machine, by running the command `which python`. Use `python2` or
-`python3` if you want to be explicit (instead of `python`).
+your own machine, by running the command `which python` in your terminal. Use
+`python3` or `python2` if you want to be explicit about which version you are
+using (instead of just `python`).
 
 ```python
 #!/usr/bin/python3
@@ -398,22 +423,26 @@ your own machine, by running the command `which python`. Use `python2` or
 print("Hello, world!")
 ```
 
-Add a few other lines of content, as you see fit, and print some result. Then
-in vim write and quit (= save and close) your script file with `:wq`.  To
-execute the script, you can run the file using the program `python`. At your
-terminal in the appropriate directory run:
+In this file, add a few lines of code that prints out all of the even numbers
+between 0 and 30. Use a `for` loop, the modulus function `%` (`7 % 3 == 1`), an
+if statement `if a == b:`, and the `print` command. Open up the sample script
+in the same vim terminal with `:tabedit my_script.py`, and switch between vim
+tabs with `gt` in normal mode.
 
+When you are done, write and quit (= save and close) your script file with
+`:wq`, and then execute your script with python
 ```bash
 % python my_first_script.py
 ```
-
-Or you can make the script executable by running `chmod u+x my_first_script.py`, then
-call it using the `./` syntax. This **requires** the "sh-bang" mentioned above.
-
+or make it executable with `chmod`
 ```bash
 % chmod u+x my_first_script.py     # Do once to make executable
 % ./my_first_script.py             # Can be run like this every time
 ```
+Once your code works, help your neighbor and troubleshoot their code.
+
+If you chose to make your script executable by running `chmod u+x my_first_script.py` and called it
+using the `./` syntax, the 'sh-bang' described above is **required**.
 
 What was the difference between running our short "Hello, world!" program in the
 interpreter versus in a script? In what instances are scripts useful, and when
