@@ -26,7 +26,10 @@ Once installed, let's open up a second shell and update everything:
   download more command line programs, in your free time look up `homebrew`
 
 If you want to skip this introduction, feel free to reference the command line
-cheatsheet (shell_cheatsheet.md) in this directory instead.
+cheatsheet (shell_cheatsheet.md) in this directory instead.  An appendix that
+gives an overview of the command line, basic bash commands, and the remote
+access of files is also available in command_line_appendix.pdf (created by Alex
+Dorsett for PHYS 125).
 
 Basic shell commands
 --------------------
