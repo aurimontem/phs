@@ -10,12 +10,14 @@ Navigation, file/directory manipulation
 ---------------------------------------
 
 ```bash
-% ls    # list files (`ls -lah` for more info)
-% cd    # change directory (`cd ..` for parent directory)
-% mv    # move/rename files
-% mkdir # make directories
-% touch # create empty file
-% rm    # remove files (`rm -r` for directories)
+% ls       # list files (`ls -lah` for more info)
+% cd       # change directory (`cd ..` for parent directory)
+% pwd      # print working directory
+% mv       # move/rename files
+% mkdir    # make directories
+% touch    # create empty file
+% rm       # remove files (`rm -r` for directories)
+% up/down arrow keys # scroll through past executed commands
 ```
 
 Viewing a file
@@ -24,6 +26,8 @@ Viewing a file
 ```bash
 % cat   # display whole file
 % less  # page whole file (`j` and `k` to navigate, `/` to search)
+% head  # display the start of the file
+% tail  # display the end of the file
 ```
 
 Editing a File
