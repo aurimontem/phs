@@ -114,7 +114,8 @@ Open source Othello
 -------------------
 
 Ensure you are in the `week_2` directory with `pwd`. Now we're going to examine
-the contents of the file `othello.txt` with command-line tools. We will:
+the contents of the file `othello.txt` with command-line tools. Spoiler alert
+for anyone who hasn't read Othello... We will:
 + Estimate how many lines Othello has, and how many Lodovico has
 + Print out the first sentence of each of Othello's lines
 + See how many times Othello's name is called in the play
@@ -177,9 +178,11 @@ command line programs that can be combined with pipes.
     % grep 'LODOVICO' othello.txt | wc -l
     39
 ```
-**HERE**
-Print out the first sentence of each of Othello's lines using the '-A' option
-for `grep`:
+Print out the first line of each of Othello's lines using the '-A' option
+for `grep`. Unsure what `-A` does? Use `man grep`, then search (`/`) for -A with
+    `/-A` + Enter. Use `q` to quit the man page. In this case, `grep -A 2
+    'OTHELLO' othello.txt` will print the line containing 'OTHELLO' as well as
+    the following two lines (`-A` for **A**fter).
 
 ```bash
 % grep -A 2 'OTHELLO' othello.txt
@@ -198,27 +201,24 @@ for `grep`:
     I kiss'd thee ere I kill'd thee: no way but this;
 ```
 
+If we wanted to navigate this in an easier way, we can pipe the output of this
+command into `less` with `grep -A 2 'OTHELLO' othello.txt | less`, in which you
+can use vim-style navigation key bindings.
 
-Random Data File
-================
 
-This is using random data file 'data_file.csv'.
-
-Objectives
-----------
-
+Extracting useful content from a toy data file in the command line
+--------------------------------------------------------------
+Next we are going to extract information with the a toy data file containing random
+data, `data_file.csv`. Using command line tools, we will:
 + Display the 'Reduced Chai Values' and 'Final Energy Values'
 + Show only the last two 'Reduced Chai Values'
 + Find out how many data lines are in the file
 + Find out how many data points are in the file
 
-Procedure
----------
-
-Get an idea of what the file looks like with `less`. Use the search function of
-less (press '/' followed by your search string) to get an idea of the file. Use
-the 'n' key to jump to the next match, 'N' to go te previous. Use the keys 'k'
-and 'j' to scroll.
+First get an idea of what the file looks like with `less`. Use the search
+function of less (press '/' followed by your search string, for example
+'Values') to probe the file's contents.  Use the 'n' key to jump to the next
+match, 'N' to go to previous. Use the keys 'k' and 'j' to scroll.
 
 ```bash
 % less data_file.csv
@@ -269,8 +269,10 @@ To show only the last two 'Reduced Chai Values', pipe the output of `grep` into
 ```
 
 Use the '-c' option for `grep` to count the data lines, coupled with the '-v'
-option to exclude non-data lines (invert the selection). You can also use the
-`wc` command to count the number of lines grep outputs.
+option to invert the selection (only showing lines that DO NOT match the
+search; in the following case we show any line not containing a colon). As
+before, you can also use the `wc` (word count) command to count the number of lines grep
+outputs.
 
 ```bash
 % grep -c -v ':' data_file.csv
@@ -279,38 +281,37 @@ option to exclude non-data lines (invert the selection). You can also use the
 5000
 ```
 
-To verify there are four data-points per line, we'll count the data points now.
-We'll use the '-v' option for `grep` again to exclude descriptive lines, and
-pipe the output into `wc`. This time we'll use the `-w` option with `wc` to
-count words, instead of lines. There should be four data-points per line.
+To verify there are four data entries on each line, we will count the total
+number of data points using the word (`-w`) option of `wc` instead of the line
+(`-l`) option.
+Again, we grep for all of the lines containing data with the '-v' option for
+`grep`, and then pipe the output into `wc`.
 
 ```bash
 % grep -c -v ':' data_file.csv | wc -w
 20000
 ```
+Therefore, since there are 5000 lines and 20000 'words', there are four data
+entries per line (unless the file isn't uniform).
 
-Supercomputer Output Parsing
-============================
+Parsing content from real supercomputer output
+----------------------------------------------
 
-This is using file 'dextran_qm_dft.out'.
-
-Objectives
-----------
-
+Next we will perform similar exercises, but this time use the supercomputer
+output file `dextran_qm_dft.out`. We will:
 + See the steps and energies for each relaxation of the dextran molecule
-+ Print out each geometry along the relaxation path
-+ Make an function that does all this for you in one fell swoop
-+ Turn the function into a shell script so it can be used a bit more versatily
-+ Use the shell script from within vim to create a new file
++ Save the energies for each relaxation step
++ Save the geometries along each relaxation step
++ Combine the energies and geometries into one file
 
-Procedure
----------
-
-Get a feel for the file by displaying it with `less` (or `vim`). Knowing that
-NWChem outputs a '@' at the beginning of a line with energy information on it,
-search for '^@'. The '^' is a regular expression that matches the beginning of a
-line, so we only get lines what the '@' is at the beginning of the line. Also
-search for 'Geometry' to get an idea of what those parts of the file look like.
+As always, first get a feel for the file by displaying it with `less` (or
+`vim`). Knowing that NWChem outputs a `@` at the beginning of a line with
+energy information on it, search for `^@`. The `^` is a regular expression that
+matches the beginning of a line, so this search only returns lines that begin
+with a `@`. If we wanted to only search for `@`, we need to use `/\@`, where
+the `\` is an escape character-- these are needed when the character we are
+searching for has other uses in the program.  Also search for 'Geometry' to get
+an idea of what those parts of the file look like.
 
 ```bash
 % less dextran_qm_dft.out
@@ -331,8 +332,10 @@ search for 'Geometry' to get an idea of what those parts of the file look like.
 
 Now that we are familiar with the output format, let's use `grep` to grab only
 the lines we need from the file. Once again, the '^' tells `grep` to only match
-'@' symbols at the beginning of a line. We can save these energies and deltas by
-redirecting the stdout of grep to another file, 'dextran_energies.out'.
+'@' symbols at the beginning of a line. Note that the syntax of regular
+experessions (e.g. how we are using `^`) is preserved across programs. We can
+save these energies and deltas by redirecting the stdout of grep to another
+file, 'dextran_energies.out'.
 
 ```bash
 % grep '^@' dextran_qm_dft.out
@@ -383,13 +386,15 @@ redirecting the stdout of grep to another file, 'dextran_energies.out'.
     @   15    -686.93830931 -4.1D-07  0.00005  0.00001  0.00041  0.00128   1978.5
     @   15    -686.93830931 -4.1D-07  0.00005  0.00001  0.00041  0.00128   1978.5
 
-So we have the electronic energies at each relaxation step (as well as position
-deltas between steps) saved to a file. Now we need to get the geometry at each
-relaxation step. Here, we'll use the '-A' option for `grep` to print out the
-lines following our matches. At first, we may not know how many lines to print
-out, so we'll try something excessive, perhaps 40? Then narrow it down (or
-expand it) to make sure you get all the atoms. Once we're satisfied that we're
-getting the results we want, we can redirect the output to a file for saving.
+Now we have the electronic energies at each relaxation step (as well as position
+deltas between steps) saved to a file.
+
+Now we need to get the geometry at each relaxation step. Here, we'll use the
+'-A' option for `grep` to print out the lines following our matches. At first,
+we may not know how many lines to print out, so we'll try something excessive,
+perhaps 40? Then narrow it down (or expand it) to make sure you get all the
+atoms. Once we're satisfied that we're getting the results we want, we can
+redirect the output to a file for saving.
 
 ```bash
 % grep -A 40 'Geometry "geometry"' dextran_qm_dft.out
@@ -449,185 +454,17 @@ Looks like we overshot by 10 lines
 % grep -A 30 'Geometry "geometry"' dextran_qm_dft.out > dextran_geometries.out
 ```
 
-Now we want to define a bash function which runs all these commands on the file.
-The function should be able to handle and NWChem output file (for ease of use),
-as well as any number of atoms. Here, we have 24 atoms, and had to use '-A 30'
-with `grep` to get the correct lines, so we need to add 6 to our number of atoms
-and pass that number to `grep`. We'll setup our function so it can take the file
-to use and the number of atoms as arguments (parameters). This is done with the
-'$N' notation - '$1' stores the first argument, '$2' stores the second, etc...
+Finally, let's combine our energies and geometries files into one total file with by
+redirecting the output of `cat` into a new file `dextran_full_output`:
 
-```bash
-    #Define a function called 'extract_data'
-% extract_data() {
-> file="$1"
-> n_atoms="$2"
-> let n_atoms=$n_atoms+6
-> echo "Relaxation Data"
-> grep --color=auto '^@' "$file"
-> echo
-> echo "Geometry Data"
-> grep --color=auto -A "$n_atoms" 'Geometry "geometry"' "$file"
-> }
+```
+    % cat dextran_energies.out dextran_geometries.out > dextran_full_output
 ```
 
-Test out the function
-
-```bash
-% extract_data dextran_qm_dft.out 24
-```
-
-    Relaxation Data
-    @ Step       Energy      Delta E   Gmax     Grms     Xrms     Xmax   Walltime
-    @ ---- ---------------- -------- -------- -------- -------- -------- --------
-    @    0    -686.92664205  0.0D+00  0.02562  0.00530  0.00000  0.00000    124.6
-    @    1    -686.93572937 -9.1D-03  0.00495  0.00123  0.05800  0.21419    230.6
-    @    2    -686.93688173 -1.2D-03  0.00371  0.00079  0.03159  0.12217    377.7
-        #### More lines here ####
-       20 H                    1.0000    -0.60963072    -2.48793956     1.59468758
-       21 H                    1.0000    -1.82931112    -2.81641725     0.34650697
-       22 H                    1.0000     1.71835792    -2.27555426    -0.39890742
-       23 H                    1.0000     2.96714682     0.88238211    -0.22383765
-       24 H                    1.0000    -0.14249451    -3.77623236    -0.91338242
-
-Save the output to a file
-
-```bash
-% extract_data dextran_qm_dft.out 24 > dextran_all_data.out
-```
-
-Awesome! Now we have a function which we can apply to any NWChem geometry
-relaxation output from a run on the supercomputers to extract exactly the data
-we need. However, if we log out and log back in to the supercomputer, our
-function definition will be gone! Redifining this function everytime we login is
-tedious, but we can put it in our '.bashrc' to force it to be redefined every
-time. Edit your '.bashrc' and add the function definition to it somewhere.
-
-```bash
-% vim .bashrc
-
-    # Add the lines
-extract_data() {
-    file="$1"
-    n_atoms="$2"
-    let n_atoms=$n_atoms+6
-    echo "Relaxation Data"
-    grep --color=auto '^@' "$file"
-    echo
-    echo "Geometry Data"
-    grep --color=auto -A "$n_atoms" 'Geometry "geometry"' "$file"
-}
-
-    # Save and close (:wq)
-```
-
-Now logout and log back into your remote computer (if doing this locally, simply
-close your terminal and open a new one). Verify that `extract_data` is defined
-by calling it on the 'dextran_qm_dft.out' file.
-
-```bash
-% extract_data dextran_qm_dft.out 24
-```
-
-    Relaxation Data
-    @ Step       Energy      Delta E   Gmax     Grms     Xrms     Xmax   Walltime
-    @ ---- ---------------- -------- -------- -------- -------- -------- --------
-    @    0    -686.92664205  0.0D+00  0.02562  0.00530  0.00000  0.00000    124.6
-    @    1    -686.93572937 -9.1D-03  0.00495  0.00123  0.05800  0.21419    230.6
-    @    2    -686.93688173 -1.2D-03  0.00371  0.00079  0.03159  0.12217    377.7
-        #### More lines here ####
-       20 H                    1.0000    -0.60963072    -2.48793956     1.59468758
-       21 H                    1.0000    -1.82931112    -2.81641725     0.34650697
-       22 H                    1.0000     1.71835792    -2.27555426    -0.39890742
-       23 H                    1.0000     2.96714682     0.88238211    -0.22383765
-       24 H                    1.0000    -0.14249451    -3.77623236    -0.91338242
-
-Neato! So we can write these little single-purpose scripts which help our data
-collection as functions in our '.bashrc'. This can greatly simplify working with
-the supercomputers. However, what if we want to call this script from inside
-`vim`? `vim` doesn't look at functions we've defined for the shell when running
-commands, only at the '$PATH' variable for the shell. To make this functionality
-available to call from within vim, we'll have to make it into a script. Make the
-directory '~/bin' if it doesn't exist, and add it to your path.
-
-```bash
-    #Check the contents of our $PATH
-% echo $PATH
-/usr/local/bin:/usr/bin:/bin:/opt/bin:/sbin:/usr/sbin
-
-    # Make '~/bin'
-% mkdir ~/bin
-
-    # Edit '~/.bashrc'
-% vim ~/.bashrc
-
-    # Add the line (somewhere towards the end is fine)
-export PATH="$PATH:$HOME/bin"
-
-    # Save and close, close your terminal (or logout) and open a new one
-% echo $PATH
-/usr/local/bin:/usr/bin:/bin:...:/usr/sbin:/home/ehildenb/bin
-```
-
-Now the folder '~/bin' can contain executables which we can call from the
-command line. Nifty! So we'll make a new script in 'bin' called `extract_data`
-with the same commands as our function, then make that script executable for our
-user using `chmod`.
-
-```bash
-% vim ~/bin/extract_data
-
-    # Add the lines that follow
-    # Put a 'shebang' here by running ':read !which bash'
-
-file="$1"
-n_atoms="$2"
-let n_atoms=$n_atoms+6
-echo "Relaxation Data"
-grep --color=auto '^@' "$file"
-echo
-echo "Geometry Data"
-grep --color=auto -A "$n_atoms" 'Geometry "geometry"' "$file"
-
-    #Save and close the file, now mark it as executable with `chmod`
-% chmod u+x ~/bin/extract_data
-
-    #Make sure Bash sees it
-% which extract_data
-/home/ehildenb/bin/extract_data
-
-    #Test it out
-% extract_data dextran_qm_dft.out 24
-```
-
-    Relaxation Data
-    @ Step       Energy      Delta E   Gmax     Grms     Xrms     Xmax   Walltime
-    @ ---- ---------------- -------- -------- -------- -------- -------- --------
-    @    0    -686.92664205  0.0D+00  0.02562  0.00530  0.00000  0.00000    124.6
-    @    1    -686.93572937 -9.1D-03  0.00495  0.00123  0.05800  0.21419    230.6
-    @    2    -686.93688173 -1.2D-03  0.00371  0.00079  0.03159  0.12217    377.7
-        #### More lines here ####
-       20 H                    1.0000    -0.60963072    -2.48793956     1.59468758
-       21 H                    1.0000    -1.82931112    -2.81641725     0.34650697
-       22 H                    1.0000     1.71835792    -2.27555426    -0.39890742
-       23 H                    1.0000     2.96714682     0.88238211    -0.22383765
-       24 H                    1.0000    -0.14249451    -3.77623236    -0.91338242
-
-Cool. We've achieved the same thing as before with the function, only this time
-we used a shell script. Now, we can call that script from within `vim` (using the
-':!' or ':read !' syntax) to get that data into a file we already have open. Try
-it out!
-
-```bash
-    #Open vim with the filename you want to save the data as (should start empty)
-% vim 'data.out'
-
-    #Type this command in
-:read !extract_data dextran_qm_dft.out 24
-
-    #Now suddenly your buffer will have the output of that command in it.
-```
-
+If we wanted to, we could define
+a bash function which runs all these commands on the file automatically, but we
+wlil save this for another time. If you're curious, check out the relevant
+sections of `index.md` in `phs/shell/exercise_1`. **HERE**
 
 Selecting Multiple Files with Globbing
 ======================================
