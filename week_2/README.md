@@ -652,3 +652,36 @@ change to the other window with `Ctrl-W Ctrl-W`, and paste with `P`.
 If you are looking for more commands to put in your `.vimrc`, google it (or
 [this link](https://dougblack.io/words/a-good-vimrc.html) is pretty good too).
 
+Computing Collatz sequences in python
+-------------------------------------
+There is a suspiciously simple conjecture in mathematics that has never been
+proven, called the Collatz conjecture. Start
+with a positive integer, and if it is even divide by two, and if it is odd
+multiply by three and add 1. The conjecture states that no matter what number
+you start with, you will end up with 1. (e.g.: 3 -> 10 -> 5 -> 16 -> 8 -> 4 ->
+2 -> 1)
+
+We are going to build these Collatz chains using python. Open a new python file
+in vim with `vim my_collatz.py`, and in the first line enter the sh-bang
+`#!/bin/python3`. In the first couple of lines, place a simple `print('hey
+there')`. Open another shell and navigate to the same folder. Make the python
+file executable with `chmod u+x my_collatz.py`, and execute it with
+`./my_collatz`. Ensure that your shell prints the expected statement.
+
+Make sure you have a good workflow here! I like to have two terminal windows
+side by side, one in the shell ready to execute the python file (use the up
+arrow to access the last command you used), and the other in vim editing the
+python file.  Switch between these windows with Windows+Tab or Alt+Tab.
+
+We will make the Collatz sequence together in class. One key aspect of python
+is that you need your spacing to be correct. If you are indented where you
+shouldn't be, or not indented where you should be, python will throw an error
+(`IndentationError: unexpected indent`). When errors occur, read the error
+message-- it even says what line the error occured on, and tells you the class
+of what was wrong.
+
+To make the Collatz sequence, we will use: function definitions (`def`),
+`while` loops, list `append`ing, casting numbers as `int`s, `if` and `else`
+statements, and eventually accept user input from the command line with
+`sys.argv`. To see a completed version of this file, refer to
+`my_collatz_solution.py`.
