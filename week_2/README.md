@@ -110,6 +110,49 @@ your approval, and there is no 'undo'.
 Next we will work through more shell exercises that were originally located in
 `phs/shell/exercise_1`.
 
+Customize your shell user experience with a `.bashrc`
+-----------------------------------------------------
+Files in your home directory that start with a `.` (they are 'hidden') and end
+in `rc` are configuration files for given program. Today we will modify a
+`.bashrc`, which gives options for bash (which is probably the shell you are
+using). You can ensure this with `echo $0` (every line you enter into the shell
+is literally passed to the `bash` function (or whatever this command returned),
+and the shell organizes the input and output in a user-friendly command line).
+Your `.bashrc` file is executed line by line in bash every time you start up
+bash or open a terminal, which effectively personalizes your shell.
+
+Ensure you are in the `week_2` directory with `pwd`. A sample bashrc is already
+in this `week_2` directory as `my_bashrc`.  Investigate it with
+`head`/`tail`/`cat`.  See if you have a `.bashrc` already located in your home
+directory. Since it is a dotfile, you need to specify the `-a` (all) command to
+ls: `ls -a ~`. Whether or not you already have one, open one in vim with `vim
+~/.bashrc`. Once open in vim, open my sample file in the same vim screen with
+`:vsplit my_bashrc`.
+
+Now we will use `vim` to copy and paste select lines from one bashrc to the
+other. You can tell which file is which on the bottom, where it will say
+`my_bashrc` or `~/.bashrc`. Switch between the two sides of your screen with
+`Ctrl-W Ctrl-W` in normal mode. Select some text in `my_bashrc` with visual
+block mode `V`, then sweeping text with `j` or `k`, and they yanking (=copying)
+with `y`. Change screens with `Ctrl-W Ctrl-W`, navigate to where you want it
+with `j` and `k`, and paste it with `p` or `P`.
+
+We will work through the lines in the bashrc together. Briefly, an `alias` is a
+keybinding, so `alias v='vim'` means that anytime I type `v`, it literally gets
+turned into the command `vim`. Think of these as 'keyboard shortcuts'.
+Functions in bash execute a series of commands that act on the function
+parameters. `$@` means 'all of the parameters you pass', `$1` means 'the first
+parameter you pass', and so on. `PS1` is what your shell prompt says (for me it says
+eric@eric-arch ~). If you wanted, you could put `echo "Hi there"` in your
+`.bashrc`, and every time bash opened it would greet you with "Hi there".
+
+
+If you want more examples of what experienced users put in their `.bashrc`, try
+[this
+thread](https://serverfault.com/questions/3743/what-useful-things-can-one-add-to-ones-bashrc)
+for some ideas
+
+
 Open source Othello
 -------------------
 
@@ -185,7 +228,7 @@ for `grep`. Unsure what `-A` does? Use `man grep`, then search (`/`) for -A with
     the following two lines (`-A` for **A**fter).
 
 ```bash
-% grep -A 2 'OTHELLO' othello.txt
+    % grep -A 2 'OTHELLO' othello.txt
     OTHELLO
     #### Many more lines here ###
     OTHELLO
@@ -221,7 +264,7 @@ function of less (press '/' followed by your search string, for example
 match, 'N' to go to previous. Use the keys 'k' and 'j' to scroll.
 
 ```bash
-% less data_file.csv
+    % less data_file.csv
     Reduced Chai Values:
     6575839, 7151022, 7334710, 4978808
     #### Many more lines ####
@@ -235,7 +278,7 @@ the '-A' option. Pipe the second into `less` to be able to scroll through and
 search the output.
 
 ```bash
-% grep -A 1 'Reduced Chai Values' data_file.csv
+    % grep -A 1 'Reduced Chai Values' data_file.csv
     Reduced Chai Values:
     6575839, 7151022, 7334710, 4978808
     --
@@ -243,7 +286,7 @@ search the output.
     Reduced Chai Values:
     9074041, 6222272, 14989142, 5701998
 
-% grep -A 1 'Final Energy Values' data_file.csv | less
+    % grep -A 1 'Final Energy Values' data_file.csv | less
     Final Energy Values:
     3880766, 14001684, 13718481, 8132653
     --
@@ -275,10 +318,10 @@ before, you can also use the `wc` (word count) command to count the number of li
 outputs.
 
 ```bash
-% grep -c -v ':' data_file.csv
-5000
-% grep -v ':' data_file.csv | wc -l
-5000
+    % grep -c -v ':' data_file.csv
+    5000
+    % grep -v ':' data_file.csv | wc -l
+    5000
 ```
 
 To verify there are four data entries on each line, we will count the total
@@ -288,8 +331,8 @@ Again, we grep for all of the lines containing data with the '-v' option for
 `grep`, and then pipe the output into `wc`.
 
 ```bash
-% grep -c -v ':' data_file.csv | wc -w
-20000
+    % grep -c -v ':' data_file.csv | wc -w
+    20000
 ```
 Therefore, since there are 5000 lines and 20000 'words', there are four data
 entries per line (unless the file isn't uniform).
@@ -314,7 +357,7 @@ searching for has other uses in the program.  Also search for 'Geometry' to get
 an idea of what those parts of the file look like.
 
 ```bash
-% less dextran_qm_dft.out
+    % less dextran_qm_dft.out
 ```
 
     Please copy the file /lrz/sys/applications/nwchem/6.3/impi/.nwchemrc to your
@@ -338,7 +381,7 @@ save these energies and deltas by redirecting the stdout of grep to another
 file, 'dextran_energies.out'.
 
 ```bash
-% grep '^@' dextran_qm_dft.out
+    % grep '^@' dextran_qm_dft.out
 ```
 
     @ Step       Energy      Delta E   Gmax     Grms     Xrms     Xmax   Walltime
@@ -362,8 +405,8 @@ file, 'dextran_energies.out'.
     @   15    -686.93830931 -4.1D-07  0.00005  0.00001  0.00041  0.00128   1978.5
 
 ```bash
-% grep '^@' dextran_qm_dft.out > dextran_energies.out
-% cat dextran_energies.out
+    % grep '^@' dextran_qm_dft.out > dextran_energies.out
+    % cat dextran_energies.out
 ```
 
     @ Step       Energy      Delta E   Gmax     Grms     Xrms     Xmax   Walltime
@@ -397,7 +440,7 @@ atoms. Once we're satisfied that we're getting the results we want, we can
 redirect the output to a file for saving.
 
 ```bash
-% grep -A 40 'Geometry "geometry"' dextran_qm_dft.out
+    % grep -A 40 'Geometry "geometry"' dextran_qm_dft.out
 ```
 
                                  Geometry "geometry" -> ""
@@ -430,7 +473,7 @@ redirect the output to a file for saving.
 Looks like we overshot by 10 lines
 
 ```bash
-% grep -A 30 'Geometry "geometry"' dextran_qm_dft.out
+    % grep -A 30 'Geometry "geometry"' dextran_qm_dft.out
 ```
 
                                  Geometry "geometry" -> ""
@@ -451,7 +494,7 @@ Looks like we overshot by 10 lines
        24 H                    1.0000    -0.14249451    -3.77623236    -0.91338242
 
 ```bash
-% grep -A 30 'Geometry "geometry"' dextran_qm_dft.out > dextran_geometries.out
+    % grep -A 30 'Geometry "geometry"' dextran_qm_dft.out > dextran_geometries.out
 ```
 
 Finally, let's combine our energies and geometries files into one total file with by
@@ -463,42 +506,37 @@ redirecting the output of `cat` into a new file `dextran_full_output`:
 
 If we wanted to, we could define
 a bash function which runs all these commands on the file automatically, but we
-wlil save this for another time. If you're curious, check out the relevant
+will save this for another time. If you're curious, check out the relevant
 sections of `index.md` in `phs/shell/exercise_1`. **HERE**
 
-Selecting Multiple Files with Globbing
-======================================
+Manipulating multiple files with globbing
+-----------------------------------------
 
-This is using the the files in directory 'plots'.
-
-Objectives
-----------
-
+Next we will practice using the wildcard operator `*` to select and move
+consistently named files. We will be using the the files in directory 'plots'.
+We will:
 + Select only the 'CCFreq' and 'CCTime' plots
 + Select only the 'tmax-140' plots
-+ Select only the 'CCFreq' and 'tmax-140' plots zip them up for emailing
++ Select only the 'CCFreq' and 'tmax-140' plots, then zip them up so that they
+  can be easily emailed
 
-Procedure
----------
-
-Select all the 'CCFreq' files or 'CCTime' files using 'globbing', or
-'wildcards'. A wildcard is a `*` on the command line, which tells Bash to try to
-match anything there. Let's try it. Examine the output of these commands:
+First move into the plots directory. We will select all the 'CCFreq' files or
+'CCTime' files using 'globbing', or 'wildcards'. A wildcard is a `*` on the
+command line, which tells Bash to try to match anything there. Let's try it.
+Examine the output of these commands:
 
 ```bash
-% ls CCFreq*
-% ls CCFreq_*
-% ls CCFreq_* CCTime_*
+    % ls CCFreq*
+    % ls CCFreq_*
+    % ls CCFreq_* CCTime_*
 ```
-
-Notice how the `*` character acts like a wildstar. It will match anything.
 
 Now create a directory and copy the selected files into that directory:
 
 ```bash
-% mkdir final_plots
-% cp  CCFreq_* CCTime_* final_plots
-% ls final_plots/
+    % mkdir final_plots
+    % cp  CCFreq_* CCTime_* final_plots
+    % ls final_plots/
 ```
 
     CCFreq_L-8_tmax-10_dt-0.1.png   CCFreq_L-8_tmax-30_dt-0.2.png
@@ -510,12 +548,11 @@ Now create a directory and copy the selected files into that directory:
     CCFreq_L-8_tmax-140_dt-0.5.png  CCTime_L-8_tmax-120_dt-1.png
     CCFreq_L-8_tmax-140_dt-1.png    CCTime_L-8_tmax-140_dt-0.2.png
 
-So we can create a directory and using 'globbing' move exactly the files we want
-into that directory. Now, try selecting for only the 'tmax-140' plots, including
-all three of 'CCFreq', 'CCTime', and 'Board'
+Now, try selecting for only the 'tmax-140' plots, including all three of
+'CCFreq', 'CCTime', and 'Board'
 
 ```bash
-% ls *_tmax-140_*
+    % ls *_tmax-140_*
 ```
 
     Board_L-8_tmax-140_dt-0.2.png  CCFreq_L-8_tmax-140_dt-0.2.png
@@ -524,20 +561,94 @@ all three of 'CCFreq', 'CCTime', and 'Board'
     Board_L-8_tmax-140_dt-1.png    CCFreq_L-8_tmax-140_dt-1.png
     CCTime_L-8_tmax-140_dt-1.png
 
-Now select for all the 'CCFreq' and 'tmax-140' plots, copy them into a new
-directory called 'presentation_plots', then zip it up using the `zip` command so
-you can email it. Make sure to pass the '-r' option to the `zip` command so that
-it zips the entire 'presentation_plots' directory.
+Now select all files that are both 'CCFreq' and also 'tmax-140' plots, copy
+them into a new directory called 'presentation_plots', then zip it up using the
+`zip` command so that you can email it. Make sure to pass the '-r' option
+(recursive) to the `zip` command so that it zips the entire
+'presentation_plots' directory.
 
 ```bash
-% mkdir presentation_plots
-% cp CCFreq_*_tmax-140* presentation_plots
-% zip -r presentation_plots.zip presentation_plots/
+    % mkdir presentation_plots
+    % cp CCFreq_*_tmax-140* presentation_plots
+    % zip -r presentation_plots.zip presentation_plots/
 ```
 
+To examine this newly created zip file we can first learn its filetype with
+`file`, and then **l**ist the file contents using `unzip`, which is the inverse
+to `zip`. Then we will extract the files to a new folder (with the `-d` flag)
+with `unzip`:
+```
+    % file presentation_plots.zipA
+    presentation_plots.zip: Zip archive data, at least v1.0 to extract
+    % unzip -l presentation_plots.zip
+    Archive:  presentation_plots.zip
+      Length      Date    Time    Name
+    ---------  ---------- -----   ----
+            0  2018-05-13 21:54   presentation_plots/
+        13434  2018-05-13 21:54   presentation_plots/CCFreq_L-8_tmax-140_dt-1.png
+        21676  2018-05-13 21:54   presentation_plots/CCFreq_L-8_tmax-140_dt-0.2.png
+        16966  2018-05-13 21:54   presentation_plots/CCFreq_L-8_tmax-140_dt-0.5.png
+    ---------                     -------
+        52076                     4 files
+    % mkdir unzipped_folder
+    % unzip presentation_plots.zip -d unzipped_folder
+    Archive:  presentation_plots.zip
+       creating: unzipped_folder/presentation_plots/
+      inflating: unzipped_folder/presentation_plots/CCFreq_L-8_tmax-140_dt-1.png
+      inflating: unzipped_folder/presentation_plots/CCFreq_L-8_tmax-140_dt-0.2.png
+      inflating: unzipped_folder/presentation_plots/CCFreq_L-8_tmax-140_dt-0.5.png
 
-** grep, > **
-** top or htop (w/ installing) **
-** dmesg, pkill **
+```
 
+Another common (though oddly confusing to use) file compression tool is `tar`.
+Here the syntax is `tar -cvf MY_TARFILE.tar FILES_TO_COMPRESS` (`-c`=create a
+tar archive, `-v`=verbose output, `-f`=use the files I am about to pass). To extract, use
+`tar -xvf MY_TARFILE.tar` (`-x`=extract).
+
+```
+    % tar -cvf presentation_plots.tar presentation_plots/*
+    presentation_plots/CCFreq_L-8_tmax-140_dt-0.2.png
+    presentation_plots/CCFreq_L-8_tmax-140_dt-0.5.png
+    presentation_plots/CCFreq_L-8_tmax-140_dt-1.png
+    % file presentation_plots.tar
+    presentation_plots.tar: POSIX tar archive (GNU)
+    % file presentation_plots.zip
+    presentation_plots.zip: Zip archive data, at least v1.0 to extract
+    % tar -xvf presentation_plots.tar                     
+    presentation_plots/CCFreq_L-8_tmax-140_dt-0.2.png
+    presentation_plots/CCFreq_L-8_tmax-140_dt-0.5.png
+    presentation_plots/CCFreq_L-8_tmax-140_dt-1.png
+```
+
+Other various shell utilities
+-----------------------------
+See what programs are running (task manager) with `top`. If you want it to be
+fancy and have colorful graphics, use `htop` (install it if you need). See the
+low-level hardware commands your system is running with `dmesg`. View the
+background daemon commands your system is running with `journalctl`. Examine
+your cpu with `lspcu`. See your filesystem with `lsblk` and `df`. See your
+wireless/wired connection hardware profiles with `ip link`. Remember your
+wireless name (mine is 'wlp4s0'). Use `iftop -i wlp4s0` (replace 'wlp4s0' with
+your wireless device name) to see the internet traffic you are uploading and
+downloading. Use `ps` to see currently running processes. Use `pkill
+PROCESS_NAME` to force kill a given process (I sometimes need to use `pkill
+chromium` when my internet bugs out).
+
+Customize your text editing user experience with a `.vimrc`
+-----------------------------------------------------------
+In the same way that we were able to modify our `bash` user experience with a
+`.bashrc`, we can modify our `vim` experience with a `.vimrc`. It is also a
+hidden file, stored in the home directory. At the start of every `vim` session,
+every line in your `vimrc` is executed sequentially. As we did with the
+`.bashrc`, open your `vimrc` in vim with `vim ~/.vimrc`, then open my sample
+vimrc alongside with `vsplit my_vimrc`. Switch between sides with `Ctrl-W
+Ctrl-W` or with `Ctrl-W Ctrl-H` or `Ctrl-W Ctrl-L` (you will notice 'h' and 'l'
+are the left and right navigation keys in vim). If you want, copy and paste the
+entire file by going to the top of the file with `gg`, enter visual block mode
+with `V`, go to the end of the file with `G`, yank all of the text with `y`,
+change to the other window with `Ctrl-W Ctrl-W`, and paste with `P`.
+
+
+If you are looking for more commands to put in your `.vimrc`, google it (or
+[this link](https://dougblack.io/words/a-good-vimrc.html) is pretty good too).
 
