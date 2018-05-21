@@ -1,2 +1,0 @@
-\beamer@sectionintoc {1}{Background}{3}{0}{1}
-\beamer@sectionintoc {2}{Example section}{6}{0}{2}

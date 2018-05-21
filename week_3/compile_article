@@ -1,0 +1,11 @@
+#!/usr/bin/bash
+
+# get filename without .tex extension
+filename=${1%.*}
+
+pdflatex $filename
+bibtex $filename
+pdflatex $filename
+pdflatex $filename
+
+./clean_up_files &> /dev/null
