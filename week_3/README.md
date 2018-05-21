@@ -11,10 +11,11 @@ into this directory.
 
 Installing LaTeX
 ----------------
-LaTeX ("lay-tek" or "la-tek", not "lay-tex") is a typesetting program that generates pretty files. Most physics
-textbooks and typed notes from your classes, for example, will have created in
-LaTeX. However, this program is fairly hefty and is typically not included by
-default. Let's install it.
+LaTeX ("lay-tek" or "la-tek", not "lay-tex") is a typesetting program that
+generates pretty files. Most physics textbooks and typed notes from your
+classes, for example, will have been created in LaTeX. However, this program is
+fairly hefty is size (.5 GB or so) and is typically not included by default.
+Let's install it.
 
 On Windows or Ubuntu (in Windows Subsystem for Linux):
 + `sudo apt-get install texlive-latex-recommended`
@@ -37,14 +38,14 @@ Ensure you have `latex` and `pdflatex` installed with:
 
 Compiling a simple skeleton document
 ------------------------------------
-LaTeX turns a .tex document full of plain-text into a beautifully typeset and
+LaTeX turns a plaintext .tex document into a beautifully typeset and
 vector graphic .pdf document. (It can also create .dvi and .ps documents, but in
-the modern era .pdf is all you will need). This means that there is a learning
+the modern era .pdf is all you will need). In LaTeX, though, there is a learning
 curve-- unlike Microsoft Word, where "what you see is what you get", you do not
 simply type on a screen and print out the document.
 
-Briefly look at the LaTeX syntax with `less skeleton_document.tex`. It is just
-text, that we will compile using `pdflatex MY_FILE.tex` into a pdf document:
+Briefly look at the LaTeX syntax with `less skeleton_document.tex`. We will
+compile this document into a pdf using `pdflatex MY_FILE.tex`:
 ```
     % pdflatex skeleton_document.tex
     This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex)
@@ -75,8 +76,9 @@ If you `ls`, you should now see additional files, including
   but DO NOT modify any of the files. If you do, you may break the Windows
   Subsystem for Linux. Treat every file as 'read-only'. Once you are here,
   navigate to the `phs/week_3` folder, and double-click `skeleton_document.pdf`
-  like you did in the old days. This incompatibility-- which is a surface
-  defect of a deeper problem-- is why I still urge you to dual-boot Ubuntu: you
+  like you did in the old days. This incompatibility, which doesn't allow you
+  to natively use graphics from the shell, is a surface
+  defect of a deeper problem, is why I still urge you to dual-boot Ubuntu: you
   are not truly using Linux, and so there will always be things like this that
   break your user experience/immersion in Linux.
 
@@ -111,7 +113,7 @@ which we used earlier-- and `bibtex`, which is a command used to get your
 references right. When using `bibtex`, you need to compile the article multiple
 times (as in the script) in order for the program to learn what references go
 where correctly. Also, this script runs `clean_up_files` at the end, which
-removes the files that are made during the compilation process.
+removes any unnecessary files that are made during the compilation process.
 
 It would be nice to be able to call this script from anywhere, so we are going to
 place it in our `bin`, which is where user-made scripts go. To do this, ensure
@@ -124,7 +126,9 @@ add it to the path with `PATH=$PATH:/home/your_username/bin`. We want this
 `bin` to be accessible every time you are in the shell, so add the line
 `PATH=$PATH:/home/your_username/bin` to your `.bashrc` if it wasn't in your
 default path. Now you should be able to call the `clean_up_files` script and
-`compile_article` script from anywhere.
+`compile_article` script from anywhere. Make sure this worked with `which
+clean_up_files` and `which compile_article`, which should return the location
+of the function. Try it!
 
 Open both the `.tex` and the `.bib` file in vim, using `vim bibtex_file.tex`
 and then `:tabe bibtex_file.bib` in vim. Switch between these two files with
@@ -165,7 +169,7 @@ Now we can take this output and pipe it into your `.bib` entry, with `cat
 pmcid-PMC5080291.ris | ris2xml | xml2bib >> bibtex_file.bib`. Make sure you use
 the redirect `>>` instead of the overwrite `>`! Once you do this your `.bib`
 file may have a weird \<feff\> character before your BiBTeX entry, but you can
-delete it in the usual way with `x`. I often delete the `abstract` field of the
+delete it in the usual way in vim with `x`. I often delete the `abstract` field of the
 BiBTeX entry with `dd`, but it is up to you. (An alternative to redirecting
 this output is to copy it into the `bibtex_file.bib` file-- for me, I do this by
 highlighting the text in the shell with a mouse, then middle-clicking in insert
@@ -204,8 +208,8 @@ how to format some common elements of papers for your liberal arts classes.
 Using BibTex, as in the previous example, is useful for LAIS as well! You can
 usually export citations in the correct format (as `.bib`) from most academic
 journals, or otherwise export them as `.ris` and convert them to into `.bib`
-style citations.  Open this file in vim, explore it, and compile it with
-`compile_article lais_example.tex`.
+style citations as we did earlier.  Open `lais_example.tex` in vim, explore it,
+and compile it with `compile_article lais_example.tex`.
 
 
 Wouldn't it be nice to be able to compile LaTeX documents without leaving vim?
@@ -214,22 +218,23 @@ compilation for us. I like to use the macro `@w`, because to me this is like a
 'deep' write - not only am I writing the document, I'm compiling it to produce
 the output.
 
-Place these lines in your '.vimrc':
+Place these lines in your `.vimrc`:
 
 ```vim
 autocmd BufRead,BufNewFile *.tex let @w=':wa:!compile_article %'
 ```
 
 To copy these lines, you should open `README.md` in vim and search for
-`/autocmd`, and yank this lines with visual block mode `Vy`. Open your `.vimrc`
+`/autocmd`, and yank this line with visual block mode `Vy`. Open your `.vimrc`
 in the same window with `:split ~/.vimrc`, navigate to where you want to paste
-these lines, and paste with `p` or `P`. You cannot just copy and paste these
-lines, because we are using a special character (in vim it looks like `^M` but
-actually it is the literal Enter key, ``, which we can't see on github but
-which we can see in vim. To make this character, press (in insert mode) `Ctrl-V` followed by
-`Enter` (try it yourself!). `Ctrl-V` allows for any non-standard key to be
-'printed' in this way, including Backspace, Ctrl+keys, and others.  This is why
-the formatting of the README on github looks kind of weird.
+this line, and paste with `p` or `P`. You cannot just copy and paste these
+lines from your internet browser, because we are using a special character (in
+vim it looks like `^M` but actually it is the literal Enter key, ``, which we
+can't see on github but which we can see in vim. To make this character, press
+(in insert mode) `Ctrl-V` followed by `Enter` (try it yourself!). `Ctrl-V`
+allows for any non-standard key to be 'printed' in this way, including
+Backspace, Ctrl+keys, and others.  This is why the above formatting of the
+README on github looks kind of weird.
 
 In this command, we are telling Vim to run the command in quotes (`:wa...%^M`)
 every time we press the key `@` then `w` (not together). The command calls
@@ -348,14 +353,17 @@ our earlier `compile_article` command:
 ```
     % compile_article basic_markdown.tex
 ```
+Take a look at the output pdf.
 
 Alternatively, we can do this all in one step with the `build_pdf` command:
 ```
     % build_pdf basic_markdown
 ```
-Note here that we don't include the file extension for this program. As before,
-we can make a macro in `vim` to run this `build_pdf` program automatically.
-First copy this program into your bin with `cp build_pdf ~/bin`. Then add the
+Note here that we don't include the file extension for this program. Open
+`build_pdf` in vim and look through its contents-- every line is just a bash
+command, and the commands are spun together in a script.  As before, we can
+make a macro in `vim` to run this `build_pdf` program automatically.  First
+copy this program into your bin with `cp build_pdf ~/bin`. Then add the
 following line into your `~/.vimrc`:
 ```
 autocmd BufRead,BufNewFile *.md let @w=':wa:!build_pdf %:r'
@@ -378,12 +386,16 @@ make notes for skype meetings with a collaborator using `pandoc` to turn my
 markdown into a beamer document (it turns different headings into new slides);
 and right now I am writing a PHS `README.md` file in markdown.
 
-More advanced python commands 
+Back to python
 -----------------------------
-
-Follow along with the following python functions in the interpreter. If you
-would like, practice stringing these functions together in a script, and then
-run the script to ensure it outputs what you expect.
+Now for something entirely different. We are going to create an intuitive
+programming workflow with python, vim, and the shell. Open the python
+interpreter in your shell with `python`, and follow along by entering the
+following python functions in the interpreter. If you would like, practice
+stringing these functions together in a script (`vim my_script.py`), and then
+run the script (`python my_script`, or make it executable with `#!/bin/python`
+on the first line, `chmod u+x my_script.py`, and `./my_script`) to ensure it
+outputs what you expect.
 
 ### Operators and Functions
 
@@ -409,7 +421,7 @@ The `append` function on a list adds an element to the end of the list:
 The `len` function on a list tells you how long it is.
 
 ```python
->>> print(len ([1,2,3,4,5]))
+>>> print(len([1,2,3,4,5]))
 5
 ```
 
