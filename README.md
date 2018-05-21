@@ -11,9 +11,13 @@ our curriculum for:
 
 -   [Week 1](week_1/) -- interact with the command line, type in vim, create a
     simple python file in vim, and modify an existing python file in vim.
--   [Week 2](week_2/) -- learn more advanced command line tools, personalize
-    your user experience with a `.vimrc` and `.bashrc`, and generate a python
-    file working in a streamlined workflow
+-   [Week 2](week_2/) -- learn more advanced command line tools and personalize
+    your user experience with a `.vimrc` and `.bashrc`
+-   [Week 3](week_3/) -- create a document, presentation, and resume in LaTeX
+    with vim, compile these files into pdfs in the command line and by
+    customizing your `.vimrc`, create markdown documents and compile them in
+    vim, and solve a programming puzzle in python while working in a
+    streamlined workflow
 
 Topics we have guides on:
 

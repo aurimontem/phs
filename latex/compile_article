@@ -1,7 +1,11 @@
 #!/usr/bin/bash
 
-pdflatex bibtex_file
-bibtex bibtex_file
-pdflatex bibtex_file
-pdflatex bibtex_file
+# get filename without .tex extension
+filename=${1%.*}
 
+pdflatex $filename
+bibtex $filename
+pdflatex $filename
+pdflatex $filename
+
+./clean_up_files &> /dev/null

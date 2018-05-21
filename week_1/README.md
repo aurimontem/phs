@@ -1,697 +1,687 @@
-Programming Help Sessions (PHS): Week 1
-=================================
+Programming Help Sessions (PHS): Week 2
+=======================================
 
-Welcome to programming help sessions! The files in here were originally created
-for the Colorado School of Mines ``Physics help sessions,'' a group founded by
-my friends (Everett Hildenbrandt, Alli Nilles, and David Grisham) and me
-(Eric Jones). The primary joy and utility of open-source programming,
-though, is that none of our names matter-- only the content does. So long
-as you act in this open-source manner, you and anyone you know may use,
-modify, and distribute this code.
+Welcome back!
 
-To participate in PHS, you will need to have access to a command line, also
-known as a **shell**:
-- Windows 10: https://tutorials.ubuntu.com/tutorial/tutorial-ubuntu-on-windows,
-  then open the program Ubuntu
-- Mac: Cmd + Spacebar, type Terminal
-- Ubuntu: Ctrl + Alt + T
+If you were here last week and you have already cloned the github repository,
+you can update the phs directory with all of my new updates by navigating to
+the `phs` directory (by **c**hanging **d**irectories with `cd phs`), and then
+running `git pull`. This command 'pulls' any updated files from the github
+repo into your own personal computer. Now, if you list the files (`ls`) in this
+directory you should see a new `week_2` folder. Move into this directory.
 
-Once installed, let's open up a second shell and update everything:
-- Windows 10: In the shell run `sudo apt update` (which updates the
-  Ubuntu repositories all shell programs are stored in) and then `sudo apt
-  upgrade` (which upgrades all of your out-of-date software), and wait for
-  everything to download and install
-- Mac: In the shell run `xcode-select --install` to download most of the
-  command line utilities you will ever need. If you are running mac and want to
-  download more command line programs, in your free time look up `homebrew`
+Before we get too involved, let's take a moment to recap what we learned last
+week. Move up to the parent directory and then into the `week_1` in one
+command, with `cd ../week_1`. Be sure to tab complete! In the `week_1`
+directory there are cheatsheets for the shell and for vim. Let's open and read
+through the shell cheatsheet with `vim shell_cheatsheet.md`. Close the file in
+vim with `:q` or `:q!`. Now open and read through the vim cheatsheet file. Now
+move back to the week_2 directory with `cd ../week_2`.
 
-If you want to skip this introduction, feel free to reference the command line
-cheatsheet (shell_cheatsheet.md) in this directory instead.  An appendix that
-gives an overview of the command line, basic bash commands, and the remote
-access of files is also available in command_line_appendix.pdf (created by Alex
-Dorsett for PHYS 125).
-
-Basic shell commands
---------------------
-
-With the command line installed, look to see what is in your current directory
-by **l**i**s**ting the files in this directory by typing ```ls``` (then Enter).
-Then, look to see where you were located in your file system by **p**rinting
-your **w**orking **d**irectory with ```pwd```. I think of `pwd` as your
-'compass', since it will always tell you where you are in your file system. In
-this guide and elsewhere, shell commands will be formatted as:
-
-```
-    % ls 
-    my_python_file.py   my_file_1.txt   my_image_1.pdf  my_webpage_1.html
-    % pwd
-    /home/eric
-```
-
-Let's make a new directory to practice moving around in the file system. We
-will **m**a**k**e a **dir**ectory called my_dir with ```mkdir my_dir```. Now,
-when we list the contents of our current directory, we see something like:
-```
-    % ls 
-    my_dir  my_python_file.py   my_file_1.txt   my_image_1.pdf  my_webpage_1.html
-```
-
-Let's **c**hange **d**irectories to this new folder with ```cd my_dir```. Now, when
-we look at where we are located we see:
-```
-    % pwd
-    /home/eric/my_dir
-```
-
-If we wanted, we can go up a directory with ```cd ..```. then return back
-to the my_dir directory again with ```cd my_dir```. Notice that you could have
-also written ```cd my_d``` + Tab, and the rest of 'my_dir' will automatically
-fill in! This is called tab-completion, and you should abuse this feature.
-
-Now let's **r**e**m**ove (= delete) this temporary **dir**ectory by navigating
-to the parent directory of ``my_dir`` and then running ``rmdir my_dir``.
-
-```ls``` and ```cd``` are the bread-and-butter of navigating the command
-line-- they are the equivalent of clicking on folders in a graphical file
-directory.
-
-Downloading PHS files with git
+Rearranging files in the shell
 ------------------------------
-Now let's copy the entirety of the 'programming help sessions' files
-onto your computer from github, using the command ```git```. First, check if
-your computer has it installed by typing ```git``` (+ Enter) on the command
-line. If it is not found, you need to install it. This is the second joy and
-utility of Linux: super easy installation of programs. You will install
-```git```  with your machine's package manager:
-- Windows w/ Ubuntu: ```sudo apt install git``` (if this doesn't work you may need
-  to first run ```sudo apt update``` then ```sudo apt upgrade```)
-- Mac: ```xcode-select --install``` (this will install most of the command line
-  tools you will ever need)
-- Linux: ```sudo apt-get install git```
-
-Notice the command ```sudo``` in these commands. ```sudo``` stands for
-'superuser do', and it executes whatever command follows with root (basically
-'admin') privileges. ```sudo``` is often needed for 'system level' commands
-(installation of software, for example) but it is also powerful-- with it, you
-can irreparably delete your entire operating system! Be careful.
-
-Now we will change to our home directory with ```cd ~```-- here '~' represents
-your home directory (to see what this is, try ```echo $HOME```. '$HOME' is a
-stored variable that simply contains the path to your 'home' directory, and you
-can modify it if you'd like. With git, we will download the files used by PHS
-onto your computer with the command ```git clone``` + the github address:
+Now that we're in week_2 (check with `pwd`), we're going to make a fake
+directory that holds our classwork with `mkdir classes`. Now move into this
+directory, using tab complete. Let's make a new empty file for quantum with
+`touch quantum` (check to see that it is empty using `cat`, `head`, `tail`, or
+`ls -lah`). Print text in the shell using `echo` (try `echo "Hello, world"`).
+Make a new file using this text with the redirection command `>`. Therefore, to
+store some text about E&M we can use `echo "Maxwell's equations" > em`. To
+append things to this file we use `>>`, while using `>`
+overwrites. Therefore we can remind ourselves about more E&M things with `echo
+"everything is a multipole expansion" >> em`. Lastly let's make a file in vim
+for classical mechanics with `vim classical`, write your favorite equation in
+insert mode (press `i` in regular mode), escape insert mode with Esc, and write
+and quit (= save and close) the file with `:wq` in regular mode.
 ```
-    % cd ~
-    % git clone https://github.com/erijones/phs.git
-    Cloning into 'phs'...
-    remote: Counting objects: 354, done.
-    remote: Compressing objects: 100% (22/22), done.
-    remote: Total 354 (delta 12), reused 29 (delta 9), pack-reused 317
-    Receiving objects: 100% (354/354), 4.67 MiB | 2.63 MiB/s, done.
-    Resolving deltas: 100% (135/135), done.
-```
-
-What is new? Check with ```ls```, and move into the new directory with ```cd
-phs```. Explore the new folders here using ```cd```, ```ls```, and ```cd ..```.
-Eventually, come back to the base phs folder with ```cd ~/phs```. Some command
-lines have access to the `tree` command which is a neat way to visualize the
-file structure; see if your system can do this with ``tree .``, once you are
-located in the `phs` directory. (Here `.` means 'in my current directory'.
-Therefore, `cd .` will leave you in the same directory)
-
-Reading from and manipulating files
------------------------------------
-With ```ls``` we can see the files in this home directory, but by adding *flags*
-onto the  'ls' command, we can modify its behavior. For example, if we want to
-list things in **l**ong form, **a**ll files including hidden files, and in a
-**h**uman readable format, we can use ```ls -lah```:
-```
+    % pwd
+    /home/eric/phs/week_2/classes
+    % touch quantum
+    % echo "Maxwell's equations" > em
+    % echo "everything is a multipole expansion" >> em
+    % vim classical
     % ls
-    latex  misc  python  README.md  shell  vim  week_1
+    classical   em  quantum
     % ls -lah
-    total 44K
-    drwxr-xr-x  9 eric users 4.0K May  5 22:08 .
-    drwxr-xr-x 24 eric users 4.0K May  5 22:08 ..
-    drwxr-xr-x  8 eric users 4.0K May  5 22:08 .git
-    -rw-r--r--  1 eric users   25 May  5 22:08 .gitignore
-    drwxr-xr-x  2 eric users 4.0K May  5 22:08 latex
-    drwxr-xr-x  2 eric users 4.0K May  5 22:08 misc
-    drwxr-xr-x  6 eric users 4.0K May  5 22:08 python
-    -rw-r--r--  1 eric users  749 May  5 22:08 README.md
-    drwxr-xr-x  4 eric users 4.0K May  5 22:08 shell
-    drwxr-xr-x  2 eric users 4.0K May  5 22:08 vim
-    drwxr-xr-x  2 eric users 4.0K May  5 22:08 week_1
+    total 36K
+    drwxr-xr-x 2 eric users 4.0K May 10 15:30 .
+    drwxr-xr-x 3 eric users 4.0K May 10 15:31 ..
+    -rw-r--r-- 1 eric users    7 May 10 15:30 classical
+    -rw-r--r-- 1 eric users   56 May 10 15:27 em
+    -rw-r--r-- 1 eric users    0 May 10 15:20 quantum
 ```
 
-On the left side, you can see the *permissions* of various files (e.g.
-drwxr-xr-x). Here, the leftmost 'd' means the file is a directory-- i.e. you
-can ```cd``` into it. The other letters refer to **r**eading, **w**riting, and
-e**x**ecuting permissions for different user groups (google 'user permissions
-linux'). Also shown is the size of the file in bytes (K = 1024) and their last
-date of modification (just now, when you ```git clone```d them).
+What if we want to learn information from all of these files at once? We can
+use the wildcard operator `*`, which returns all matching entries. For example,
+`ls *` will list all of the files, `ls e*` will only return entries that begin
+with e (this will return em), and `ls *m` will only return entries that end
+with m (this will return em and quantum). Try out these commands.
 
-You may notice that only two files are not directories: .gitignore and
-README.md. We can output their contents to the screen with ```cat``` (for
-con**cat**enate):
+We can use this wildcard operator anywhere in the command line that would
+typically except a filename. For example, to list all of the contents of all of
+our files, we can use `cat *` (con**cat**enation). Even further, we can take
+all of our class information and turn it into one big file by **redirecting**
+the output of `cat *` to a new file with `>`:
 ```
-    % cat .gitignore
-    *.html
-    *.pyc
-    *.pdf
-    *.swp
-    % cat README.md
-    Programming Help Sessions
-    =========================
-
-    Here are some guides (and other useful things) for programming and Linux,
-    << OTHER TEXT >>
-    -   [Linux program configurations (dotfiles)](dotfiles/)
-```
-
-The careful reader will notice that the contents of README.md are precisely the
-contents visible at ```github.com/erijones/phs```-- this is because the github
-website exactly consists of the text in the README.md file. ```*.md``` is the
-format for markdown files (google markdown), which are basically fancy .txt or
-basic .tex files. Indeed, if you are reading this document on github, you can
-see the exact same document in the ~/phs/week_1 directory. We will read the
-first few lines of it with ```head```:
-```
-    % pwd
-    /home/eric/phs
-    % cd week_1
+    % cat * > all_my_classes
     % ls
-    README.md  shell_cheatsheet.md  vim_cheatsheet.md
-    % head README.md
-    Programming Help Sessions: Week 1
-    =================================
-
-    Welcome to programming help sessions! The files in here were originally created
-    for the Colorado School of Mines ``Physics help sessions,'' a group founded by
-    my friends (Everett Hildenbrandt, Alli Nilles, and David Grisham) and me (Eric
-    Jones). The primary joy and utility of open-source programming, though, is that
-    none of our names matter-- only the content does. So long as you act in this
-    open-source manner, you and anyone you know may use, modify, and distribute
-    this code.
+    all_my_classes  classical  em  quantum
+    % cat all_my_classes
+    F = ma
+    Maxwell's equations
+    everything is a multipole expansion
 ```
 
-We could also use ```cat README.md``` but that would display some 300 lines of
-text, which is a little too much. We can also use ```tail README.md``` to see
-the last 10 lines of the document. To see the first 30 lines, for example, use
-```head -n 30 README.md```.
+Let's say that `classical` is a well-made file, and we want to use it as a
+template for some other file. **C**o**p**y it to a new file with `cp classical
+new_classical`. Let's additionally say that we want our ``all_my_classes`` file
+to be more specific, so we can **m**o**v**e it to have a new name with `mv
+all_my_classes class_notes_winter_2018`.
 
-The third joy and utility of the command line is that everything is either a
-file or a directory. Therefore, for any item ```foo``` you can either ```cd
-foo``` or ```cat foo```, and something will be displayed. (However, if you try
-to ```cat``` a .jpg file, expect to get nonsense!) To determine what type of a
-file something is, use the ```file``` command (this is especially useful when
-figuring out how .tar and .zip files were compressed!):
+Let's say that you really didn't like quantum and didn't learn anything (hence
+why it is empty!). To **r**e**m**ove the file, we use `rm quantum`. Ensure we
+have removed it with `ls`. WARNING: This is not your childproofed delete from
+Windows or Mac-- when you remove something, it is gone for good. There is no
+recycle bin (unless you choose to make one). `rm` can be dangerous, especially
+when combined with the wildcard (be very careful before running `rm *`!).
+
+Now it is springtime, and we need to do some spring cleaning to make our
+classes directory relevant for this quarter. Let's make a separate directory in
+the parent directory for classes from winter 2018:
 ```
-    % file README.md
-    README.md: ASCII text
-```
-
-You should now feel comfortable navigating up and down directories (```cd```,
-```ls```) as well as displaying the text in files (```cat```, ```head```,
-```tail```). These tools are hardly scratching the surface of command line
-tools: wait for future weeks to learn more advanced tools, or check out the
-command line cheatsheet shell_cheatsheet.md in this directory if you are
-impatient. 
-
-Since everything is just a file or a directory, we will now learn how to
-manipulate text using the text-editor ```vim```.
-
-Text editing in ```vim```
--------------------------
-```vim``` is not your standard text editor-- your mouse will not work! It is
-entirely keyboard based. You may exclaim "this is terrible!" at first, but once
-you overcome the barrier, you will be **significantly** faster at typing with
-vim than with a point-and-click text editor (e.g. the built in python editor,
-MATLAB, Microsoft Word). The main reason for this is that your mouse has two
-buttons, while your keyboard has around 100 (vim is case sensitive). Further,
-if you use ```vim```, it will become the ONLY text editor you will need-- it
-can write your LaTeX code, your python, your C++, your Julia, and whatever
-else. (A caveat: you don't *always* need to use vim. I use the built-in
-text editors for Gmail and Mathematica and iPython, but I often find myself
-wishing they had vim key bindings!)
-
-Let's get started by by opening the file ```vim_exercise_1.md``` in vim:
-```
+    % mkdir ../winter_2018
+    % ls ..
+    classes     README.md   winter_2018
     % pwd
-    /home/eric/phs/week_1
-    % ls
-    jabberwocky  my_script.py  README.md  shell_cheatsheet.md  vim_cheatsheet.md  vim_exercise_1.md
-    % vim vim_exercise_1.md
+    /home/eric/phs/week_2/classes
 ```
 
-(remember to tab complete after ```vim vim_e```) (as before, if you need to
-install vim use ```sudo apt install vim``` command)
+Note that here we executed commands that 'remotely' by using them with the
+parent directory variable `..`. Now, we wish to move all of our files to this
+`winter_2018` directory, which we can do with `mv * ../winter_2018`. Here the
+wildcard selects all files, and moves them to our recently created directory.
+Ensure this is the case with `ls` and `ls ../winter_2018`. Finally move to the
+week_2 directory with `cd ..`. If you want, you can delete the two
+directories you created with `rm -r winter_2018 classes`, but you can also keep
+them if you want. Again, be careful! `rm -r` will delete without asking for
+your approval, and there is no 'undo'.
 
-This vim exercise is self-contained, so work through the examples. vim has
-different "modes": normal model, insert mode, and visual mode. You start out in
-normal mode (use 'h,j,k,l' to move), and you enter insert mode with 'i'. Escape
-insert mode back into normal mode with 'Esc'. When in normal model, undo your
-last command with 'u', and **w**rite and **q**uit (= save and close) the file
-with ':wq'. I know reaching for the Esc key all the time is annoying-- in
-future classes we will remap CapsLock to Esc, which is much better in my
-opinion. See you after you've completed ```vim_exercise_1.md```!
 
-Running python files in the python interpreter
+Next we will work through more shell exercises that were originally located in
+`phs/shell/exercise_1`.
+
+Customize your shell user experience with a `.bashrc`
+-----------------------------------------------------
+Files in your home directory that start with a `.` (they are 'hidden') and end
+in `rc` are configuration files for given program. Today we will modify a
+`.bashrc`, which gives options for bash (which is probably the shell you are
+using). You can ensure this with `echo $0` (every line you enter into the shell
+is literally passed to the `bash` function (or whatever this command returned),
+and the shell organizes the input and output in a user-friendly command line).
+Your `.bashrc` file is executed line by line in bash every time you start up
+bash or open a terminal, which effectively personalizes your shell.
+
+Ensure you are in the `week_2` directory with `pwd`. A sample bashrc is already
+in this `week_2` directory as `my_bashrc`.  Investigate it with
+`head`/`tail`/`cat`.  See if you have a `.bashrc` already located in your home
+directory. Since it is a dotfile, you need to specify the `-a` (all) command to
+ls: `ls -a ~`. Whether or not you already have one, open one in vim with `vim
+~/.bashrc`. Once open in vim, open my sample file in the same vim screen with
+`:vsplit my_bashrc`.
+
+Now we will use `vim` to copy and paste select lines from one bashrc to the
+other. You can tell which file is which on the bottom, where it will say
+`my_bashrc` or `~/.bashrc`. Switch between the two sides of your screen with
+`Ctrl-W Ctrl-W` in normal mode. Select some text in `my_bashrc` with visual
+block mode `V`, then sweeping text with `j` or `k`, and they yanking (=copying)
+with `y`. Change screens with `Ctrl-W Ctrl-W`, navigate to where you want it
+with `j` and `k`, and paste it with `p` or `P`.
+
+We will work through the lines in the bashrc together. Briefly, an `alias` is a
+keybinding, so `alias v='vim'` means that anytime I type `v`, it literally gets
+turned into the command `vim`. Think of these as 'keyboard shortcuts'.
+Functions in bash execute a series of commands that act on the function
+parameters. `$@` means 'all of the parameters you pass', `$1` means 'the first
+parameter you pass', and so on. `PS1` is what your shell prompt says (for me it says
+eric@eric-arch ~). If you wanted, you could put `echo "Hi there"` in your
+`.bashrc`, and every time bash opened it would greet you with "Hi there".
+
+
+If you want more examples of what experienced users put in their `.bashrc`, try
+[this
+thread](https://serverfault.com/questions/3743/what-useful-things-can-one-add-to-ones-bashrc)
+for some ideas
+
+
+Open source Othello
+-------------------
+
+Ensure you are in the `week_2` directory with `pwd`. Now we're going to examine
+the contents of the file `othello.txt` with command-line tools. Spoiler alert
+for anyone who hasn't read Othello... We will:
++ Estimate how many lines Othello has, and how many Lodovico has
++ Print out the first sentence of each of Othello's lines
++ See how many times Othello's name is called in the play
+
+First, print out the file (using `cat` or `head`) to get an idea of the structure:
+
+```bash
+    % cat othello.txt
+               Othello, the Moore of Venice
+    [1]Shakespeare homepage | [2]Othello | Entire play
+    #### Many more lines here ####
+       LODOVICO
+
+    [To IAGO] O Spartan dog,
+    More fell than anguish, hunger, or the sea!
+    Look on the tragic loading of this bed;
+    This is thy work: the object poisons sight;
+    Let it be hid. Gratiano, keep the house,
+    And seize upon the fortunes of the Moor,
+    For they succeed on you. To you, lord governor,
+    Remains the censure of this hellish villain;
+    The time, the place, the torture: O, enforce it!
+    Myself will straight aboard: and to the state
+    This heavy act with heavy heart relate.
+
+    Exeunt
+```
+Now use `less` to view the document with `less othello.txt`. In `less` you can
+navigate using the same key bindings as in vim, so 'j' and 'k' scroll up or
+down, and 'f' and 'b' page through forwards and back.  Notice that everytime
+Othello speaks, the document first prints OTHELLO. Based on this pattern, we
+can find Othello's lines using `grep` (the syntax for grep is `grep PATTERN
+FILE`, where PATTERN is what you are searching for, and FILE is the file you're
+searching; for details check out `man grep`):
+
+```bash
+    % grep 'OTHELLO' othello.txt
+    OTHELLO
+    OTHELLO
+    #### Many more lines here ####
+    OTHELLO
+```
+To **c**ount the number of entries that grep found, we can use the '-c' option.
+We apply this to count Othello's lines:
+
+```bash
+    % grep -c 'OTHELLO' othello.txt
+    296
+```
+Another alternative is to PASS all of the lines of grep's output into another
+command line program. This is called 'piping', and uses the character `|`. This
+is similar to redirection (`<` or `<<`), but it pipes the output from one
+program into the input of another. Here we use the 'word count' program `wc`,
+with the option `-l` which counts the number of lines. Notice that there are
+usually many ways to solve a problem, and there are lots of powerful and small
+command line programs that can be combined with pipes.
+```bash
+    % grep -c 'LODOVICO' othello.txt
+    39
+    % grep 'LODOVICO' othello.txt | wc -l
+    39
+```
+Print out the first line of each of Othello's lines using the '-A' option
+for `grep`. Unsure what `-A` does? Use `man grep`, then search (`/`) for -A with
+    `/-A` + Enter. Use `q` to quit the man page. In this case, `grep -A 2
+    'OTHELLO' othello.txt` will print the line containing 'OTHELLO' as well as
+    the following two lines (`-A` for **A**fter).
+
+```bash
+    % grep -A 2 'OTHELLO' othello.txt
+    OTHELLO
+    #### Many more lines here ###
+    OTHELLO
+
+    O fool! fool! fool!
+    --
+    OTHELLO
+
+    Soft you; a word or two before you go.
+    --
+    OTHELLO
+
+    I kiss'd thee ere I kill'd thee: no way but this;
+```
+
+If we wanted to navigate this in an easier way, we can pipe the output of this
+command into `less` with `grep -A 2 'OTHELLO' othello.txt | less`, in which you
+can use vim-style navigation key bindings.
+
+
+Extracting useful content from a toy data file in the command line
+--------------------------------------------------------------
+Next we are going to extract information with the a toy data file containing random
+data, `data_file.csv`. Using command line tools, we will:
++ Display the 'Reduced Chai Values' and 'Final Energy Values'
++ Show only the last two 'Reduced Chai Values'
++ Find out how many data lines are in the file
++ Find out how many data points are in the file
+
+First get an idea of what the file looks like with `less`. Use the search
+function of less (press '/' followed by your search string, for example
+'Values') to probe the file's contents.  Use the 'n' key to jump to the next
+match, 'N' to go to previous. Use the keys 'k' and 'j' to scroll.
+
+```bash
+    % less data_file.csv
+    Reduced Chai Values:
+    6575839, 7151022, 7334710, 4978808
+    #### Many more lines ####
+    Final Energy Values:
+    3880766, 14001684, 13718481, 8132653
+    #### Many more lines ####
+```
+
+Find the 'Reduced Chai Values' and 'Final Energy Values' by calling grep with
+the '-A' option. Pipe the second into `less` to be able to scroll through and
+search the output.
+
+```bash
+    % grep -A 1 'Reduced Chai Values' data_file.csv
+    Reduced Chai Values:
+    6575839, 7151022, 7334710, 4978808
+    --
+    #### More lines here ####
+    Reduced Chai Values:
+    9074041, 6222272, 14989142, 5701998
+
+    % grep -A 1 'Final Energy Values' data_file.csv | less
+    Final Energy Values:
+    3880766, 14001684, 13718481, 8132653
+    --
+    #### More lines here ####
+    --
+    Final Energy Values:
+    10340226, 8981179, 12774173, 8236417
+lines 1-65
+```
+
+To show only the last two 'Reduced Chai Values', pipe the output of `grep` into
+`tail`, and tell `tail` to only output the last 6 lines with the '-n' option.
+
+```bash
+  % grep -A 1 'Reduced Chai Values' data_file.csv | tail -n 6
+    --
+    Reduced Chai Values:
+    1056171, 5042308, 4669985, 10144310
+    --
+    Reduced Chai Values:
+    9074041, 6222272, 14989142, 5701998
+
+```
+
+Use the '-c' option for `grep` to count the data lines, coupled with the '-v'
+option to invert the selection (only showing lines that DO NOT match the
+search; in the following case we show any line not containing a colon). As
+before, you can also use the `wc` (word count) command to count the number of lines grep
+outputs.
+
+```bash
+    % grep -c -v ':' data_file.csv
+    5000
+    % grep -v ':' data_file.csv | wc -l
+    5000
+```
+
+To verify there are four data entries on each line, we will count the total
+number of data points using the word (`-w`) option of `wc` instead of the line
+(`-l`) option.
+Again, we grep for all of the lines containing data with the '-v' option for
+`grep`, and then pipe the output into `wc`.
+
+```bash
+    % grep -c -v ':' data_file.csv | wc -w
+    20000
+```
+Therefore, since there are 5000 lines and 20000 'words', there are four data
+entries per line (unless the file isn't uniform).
+
+Parsing content from real supercomputer output
 ----------------------------------------------
-Now we're going to learn how to use python, a syntactically-pleasing and
-readable programming language. Open two command line windows and place one
-above the other (splitscreen). In both windows, navigate to the
-```~/phs/week_1``` directory. 
 
-In one of the windows execute ```python```, which will open up the python
-interpreter-- this is a useful space in which to test basic syntax and how to
-use functions, entering text one line at a time (like in the command line). We
-can create python scripts in vim that run many lines at once.  In general, the
-interpreter is good for testing out small snippets of code or ideas, while
-scripts are good for larger more extensive programs that you will revisit and
-modify. You should use python3 instead of python2 whenever possible, since it
-is morally proper to use up-to-date software. (A large part of the following
-text is taken from ```phs/python/intro/index.md```)
+Next we will perform similar exercises, but this time use the supercomputer
+output file `dextran_qm_dft.out`. We will:
++ See the steps and energies for each relaxation of the dextran molecule
++ Save the energies for each relaxation step
++ Save the geometries along each relaxation step
++ Combine the energies and geometries into one file
 
-Once in the interpreter (```python``` on the command line), you can use any
-commands you would use in python:
+As always, first get a feel for the file by displaying it with `less` (or
+`vim`). Knowing that NWChem outputs a `@` at the beginning of a line with
+energy information on it, search for `^@`. The `^` is a regular expression that
+matches the beginning of a line, so this search only returns lines that begin
+with a `@`. If we wanted to only search for `@`, we need to use `/\@`, where
+the `\` is an escape character-- these are needed when the character we are
+searching for has other uses in the program.  Also search for 'Geometry' to get
+an idea of what those parts of the file look like.
 
-```python
-% python
->>> print("Hello, world!")
-```
-
-Here we will mention some common commands in python. Follow along by trying
-these commands in the python shell (interpreter). Verify the outputs shown
-here.
-
-### Assignment and Arithmetic
-
-Assignment uses the `=` operator. The standard arithmetic operators are
-supported (`+`, `*`, `-`, `/`) on number types.
-
-```python
->>> a = 5
->>> print(a)
-5
->>> a = 15 + 30
->>> print(a)
-45
->>> b = 22
->>> print(a, b)
-45 22
->>> print(a*b + (b-a))
-967
->>> b = a / b
->>> print(b)
-2.0454545454545
->>> b = a / b
->>> print(b)
-22.0
-```
-
-What if we want to perform a `sqrt` or `sin`? We have to import a module which
-has that function defined - the `math` module. Modules consist of prebuilt
-commands that are constructed and peer-reviewed by a few open-source
-contributors. Once you learn to use these modules (especially `numpy`, `scipy`,
-`itertools`, and `matplotlib`), your code can worry more about implementing
-ideas rather than the implementation itself.
-
-
-```python
->>> import math             # Somewhere before we use `math`
->>> print(math.sqrt(4))
-2.0
->>> print(math.sqrt(15))
-3.872983346207417
->>> print(math.sin(math.pi / 2))
-1.0
-```
-We often use exponentials, or other complex math functions, when trying to solve
-problems with programming. Find e^10, where e is the base of the natural log.
-Then, take log(16), then (log(16) base 2). What function do you use, and how do
-you call it?  Google will have all the answers.  (google "python exponential",
-for example)
-
-Eventually, you can also write your own modules that contain your own specific
-functions for your own specific task-- to do this, you can create a python file
-called `my_module.py`, and then import it in a python script with `import
-my_module`.
-
-
-### Lists
-
-In python, lists are one of the fundamental datatypes. Even strings (`'apple'`)
-are stored as lists of single characters (`['a', 'p', 'p', 'l', 'e']`) in
-python.  To construct a list, we can define it manually using `[element1, ...,
-elementn]` syntax. The elements can be of any type, and of heterogeneous types.
-
-```python
->>> test_list = [1,2,3,4,5]
->>> print(test_list)
-[1, 2, 3, 4, 5]
->>> names = ["Bob", "Rob", "Robert", "Bobert"]
->>> print(names)
-['Bob', 'Rob', 'Robert', 'Bobert']
->>> things = ["Car", 4, 2.23, "Denver"]
->>> print(things)
-['Car', 4, 2.23, 'Denver']
-```
-
-You can access a specific element of a list using the `my_list[index]` syntax.
-The `index`'th element of the list `my_list` will be returned (the first element
-is accessed with `index = 0`). A negative `index` will start from the back of
-the list.
-
-```python
->>> test_list = ["a", "b", "c", "d"]
->>> print(test_list[0])
-a
->>> print(test_list[2])
-c
->>> print(test_list[-1])
-d
->>> print(test_list[-2])
-c
-```
-
-Creating python scripts in vim
-------------------------------
-
-A python script is a text file consisting of python commands on each line. When
-the script is executed, each line of the script is sequentially executed in the
-interpreter. Blank lines are ignored, and on any line the text that follows a
-`#` is a comment and will be ignored.
-
-Open the sample python file `my_script.py` in vim with `vim my_script.py`, and
-see that it consists of typical python commands.  You would like to execute
-this file, but it is currently just a text file:
-```
-    % ls -lah my_script.py
-    -rw-r--r-- 1 eric users 1012 May  7 01:29 my_script.py
-```
-
-To make this file executable, you need to **ch**ange the **mod**ifications and
-take the **u**ser class and add (**+**) e**x**ecute permissions, with `chmod
-u+x my_script.py`. Now, the file has execute permissions:
-```
-    % ls -lah my_script.py
-    -rwxr--r-- 1 eric users 1012 May  7 01:29 my_script.py
-```
-Notice the '-' is now an 'x'. Execute this file with `./my_script.py`. (As a
-caveat, you could have originally executed the file without changing the file
-permissions with `python my_script.py`, but making files you want to execute
-executable with `chmod` is the proper way to do things in the command line)
-
-Now read through the python file `my_script.py` in vim. Part A demonstrates a
-simple for loop, using the `range` command which effectively constructs a list
-of numbers that you can iterate through. Part B uses a for loop to perform the
-derivative of some (time, position) coordinates. Part C constructs and calls a
-simple function that adds numbers within a certain range. Part D contains an
-error, which you should find by reading the error message python gives you.
-Remedy this error in the file, save and close the file with `:wq` in vim, and
-rerun it to ensure there is no longer any error.
-
-Now you will make your own python file. Open a new file called
-`my_first_script.py` with `vim my_first_script.py`. Immediately write the file
-(= save) with `:w`.  In the first line in the file, place the 'sh-bang'
-`#!/usr/bin/python3`, which tells the shell that you are using python, and that
-it is located at `/usr/bin/python3`. Ensure that this is the right location on
-your own machine, by running the command `which python` in your terminal. Use
-`python3` or `python2` if you want to be explicit about which version you are
-using (instead of just `python`).
-
-```python
-#!/usr/bin/python3
-# This comment is the second line of the file
-print("Hello, world!")
-```
-
-In this file, add a few lines of code that prints out all of the even numbers
-between 0 and 30. Use a `for` loop, the modulus function `%` (`7 % 3 == 1`), an
-if statement `if a == b:`, and the `print` command. Open up the sample script
-in the same vim terminal with `:tabedit my_script.py`, and switch between vim
-tabs with `gt` in normal mode.
-
-When you are done, write and quit (= save and close) your script file with
-`:wq`, and then execute your script with python
 ```bash
-% python my_first_script.py
+    % less dextran_qm_dft.out
 ```
-or make it executable with `chmod`
+
+    Please copy the file /lrz/sys/applications/nwchem/6.3/impi/.nwchemrc to your
+    home directory.
+    This file is necessary for NWChem to find the standard libraries.
+     argument  1 = optimize.nw
+        #### More lines here ####
+
+    Northwest Computational Chemistry Package (NWChem) 6.3
+    ------------------------------------------------------
+
+
+    Environmental Molecular Sciences Laboratory
+    dextran_qm_dft.out lines 1-65/24471 0%
+
+Now that we are familiar with the output format, let's use `grep` to grab only
+the lines we need from the file. Once again, the '^' tells `grep` to only match
+'@' symbols at the beginning of a line. Note that the syntax of regular
+experessions (e.g. how we are using `^`) is preserved across programs. We can
+save these energies and deltas by redirecting the stdout of grep to another
+file, 'dextran_energies.out'.
+
 ```bash
-% chmod u+x my_first_script.py     # Do once to make executable
-% ./my_first_script.py             # Can be run like this every time
+    % grep '^@' dextran_qm_dft.out
 ```
-Once your code works, help your neighbor and troubleshoot their code.
 
-If you chose to make your script executable by running `chmod u+x my_first_script.py` and called it
-using the `./` syntax, the 'sh-bang' described above is **required**.
+    @ Step       Energy      Delta E   Gmax     Grms     Xrms     Xmax   Walltime
+    @ ---- ---------------- -------- -------- -------- -------- -------- --------
+    @    0    -686.92664205  0.0D+00  0.02562  0.00530  0.00000  0.00000    124.6
+    @    1    -686.93572937 -9.1D-03  0.00495  0.00123  0.05800  0.21419    230.6
+    @    2    -686.93688173 -1.2D-03  0.00371  0.00079  0.03159  0.12217    377.7
+    @    3    -686.93728094 -4.0D-04  0.00183  0.00045  0.02043  0.06471    536.9
+    @    4    -686.93765371 -3.7D-04  0.00231  0.00055  0.02664  0.09902    685.2
+    @    5    -686.93795400 -3.0D-04  0.00218  0.00046  0.02601  0.08722    834.3
+    @    6    -686.93815263 -2.0D-04  0.00214  0.00036  0.02147  0.06602    982.6
+    @    7    -686.93820464 -5.2D-05  0.00078  0.00014  0.00714  0.01937   1114.2
+    @    8    -686.93823383 -2.9D-05  0.00089  0.00015  0.00618  0.01997   1236.3
+    @    9    -686.93825965 -2.6D-05  0.00063  0.00014  0.00684  0.02057   1365.8
+    @   10    -686.93828289 -2.3D-05  0.00065  0.00012  0.00676  0.02784   1504.9
+    @   11    -686.93829701 -1.4D-05  0.00049  0.00010  0.00514  0.02142   1618.2
+    @   12    -686.93830468 -7.7D-06  0.00046  0.00008  0.00443  0.01556   1748.7
+    @   13    -686.93830745 -2.8D-06  0.00013  0.00003  0.00102  0.00292   1827.3
+    @   14    -686.93830891 -1.5D-06  0.00006  0.00001  0.00100  0.00300   1906.5
+    @   15    -686.93830931 -4.1D-07  0.00005  0.00001  0.00041  0.00128   1978.5
+    @   15    -686.93830931 -4.1D-07  0.00005  0.00001  0.00041  0.00128   1978.5
 
-What was the difference between running our short "Hello, world!" program in the
-interpreter versus in a script? In what instances are scripts useful, and when
-is the interpreter useful?
+```bash
+    % grep '^@' dextran_qm_dft.out > dextran_energies.out
+    % cat dextran_energies.out
+```
 
-More advanced python commands 
+    @ Step       Energy      Delta E   Gmax     Grms     Xrms     Xmax   Walltime
+    @ ---- ---------------- -------- -------- -------- -------- -------- --------
+    @    0    -686.92664205  0.0D+00  0.02562  0.00530  0.00000  0.00000    124.6
+    @    1    -686.93572937 -9.1D-03  0.00495  0.00123  0.05800  0.21419    230.6
+    @    2    -686.93688173 -1.2D-03  0.00371  0.00079  0.03159  0.12217    377.7
+    @    3    -686.93728094 -4.0D-04  0.00183  0.00045  0.02043  0.06471    536.9
+    @    4    -686.93765371 -3.7D-04  0.00231  0.00055  0.02664  0.09902    685.2
+    @    5    -686.93795400 -3.0D-04  0.00218  0.00046  0.02601  0.08722    834.3
+    @    6    -686.93815263 -2.0D-04  0.00214  0.00036  0.02147  0.06602    982.6
+    @    7    -686.93820464 -5.2D-05  0.00078  0.00014  0.00714  0.01937   1114.2
+    @    8    -686.93823383 -2.9D-05  0.00089  0.00015  0.00618  0.01997   1236.3
+    @    9    -686.93825965 -2.6D-05  0.00063  0.00014  0.00684  0.02057   1365.8
+    @   10    -686.93828289 -2.3D-05  0.00065  0.00012  0.00676  0.02784   1504.9
+    @   11    -686.93829701 -1.4D-05  0.00049  0.00010  0.00514  0.02142   1618.2
+    @   12    -686.93830468 -7.7D-06  0.00046  0.00008  0.00443  0.01556   1748.7
+    @   13    -686.93830745 -2.8D-06  0.00013  0.00003  0.00102  0.00292   1827.3
+    @   14    -686.93830891 -1.5D-06  0.00006  0.00001  0.00100  0.00300   1906.5
+    @   15    -686.93830931 -4.1D-07  0.00005  0.00001  0.00041  0.00128   1978.5
+    @   15    -686.93830931 -4.1D-07  0.00005  0.00001  0.00041  0.00128   1978.5
+
+Now we have the electronic energies at each relaxation step (as well as position
+deltas between steps) saved to a file.
+
+Now we need to get the geometry at each relaxation step. Here, we'll use the
+'-A' option for `grep` to print out the lines following our matches. At first,
+we may not know how many lines to print out, so we'll try something excessive,
+perhaps 40? Then narrow it down (or expand it) to make sure you get all the
+atoms. Once we're satisfied that we're getting the results we want, we can
+redirect the output to a file for saving.
+
+```bash
+    % grep -A 40 'Geometry "geometry"' dextran_qm_dft.out
+```
+
+                                 Geometry "geometry" -> ""
+                                 -------------------------
+
+     Output coordinates in angstroms (scale by  1.889725989 to convert to a.u.)
+
+      No.       Tag          Charge          X              Y              Z
+     ---- ---------------- ---------- -------------- -------------- --------------
+        1 C                    6.0000    -1.46614374     1.14413858     0.20689570
+        2 C                    6.0000    -0.06510930     1.71491488     0.52712986
+        3 C                    6.0000     1.01933089     0.89126609    -0.19986268
+        #### More lines here ####
+       20 H                    1.0000    -0.60963072    -2.48793956     1.59468758
+       21 H                    1.0000    -1.82931112    -2.81641725     0.34650697
+       22 H                    1.0000     1.71835792    -2.27555426    -0.39890742
+       23 H                    1.0000     2.96714682     0.88238211    -0.22383765
+       24 H                    1.0000    -0.14249451    -3.77623236    -0.91338242
+
+          Atomic Mass
+          -----------
+
+          C                 12.000000
+          O                 15.994910
+          H                  1.007825
+
+
+     Effective nuclear repulsion energy (a.u.)     827.3774954752
+
+Looks like we overshot by 10 lines
+
+```bash
+    % grep -A 30 'Geometry "geometry"' dextran_qm_dft.out
+```
+
+                                 Geometry "geometry" -> ""
+                                 -------------------------
+
+     Output coordinates in angstroms (scale by  1.889725989 to convert to a.u.)
+
+      No.       Tag          Charge          X              Y              Z
+     ---- ---------------- ---------- -------------- -------------- --------------
+        1 C                    6.0000    -1.46614374     1.14413858     0.20689570
+        2 C                    6.0000    -0.06510930     1.71491488     0.52712986
+        3 C                    6.0000     1.01933089     0.89126609    -0.19986268
+        #### More lines here ####
+       20 H                    1.0000    -0.60963072    -2.48793956     1.59468758
+       21 H                    1.0000    -1.82931112    -2.81641725     0.34650697
+       22 H                    1.0000     1.71835792    -2.27555426    -0.39890742
+       23 H                    1.0000     2.96714682     0.88238211    -0.22383765
+       24 H                    1.0000    -0.14249451    -3.77623236    -0.91338242
+
+```bash
+    % grep -A 30 'Geometry "geometry"' dextran_qm_dft.out > dextran_geometries.out
+```
+
+Finally, let's combine our energies and geometries files into one total file with by
+redirecting the output of `cat` into a new file `dextran_full_output`:
+
+```
+    % cat dextran_energies.out dextran_geometries.out > dextran_full_output
+```
+
+If we wanted to, we could define
+a bash function which runs all these commands on the file automatically, but we
+will save this for another time. If you're curious, check out the relevant
+sections of `index.md` in `phs/shell/exercise_1`. **HERE**
+
+Manipulating multiple files with globbing
+-----------------------------------------
+
+Next we will practice using the wildcard operator `*` to select and move
+consistently named files. We will be using the the files in directory 'plots'.
+We will:
++ Select only the 'CCFreq' and 'CCTime' plots
++ Select only the 'tmax-140' plots
++ Select only the 'CCFreq' and 'tmax-140' plots, then zip them up so that they
+  can be easily emailed
+
+First move into the plots directory. We will select all the 'CCFreq' files or
+'CCTime' files using 'globbing', or 'wildcards'. A wildcard is a `*` on the
+command line, which tells Bash to try to match anything there. Let's try it.
+Examine the output of these commands:
+
+```bash
+    % ls CCFreq*
+    % ls CCFreq_*
+    % ls CCFreq_* CCTime_*
+```
+
+Now create a directory and copy the selected files into that directory:
+
+```bash
+    % mkdir final_plots
+    % cp  CCFreq_* CCTime_* final_plots
+    % ls final_plots/
+```
+
+    CCFreq_L-8_tmax-10_dt-0.1.png   CCFreq_L-8_tmax-30_dt-0.2.png
+    CCTime_L-8_tmax-140_dt-0.5.png  CCFreq_L-8_tmax-10_dt-0.2.png
+    CCFreq_L-8_tmax-50_dt-1.png     CCTime_L-8_tmax-140_dt-1.png
+    CCFreq_L-8_tmax-120_dt-1.png    CCTime_L-8_tmax-10_dt-0.1.png
+    CCTime_L-8_tmax-30_dt-0.2.png   CCFreq_L-8_tmax-140_dt-0.2.png
+    CCTime_L-8_tmax-10_dt-0.2.png   CCTime_L-8_tmax-50_dt-1.png
+    CCFreq_L-8_tmax-140_dt-0.5.png  CCTime_L-8_tmax-120_dt-1.png
+    CCFreq_L-8_tmax-140_dt-1.png    CCTime_L-8_tmax-140_dt-0.2.png
+
+Now, try selecting for only the 'tmax-140' plots, including all three of
+'CCFreq', 'CCTime', and 'Board'
+
+```bash
+    % ls *_tmax-140_*
+```
+
+    Board_L-8_tmax-140_dt-0.2.png  CCFreq_L-8_tmax-140_dt-0.2.png
+    CCTime_L-8_tmax-140_dt-0.2.png Board_L-8_tmax-140_dt-0.5.png
+    CCFreq_L-8_tmax-140_dt-0.5.png CCTime_L-8_tmax-140_dt-0.5.png
+    Board_L-8_tmax-140_dt-1.png    CCFreq_L-8_tmax-140_dt-1.png
+    CCTime_L-8_tmax-140_dt-1.png
+
+Now select all files that are both 'CCFreq' and also 'tmax-140' plots, copy
+them into a new directory called 'presentation_plots', then zip it up using the
+`zip` command so that you can email it. Make sure to pass the '-r' option
+(recursive) to the `zip` command so that it zips the entire
+'presentation_plots' directory.
+
+```bash
+    % mkdir presentation_plots
+    % cp CCFreq_*_tmax-140* presentation_plots
+    % zip -r presentation_plots.zip presentation_plots/
+```
+
+To examine this newly created zip file we can first learn its filetype with
+`file`, and then **l**ist the file contents using `unzip`, which is the inverse
+to `zip`. Then we will extract the files to a new folder (with the `-d` flag)
+with `unzip`:
+```
+    % file presentation_plots.zipA
+    presentation_plots.zip: Zip archive data, at least v1.0 to extract
+    % unzip -l presentation_plots.zip
+    Archive:  presentation_plots.zip
+      Length      Date    Time    Name
+    ---------  ---------- -----   ----
+            0  2018-05-13 21:54   presentation_plots/
+        13434  2018-05-13 21:54   presentation_plots/CCFreq_L-8_tmax-140_dt-1.png
+        21676  2018-05-13 21:54   presentation_plots/CCFreq_L-8_tmax-140_dt-0.2.png
+        16966  2018-05-13 21:54   presentation_plots/CCFreq_L-8_tmax-140_dt-0.5.png
+    ---------                     -------
+        52076                     4 files
+    % mkdir unzipped_folder
+    % unzip presentation_plots.zip -d unzipped_folder
+    Archive:  presentation_plots.zip
+       creating: unzipped_folder/presentation_plots/
+      inflating: unzipped_folder/presentation_plots/CCFreq_L-8_tmax-140_dt-1.png
+      inflating: unzipped_folder/presentation_plots/CCFreq_L-8_tmax-140_dt-0.2.png
+      inflating: unzipped_folder/presentation_plots/CCFreq_L-8_tmax-140_dt-0.5.png
+
+```
+
+Another common (though oddly confusing to use) file compression tool is `tar`.
+Here the syntax is `tar -cvf MY_TARFILE.tar FILES_TO_COMPRESS` (`-c`=create a
+tar archive, `-v`=verbose output, `-f`=use the files I am about to pass). To extract, use
+`tar -xvf MY_TARFILE.tar` (`-x`=extract).
+
+```
+    % tar -cvf presentation_plots.tar presentation_plots/*
+    presentation_plots/CCFreq_L-8_tmax-140_dt-0.2.png
+    presentation_plots/CCFreq_L-8_tmax-140_dt-0.5.png
+    presentation_plots/CCFreq_L-8_tmax-140_dt-1.png
+    % file presentation_plots.tar
+    presentation_plots.tar: POSIX tar archive (GNU)
+    % file presentation_plots.zip
+    presentation_plots.zip: Zip archive data, at least v1.0 to extract
+    % tar -xvf presentation_plots.tar                     
+    presentation_plots/CCFreq_L-8_tmax-140_dt-0.2.png
+    presentation_plots/CCFreq_L-8_tmax-140_dt-0.5.png
+    presentation_plots/CCFreq_L-8_tmax-140_dt-1.png
+```
+
+Other various shell utilities
 -----------------------------
+See what programs are running (task manager) with `top`. If you want it to be
+fancy and have colorful graphics, use `htop` (install it if you need). See the
+low-level hardware commands your system is running with `dmesg`. View the
+background daemon commands your system is running with `journalctl`. Examine
+your cpu with `lspcu`. See your filesystem with `lsblk` and `df`. See your
+wireless/wired connection hardware profiles with `ip link`. Remember your
+wireless name (mine is 'wlp4s0'). Use `iftop -i wlp4s0` (replace 'wlp4s0' with
+your wireless device name) to see the internet traffic you are uploading and
+downloading. Use `ps` to see currently running processes. Use `pkill
+PROCESS_NAME` to force kill a given process (I sometimes need to use `pkill
+chromium` when my internet bugs out).
 
-Follow along with the following python functions in the interpreter. If you
-would like, practice stringing these functions together in a script, and then
-run the script to ensure it outputs what you expect.
-
-### Operators and Functions
-
-The `+` operator on two lists extends the first list with the second list.
-
-```python
->>> list1 = [1,2,3]
->>> list2 = [4,5,6]
->>> print(list1, list2, list1 + list2)
-[1, 2, 3] [4, 5, 6] [1, 2, 3, 4, 5, 6]
-```
-
-The `append` function on a list adds an element to the end of the list:
-
-```python
->>> test_list = [1,2,3]
->>> print(test_list)
-[1, 2, 3]
->>> test_list.append(4)
->>> print(test_list)
-[1, 2, 3, 4]
-```
-The `len` function on a list tells you how long it is.
-
-```python
->>> print(len ([1,2,3,4,5]))
-5
-```
-
-In your shell, create some test lists and compare the behavior of `append` and
-`extend`. What happens when you `append` lists to lists?
+Customize your text editing user experience with a `.vimrc`
+-----------------------------------------------------------
+In the same way that we were able to modify our `bash` user experience with a
+`.bashrc`, we can modify our `vim` experience with a `.vimrc`. It is also a
+hidden file, stored in the home directory. At the start of every `vim` session,
+every line in your `vimrc` is executed sequentially. As we did with the
+`.bashrc`, open your `vimrc` in vim with `vim ~/.vimrc`, then open my sample
+vimrc alongside with `vsplit my_vimrc`. Switch between sides with `Ctrl-W
+Ctrl-W` or with `Ctrl-W Ctrl-H` or `Ctrl-W Ctrl-L` (you will notice 'h' and 'l'
+are the left and right navigation keys in vim). If you want, copy and paste the
+entire file by going to the top of the file with `gg`, enter visual block mode
+with `V`, go to the end of the file with `G`, yank all of the text with `y`,
+change to the other window with `Ctrl-W Ctrl-W`, and paste with `P`.
 
 
-### Strings
+If you are looking for more commands to put in your `.vimrc`, google it (or
+[this link](https://dougblack.io/words/a-good-vimrc.html) is pretty good too).
 
-Strings are a special case of a python `list` where the elements are `char`'s.
-You can create a `string` in python using quotes (single or double). You can
-concatenate strings using the `+` operator.
+Computing Collatz sequences in python
+-------------------------------------
+There is a suspiciously simple conjecture in mathematics that has never been
+proven, called the Collatz conjecture. Start
+with a positive integer, and if it is even divide by two, and if it is odd
+multiply by three and add 1. The conjecture states that no matter what number
+you start with, you will end up with 1. (e.g.: 3 -> 10 -> 5 -> 16 -> 8 -> 4 ->
+2 -> 1)
 
-```python
->>> my_string = "hello"
->>> print(my_string)
-hello
->>> string_two = " world"
->>> print(my_string + string_two)
-hello world
->>> print(len (my_string))
-5
-```
+We are going to build these Collatz chains using python. Open a new python file
+in vim with `vim my_collatz.py`, and in the first line enter the sh-bang
+`#!/bin/python3`. In the first couple of lines, place a simple `print('hey
+there')`. Open another shell and navigate to the same folder. Make the python
+file executable with `chmod u+x my_collatz.py`, and execute it with
+`./my_collatz`. Ensure that your shell prints the expected statement.
 
-In the python shell, create a test string. How would you access the first
-letter of that string, with list syntax?
+Make sure you have a good workflow here! I like to have two terminal windows
+side by side, one in the shell ready to execute the python file (use the up
+arrow to access the last command you used), and the other in vim editing the
+python file.  Switch between these windows with Windows+Tab or Alt+Tab.
 
-### List Slices
+We will make the Collatz sequence together in class. One key aspect of python
+is that you need your spacing to be correct. If you are indented where you
+shouldn't be, or not indented where you should be, python will throw an error
+(`IndentationError: unexpected indent`). When errors occur, read the error
+message-- it even says what line the error occured on, and tells you the class
+of what was wrong.
 
-List slices can be used to select a certain subset of another list. They use the
-`my_list[start:end:inc]` syntax. The new list starts at the `start` index, goes
-until the `end` index (but does not include it), making jumps of `inc`. By
-default, `start` is `0`, `end` is `len(my_list)`, and `inc` is `1`.
-
-```python
->>> test_list = [1,2,23,2,38,48,54,90]
->>> print(test_list[3:5])
-[2, 38]
->>> print(test_list[:7])       # Everything up to element 7
-[1, 2, 23, 2, 38, 48, 54]
->>> print(test_list[2:7:2])    # Every second element from 2-7
-[23, 38, 54]
->>> print(test_list[::-1])     # Reverse a list
-[90, 54, 48, 38, 2, 23, 2, 1]
-```
-
-In the python shell, try the following:
-
-- reverse elements 1 through 4 in a test list
-- use list slices to extract the first 4 letters in a string
-
-### Loops
-
-To build lists and perform other calculations, we use loops. A python `for` loop
-iterates through a `list` provided by the user. This `list` could be a range of
-numbers, or lines in a file, or any list.
-
-```python
->>> for x in [1,2,8,4,19]:
-...     print(x, x+i)          # Notice extra space before print
-...
-1 2
-2 4
-hello hellohello
-4 8
-19 38
-```
-Notice in this example you are not printing the iterator (i=1,2,3), but rather
-are printing the constituent elements of the list themselves.
-
-Quite often we need to add up numbers in a loop. If we wanted to sum the numbers
-from 3 to 5, we need to create a range. The `range(start,end,inc)` function will
-produce all numbers up to, but not including, `end` and will increment by `inc`
-(1 by default). Also note that we need to initialize the `tot` variable before
-the loop. The `tot += elem` operation is shorthand for `tot = tot + elem`.
-
-```python
->>> print(range(3,6))
-range(3, 6)                     # Most useless output ever
->>> for i in range(3,6):
-...     print(i)               # Don't forget extra space before print
-...
-3
-4
-5
->>> tot = 0                         # Let's calculate a total
->>> for elem in range(302,6000):
-...     tot += elem
-...
->>> print(tot)
-17951549
-```
-
-Notice that the statements which are "inside" the loop must be indented. There
-is no rule saying you have to use spaces or tabs, but you have to be
-**consistent**. This enforces easier-to-read code.
-
-### Building lists with append
-
-This method is useful when you don't know how long your list will be, but you
-think it will be short. The function `append` is not as efficient as some of the
-later methods.
-
-```python
->>> app_list = []
->>> data_to_app = [1,3,5,8,1000]
->>> for elem in data_to_app:
-...     app_list.append(elem)
->>> print(app_list)
-[1, 3, 5, 8, 1000]
-```
-
-In the shell, take the following list of lists and create one flattened list
-using a for loop and the `+` operator:
-
-```python
->>> to_flatten = [[1,2,3],["wat"],[0.2,1000]]
-```
-
-### Building a pre-allocated list
-
-In this example, we allocate all the memory for the list ahead of time and
-update values after. This is more efficient than appending to an existing list
-every time (the lists memory only needs to be allocated once). This technique
-is especially useful in conjunction with the `linspace` function of the `numpy`
-module, and is the standard way to crunch large list calculations (solving
-ODEs, analyzing large data sets, etc.).  The syntax `[0]*num` creates a list of
-`0`'s that is `num` long.
-
-```python
->>> xs = [1,3,5,10,15]
->>> vs = [0]*(len(xs)-1)            # Allocate memory for velocities
->>> dt = 1
->>> for t in range(len(vs)):
-...     dx = xs[t+1] - xs[t]
-...     vs[t] = dx/dt
-...
->>> print(vs)
-```
-
-The loop above took a list of positions and, assuming constant time intervals,
-created a list of velocities. On your own, take that list of velocities and make
-a loop to calculate a list of accelerations, including allocating memory before
-the loop. Your resulting list should be `[0.0, 3.0, 0.0]`.
-
-
-### Building lists with list comprehensions
-
-This is the most compact and "pythonic" way to build lists. It is also usually
-the fastest. List comprehensions need to be used with an existing list to build
-from, which can be a built-in like the `range(start, stop, inc)` function.
-
-Here are some examples of list comprehensions. Notice that you can evaluate
-general expressions (even calling functions) in the list comprehension.
-
-```python
->>> simple_range = [x for x in range(5)]
->>> print(simple_range)
-[0, 1, 2, 3, 4]
->>> squared = [i*i for i in simple_range]
->>> print(squared)
-[0, 1, 4, 9, 16]
->>> import math
->>> sqrts = [math.sqrt(element) for element in range(12, 15)]
->>> print(sqrts)
-[3.4641016151377544, 3.605551275463989, 3.7416573867739413]
-```
-
-We can also add conditional statements, for example to grab all multiples of
-five. The `%` operator - called `modulus` - calculates the remainder after
-division (eg. `5 % 3 == 2`, `17 % 7 == 3`, `10 % 2 == 0`). The `==` operator
-calculates if the terms on either side are equal, and returns a boolean `True`
-or `False`.
-
-```python
->>> simple_range = [x for x in range(44) if x % 5 == 0]
->>> print(simple_range)
-[0, 5, 10, 15, 20, 25, 30, 35, 40]
->>> squares_under_fifty = [n*n for n in range(51) if n*n <= 50]
->>> print(squares_under_fifty)
-[0, 1, 4, 9, 16, 25, 36, 49]
-```
-We can do mathematical operations within the list comprehension. In the shell,
-write your own list comprehension which returns the squares of all of the
-integers from 10 to 20.
-
-As a final example, let's write a quick `flatten` function which takes a list of
-lists and creates a list with one less level of nesting:
-
-```python
->>> list_of_lists = [[1,2,3], [4,5,6], [7,8,9]]
->>> flattened = [x for sublist in list_of_lists for x in sublist]
->>> print(flattened)
-[1, 2, 3, 4, 5, 6, 7, 8, 9]
-```
-
-This is some crazy syntax, so take a while to think about how this works. It
-might help to see the equivalent `for` + `append` loop expression:
-
-```python
->>> list_of_lists = [[1,2,3], [4,5,6], [7,8,9]]
->>> flattened = []
->>> for sublist in list_of_lists:   # Appears first in nested comprehension
-...     for x in sublist:           # Appears second
-...         flattened.append(x)
-...
->>> print(flattened)
-[1, 2, 3, 4, 5, 6, 7, 8, 9]
-```
-
-List comprehensions are much faster than for loops + append, especially for
-larger lists!
+To make the Collatz sequence, we will use: function definitions (`def`),
+`while` loops, list `append`ing, casting numbers as `int`s, `if` and `else`
+statements, and eventually accept user input from the command line with
+`sys.argv`. To see a completed version of this file, refer to
+`my_collatz_solution.py`.
