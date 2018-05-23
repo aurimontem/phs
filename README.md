@@ -19,7 +19,7 @@ our curriculum for:
     vim, and solve a programming puzzle in python while working in a
     streamlined workflow
 
-Topics we have guides on:
+We have guides for:
 
 -   [Linux shells (terminal)](shell/)
 -   [Python programming language](python/)
