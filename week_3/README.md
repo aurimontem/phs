@@ -327,67 +327,8 @@ and view a fully fleshed out report that includes figures in the
 `example_tex_report` directory.
 
 
-Making LaTeX-quality documents simply with Markdown
----------------------------------------------------
-One alternative to LaTeX is Markdown. Markdown is like fancy .txt-- it has
-basic formatting. However, there is a powerful tool called `pandoc` that can
-convert markdown into any other format: it can convert it into LaTeX, or html,
-or Word, and it will still format the document nicely.
-
-As an example, look at the text in `basic_markdown.md`. We will convert it into
-a `.tex` document, and then into a `.pdf` like we did before. First we need to
-download `pandoc`:
-+ Ubuntu/Windows: `sudo apt install pandoc`
-+ Mac: `brew install pandoc`
-
-Now we will convert a standalone file (`-s`) from (`-f`) markdown to (`-t`)
-latex to a particular output file (`-o`) with the command
-```
-    % pandoc -s -f markdown -t latex -o basic_markdown.tex basic_markdown.md
-```
-Now you have the converted LaTeX file basic_markdown.tex-- take a look at it
-with `less` or `tail`, and you will see that markdown inserts a huge preamble,
-but then cuts and pastes the markdown text between the `\begin{document}` and
-`\end{document}` tags. Now we can convert this `.tex` file into a `.pdf` with
-our earlier `compile_article` command:
-```
-    % compile_article basic_markdown.tex
-```
-Take a look at the output pdf.
-
-Alternatively, we can do this all in one step with the `build_pdf` command:
-```
-    % build_pdf basic_markdown
-```
-Note here that we don't include the file extension for this program. Open
-`build_pdf` in vim and look through its contents-- every line is just a bash
-command, and the commands are spun together in a script.  As before, we can
-make a macro in `vim` to run this `build_pdf` program automatically.  First
-copy this program into your bin with `cp build_pdf ~/bin`. Then add the
-following line into your `~/.vimrc`:
-```
-autocmd BufRead,BufNewFile *.md let @w=':wa:!build_pdf %:r'
-autocmd BufRead,BufNewFile *.md let @o=':!mupdf %:r.pdf &> /dev/null &'
-```
-As before, copy and paste from the `vim` file rather from the website because
-`^M` messes with the formatting. As before, `autocmd BufRead,BufNewFile *.md`
-says to only use this macro if the file ends in `.md`, and the rest says to
-write with `@w` or open in `mupdf` with `@o`; if you want, replace mupdf by the
-pdf viewer of your choice.
-
-Now open `basic_markdown.md` in vim, and try using `@w` to compile and `@o` to
-open the pdf file. This is an easy way to turn standard text that even includes
-LaTeX formatting into a nice output pdf, without the need to remember the
-often-confusing LaTeX syntax.
-
-I use markdown as my go-to for casual note taking. For example, I annotate
-papers that I read in a `papers.md` document with headers and bullet points; I
-make notes for skype meetings with a collaborator using `pandoc` to turn my
-markdown into a beamer document (it turns different headings into new slides);
-and right now I am writing a PHS `README.md` file in markdown.
-
-Back to python
------------------------------
+More python syntax
+------------------
 Now for something entirely different. We are going to create an intuitive
 programming workflow with python, vim, and the shell. Open the python
 interpreter in your shell with `python`, and follow along by entering the
@@ -668,4 +609,6 @@ To make the Collatz sequence, we will use: function definitions (`def`),
 statements, and eventually accept user input from the command line with
 `sys.argv`. To see a completed version of this file, refer to
 `my_collatz_solution.py`.
+
+
 

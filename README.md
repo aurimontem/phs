@@ -15,9 +15,11 @@ our curriculum for:
     your user experience with a `.vimrc` and `.bashrc`
 -   [Week 3](week_3/) -- create a document, presentation, and resume in LaTeX
     with vim, compile these files into pdfs in the command line and by
-    customizing your `.vimrc`, create markdown documents and compile them in
-    vim, and solve a programming puzzle in python while working in a
-    streamlined workflow
+    customizing your `.vimrc`
+-   [Week 4](week_4/) -- create markdown documents and convert them into Word
+    or LaTeX or html or whatever else, solve a programming puzzle in python
+    while working in a streamlined workflow, and report your results in a LaTeX
+    document you create in vim and compile from the command line
 
 We have guides for:
 
@@ -25,3 +27,7 @@ We have guides for:
 -   [Python programming language](python/)
 -   [Vim text editor](vim/)
 -   [Linux program configurations (dotfiles)](dotfiles/)
+
+We are always looking to improve! Look at our [TODO](TODO.md) page and let us
+know if you have additional ideas or would like to contribute to our
+documentation.
