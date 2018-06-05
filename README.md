@@ -17,9 +17,9 @@ our curriculum for:
     with vim, compile these files into pdfs in the command line and by
     customizing your `.vimrc`
 -   [Week 4](week_4/) -- create markdown documents and convert them into Word
-    or LaTeX or html or whatever else, solve a programming puzzle in python
-    while working in a streamlined workflow, and report your results in a LaTeX
-    document you create in vim and compile from the command line
+    or LaTeX or html or whatever else, read a solution of the travelling
+    salesman problem in python, and parallelize it for use on a hypothetical
+    supercomputer
 
 We have guides for:
 
