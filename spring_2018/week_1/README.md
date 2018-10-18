@@ -2,7 +2,7 @@ Programming Help Sessions (PHS): Week 1
 =================================
 
 Welcome to programming help sessions! The files in here were originally created
-for the Colorado School of Mines "Physics help sessions," a group founded by
+for the Colorado School of Mines ``Physics help sessions,'' a group founded by
 my friends (Everett Hildenbrandt, Alli Nilles, and David Grisham) and me
 (Eric Jones). The primary joy and utility of open-source programming,
 though, is that none of our names matter-- only the content does. So long
@@ -26,7 +26,10 @@ Once installed, let's open up a second shell and update everything:
   download more command line programs, in your free time look up `homebrew`
 
 If you want to skip this introduction, feel free to reference the command line
-cheatsheet (shell_cheatsheet.md) in this directory instead.
+cheatsheet (shell_cheatsheet.md) in this directory instead.  An appendix that
+gives an overview of the command line, basic bash commands, and the remote
+access of files is also available in command_line_appendix.pdf (created by Alex
+Dorsett for PHYS 125).
 
 Basic shell commands
 --------------------
@@ -44,13 +47,6 @@ this guide and elsewhere, shell commands will be formatted as:
     % pwd
     /home/eric
 ```
-Is the output of your ```ls``` command ugly? (Only black and white text that is
-all the same font?) Run the command ```alias ls='ls --color=auto'``` to make
-your ```ls``` command more colorful/intuitive. Currently you will need to run
-this command every time you open bash manually, but next week we will modify
-your bash configuration settings in a file called ```.bashrc``` that will run
-this command automatically every time you open bash.
-
 
 Let's make a new directory to practice moving around in the file system. We
 will **m**a**k**e a **dir**ectory called my_dir with ```mkdir my_dir```. Now,
@@ -59,6 +55,7 @@ when we list the contents of our current directory, we see something like:
     % ls 
     my_dir  my_python_file.py   my_file_1.txt   my_image_1.pdf  my_webpage_1.html
 ```
+
 Let's **c**hange **d**irectories to this new folder with ```cd my_dir```. Now, when
 we look at where we are located we see:
 ```
@@ -218,8 +215,7 @@ You should now feel comfortable navigating up and down directories (```cd```,
 ```tail```). These tools are hardly scratching the surface of command line
 tools: wait for future weeks to learn more advanced tools, or check out the
 command line cheatsheet shell_cheatsheet.md in this directory if you are
-impatient. Alternatively, read through Alex Dorsett's thorough shell sguide
-```command_line_appendix.pdf```.
+impatient. 
 
 Since everything is just a file or a directory, we will now learn how to
 manipulate text using the text-editor ```vim```.
@@ -236,11 +232,7 @@ if you use ```vim```, it will become the ONLY text editor you will need-- it
 can write your LaTeX code, your python, your C++, your Julia, and whatever
 else. (A caveat: you don't *always* need to use vim. I use the built-in
 text editors for Gmail and Mathematica and iPython, but I often find myself
-wishing they had vim key bindings!). 
-
-One "teaser" video that demonstrates how an experienced vim user works is:
-https://www.youtube.com/watch?v=FcpQ7koECgk. Can you do these types of edits
-as quickly in your GUI text editor?
+wishing they had vim key bindings!)
 
 Let's get started by by opening the file ```vim_exercise_1.md``` in vim:
 ```
@@ -286,149 +278,11 @@ commands you would use in python:
 ```python
 % python
 >>> print("Hello, world!")
-Hello, World!
->>> 8*2
-16
->>> 8**2
-64
-```
-Exit the interpreter with ```Ctrl + d```, or with ```quit()```, or
-with ```exit()```.  Other common python commands are listed at the end of this
-guide--- on your own time, try out these commands in the python shell
-(interpreter), and verify the outputs shown.
-
-Creating python scripts in vim
-------------------------------
-
-A python script is a text file consisting of python commands on each line. When
-the script is executed, each line of the script is sequentially executed in the
-interpreter. Blank lines are ignored, and on any line the text that follows a
-`#` is a comment and will be ignored.
-
-Let's make our first python "Hello, world" script. To do this, open up a new
-file with ```vim my_script.py```. You should now be looking at the vim editor
-in all its glory. Let's quickly save and quit with ```:wq + Enter```, and
-investigate our new file in the shell with ```ls -lah```:
-```
-    % ls -lah
-    total 288K
-    drwxr-xr-x  2 eric users 4.0K Oct 18 12:40 .
-    drwxr-xr-x 10 eric users 4.0K Oct 18 12:02 ..
-    -rw-r--r--  1 eric users 190K Oct 18 11:59 command_line_appendix.pdf
-    -rw-r--r--  1 eric users  951 Oct 18 11:59 jabberwocky
-    -rw-r--r--  1 eric users 1016 Oct 18 11:59 my_fancy_script.py
-    -rw-r--r--  1 eric users    0 Oct 18 12:40 my_script.py
-    -rw-r--r--  1 eric users  28K Oct 18 12:33 README.md
-    -rw-r--r--  1 eric users 2.7K Oct 18 11:59 shell_cheatsheet.md
-    -rw-r--r--  1 eric users 1.6K Oct 18 11:59 vim_cheatsheet.md
-    -rw-r--r--  1 eric users 5.6K Oct 18 12:24 vim_exercise_1.md
-
-```
-Notice our new script ```my_script.py``` is present, with size 0. This makes
-sense-- we didn't type anything! Open the script again with ```my_script.py```.
-Go into insert mode (```i```), and type the lines:
-```python
-#!/usr/bin/python3
-# This comment is the second line of the file
-print("Hello, world!")
-```
-Then escape from insert mode (```Esc```) and write and quit (```:wq```). You
-should now be at the shell once again. In the first line in the file, we placed the 'sh-bang'
-`#!/usr/bin/env  python3`. This tells the shell to execute the file using
-python3, and the ```/usr/bin/env``` is a program that knows and tells bash where
-python3 is located on your computer. 
-
-You would like to execute this file, but it is currently just a text file:
-```
-    % ls -lah my_script.py
-    -rw-r--r-- 1 eric users 46 Oct 18 12:44 my_script.py
 ```
 
-To make this file executable, you need to **ch**ange the **mod**ifications and
-take the **u**ser class and add (**+**) e**x**ecute permissions, with `chmod
-u+x my_script.py`. Now, the file has execute permissions:
-```
-    % chmod u+x my_script.py
-    % ls -lah my_script.py
-    -rwxr--r-- 1 eric users 46 Oct 18 12:44 my_script.py
-```
-Notice the '-' is now an 'x'. Execute this file with `./my_script.py`: 
-```
-    % ./my_script.py
-    Hello, world!
-```
-
-(As a caveat, you could have originally executed the file without changing the
-file permissions with `python3 my_script.py`, but making files you want to
-execute executable with `chmod` is the proper way to do things in the command
-line)
-
-Executing premade python files
-------------------------------
-
-Now let's read through the fancier python file `my_fancy_script.py` in vim.
-Part A demonstrates a simple for loop, using the `range` command which
-effectively constructs a list of numbers that you can iterate through. Part B
-uses a for loop to perform the derivative of some (time, position) coordinates.
-Part C constructs and calls a simple function that adds numbers within a
-certain range. Part D is optional, and integrates a function for those in
-Physics 134 that needed to know this (see below for more details).
-
-If you try to execute it right now, it won't work:
-```
-    % ./my_fancy_script.py
-    bash: ./my_fancy_script.py: Permission denied
-```
-
-This is because you don't have the right permissions! Allow **u**sers to
-e**x**ecute with ```chmod```:
-```
-    % ls -lah my_fancy_script.py
-    -rw-r--r-- 1 eric users 837 Oct 18 13:58 my_fancy_script.py
-    % chmod u+x my_fancy_script.py
-    -rwxr--r-- 1 eric users 837 Oct 18 13:58 my_fancy_script.py
-    % ./my_fancy_script.py
-    PART A
-    <<< ETC. >>>
-```
-If you want to run part D: change ```run_part_d = False``` to ```run_part_d =
-True``` and try running it. You may need to install the python packages
-```numpy``` (for numerical integration) and ```matplotlib``` (for plotting)
-with ```pip3 install numpy``` and ```pip3 install matplotlib```). If you don't
-have ```pip3```, you may need to install it with ```sudo apt install
-python3-pip```. Then, the code in Part D solves the differential equation dx/dt
-= 5*x - x^2 for time 0 to 10. Replace your dx/dt and your t_max in the
-integrand function. Currently Part D saves a figure of x(t) to
-```my_first_figure.pdf```. To view this pdf file:
-+ In Windows, navigate to the file following
-  https://www.howtogeek.com/261383/how-to-access-your-ubuntu-bash-files-in-windows-and-your-windows-system-drive-in-bash/
-+ In Mac: run ```file my_first_figure.pdf``` and the default pdf viewer will
-  open the file
-+ In Linux: run ```evince my_first_figure.pdf``` (if you don't have evince
-  installed, run ```sudo apt install evince```)
-  
-In general, the procedure for creating and running python files from the
-command line is:
-+ make your own python file `my_first_script.py` with `vim my_first_script.py`
-  that includes the sh-bang ```#!/usr/bin/env python3```
-+ make it executable with `chmod` and run it:
-```bash
-% chmod u+x my_first_script.py     # Do once to make executable
-% ./my_first_script.py             # Can be run like this every time
-```
-+ or run your file with python
-```bash
-% python3 my_first_script.py
-```
-If you chose to make your script executable by running `chmod u+x my_first_script.py` and called it
-using the `./` syntax, the 'sh-bang' described above is **required**.
-
-Food for thought: What was the difference between running our short "Hello,
-world!" program in the interpreter versus running it in a script? In what
-instances are scripts useful, and when is the interpreter useful?
-
-Python Commands
----------------
+Here we will mention some common commands in python. Follow along by trying
+these commands in the python shell (interpreter). Verify the outputs shown
+here.
 
 ### Assignment and Arithmetic
 
@@ -519,6 +373,90 @@ d
 >>> print(test_list[-2])
 c
 ```
+
+Creating python scripts in vim
+------------------------------
+
+A python script is a text file consisting of python commands on each line. When
+the script is executed, each line of the script is sequentially executed in the
+interpreter. Blank lines are ignored, and on any line the text that follows a
+`#` is a comment and will be ignored.
+
+Open the sample python file `my_script.py` in vim with `vim my_script.py`, and
+see that it consists of typical python commands.  You would like to execute
+this file, but it is currently just a text file:
+```
+    % ls -lah my_script.py
+    -rw-r--r-- 1 eric users 1012 May  7 01:29 my_script.py
+```
+
+To make this file executable, you need to **ch**ange the **mod**ifications and
+take the **u**ser class and add (**+**) e**x**ecute permissions, with `chmod
+u+x my_script.py`. Now, the file has execute permissions:
+```
+    % ls -lah my_script.py
+    -rwxr--r-- 1 eric users 1012 May  7 01:29 my_script.py
+```
+Notice the '-' is now an 'x'. Execute this file with `./my_script.py`. (As a
+caveat, you could have originally executed the file without changing the file
+permissions with `python my_script.py`, but making files you want to execute
+executable with `chmod` is the proper way to do things in the command line)
+
+Now read through the python file `my_script.py` in vim. Part A demonstrates a
+simple for loop, using the `range` command which effectively constructs a list
+of numbers that you can iterate through. Part B uses a for loop to perform the
+derivative of some (time, position) coordinates. Part C constructs and calls a
+simple function that adds numbers within a certain range. Part D contains an
+error, which you should find by reading the error message python gives you.
+Remedy this error in the file, save and close the file with `:wq` in vim, and
+rerun it to ensure there is no longer any error.
+
+Now you will make your own python file. Open a new file called
+`my_first_script.py` with `vim my_first_script.py`. Immediately write the file
+(= save) with `:w`.  In the first line in the file, place the 'sh-bang'
+`#!/usr/bin/python3`, which tells the shell that you are using python, and that
+it is located at `/usr/bin/python3`. Ensure that this is the right location on
+your own machine, by running the command `which python` in your terminal. Use
+`python3` or `python2` if you want to be explicit about which version you are
+using (instead of just `python`).
+
+```python
+#!/usr/bin/python3
+# This comment is the second line of the file
+print("Hello, world!")
+```
+
+In this file, add a few lines of code that prints out all of the even numbers
+between 0 and 30. Use a `for` loop, the modulus function `%` (`7 % 3 == 1`), an
+if statement `if a == b:`, and the `print` command. Open up the sample script
+in the same vim terminal with `:tabedit my_script.py`, and switch between vim
+tabs with `gt` in normal mode.
+
+When you are done, write and quit (= save and close) your script file with
+`:wq`, and then execute your script with python
+```bash
+% python my_first_script.py
+```
+or make it executable with `chmod`
+```bash
+% chmod u+x my_first_script.py     # Do once to make executable
+% ./my_first_script.py             # Can be run like this every time
+```
+Once your code works, help your neighbor and troubleshoot their code.
+
+If you chose to make your script executable by running `chmod u+x my_first_script.py` and called it
+using the `./` syntax, the 'sh-bang' described above is **required**.
+
+What was the difference between running our short "Hello, world!" program in the
+interpreter versus in a script? In what instances are scripts useful, and when
+is the interpreter useful?
+
+More advanced python commands 
+-----------------------------
+
+Follow along with the following python functions in the interpreter. If you
+would like, practice stringing these functions together in a script, and then
+run the script to ensure it outputs what you expect.
 
 ### Operators and Functions
 
