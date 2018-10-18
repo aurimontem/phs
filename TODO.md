@@ -13,3 +13,4 @@ Traffic
 + 5/7  (week 1): 22 attended, didn't know about github analytics yet
 + 5/14 (week 2): 13 attended, 18 unique visitors, 97 views, 3 cloners
 + 5/21 (week 3): 15 attended, 15 unique visitors, 77 views, 7 cloners
++ 6/4  (week 4):  6 attended, 4  unique visitors, 11 views, 1 cloners
