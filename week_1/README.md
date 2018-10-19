@@ -45,11 +45,12 @@ this guide and elsewhere, shell commands will be formatted as:
     /home/eric
 ```
 Is the output of your ```ls``` command ugly? (Only black and white text that is
-all the same font?) Run the command ```alias ls='ls --color=auto'``` to make
-your ```ls``` command more colorful/intuitive. Currently you will need to run
-this command every time you open bash manually, but next week we will modify
-your bash configuration settings in a file called ```.bashrc``` that will run
-this command automatically every time you open bash.
+all the same font?) If running Mac: run the command ```alias ls='ls -G'```. If
+not running Mac: run the command ```alias ls='ls --color=auto'``` to make your
+```ls``` command more colorful/intuitive. Currently you will need to run this
+command every time you open bash manually, but next week we will modify your
+bash configuration settings in a file called ```.bashrc``` that will run this
+command automatically every time you open bash.
 
 
 Let's make a new directory to practice moving around in the file system. We
