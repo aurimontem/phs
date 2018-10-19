@@ -122,12 +122,19 @@ file structure; see if your system can do this with ``tree .``, once you are
 located in the `phs` directory. (Here `.` means 'in my current directory'.
 Therefore, `cd .` will leave you in the same directory)
 
+What would you do if you didn't have these handy PHS guides to help you
+program? The answer is the `man` pages. `man` is short for 'manual', and it
+will tell you everything you need to know about a shell command. Try running
+`man ls`. Use `j` and `k` to scroll up and down. Notice all the `-a`, `-A`,
+etc. type commands? These are called 'flags', and they modify the base command. 
+
 Reading from and manipulating files
 -----------------------------------
 With ```ls``` we can see the files in this home directory, but by adding *flags*
 onto the  'ls' command, we can modify its behavior. For example, if we want to
 list things in **l**ong form, **a**ll files including hidden files, and in a
-**h**uman readable format, we can use ```ls -lah```:
+**h**uman readable format, we can use ```ls -lah```: (use `man ls` to figure
+out what `-l`, `-a`, and `-h` mean!)
 ```
     % ls
     latex  misc  python  README.md  shell  vim  week_1
