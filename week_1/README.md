@@ -125,8 +125,9 @@ Therefore, `cd .` will leave you in the same directory)
 What would you do if you didn't have these handy PHS guides to help you
 program? The answer is the `man` pages. `man` is short for 'manual', and it
 will tell you everything you need to know about a shell command. Try running
-`man ls`. Use `j` and `k` to scroll up and down. Notice all the `-a`, `-A`,
-etc. type commands? These are called 'flags', and they modify the base command. 
+`man ls`. Use `j` and `k` to scroll up and down, and use `q` to quit. Notice
+all the `-a`, `-A`, etc. type commands? These are called 'flags', and they
+modify the base command. 
 
 Reading from and manipulating files
 -----------------------------------
