@@ -9,17 +9,15 @@ it is your first time programming, take a look at README.md in the [Week
 If you're following along with Programming Help Sessions @ UCSB, take a look at
 our curriculum for:
 
--   [Week 1](week_1/) -- interact with the command line, type in vim, create a
-    simple python file in vim, and modify an existing python file in vim.
--   [Week 2](spring_2018/week_2/) -- learn more advanced command line tools and personalize
-    your user experience with a `.vimrc` and `.bashrc`
--   [Week 3](spring_2018/week_3/) -- create a document, presentation, and resume in LaTeX
-    with vim, compile these files into pdfs in the command line and by
-    customizing your `.vimrc`
--   [Week 4](spring_2018/week_4/) -- create markdown documents and convert them into Word
-    or LaTeX or html or whatever else, read a solution of the travelling
-    salesman problem in python, and parallelize it for use on a hypothetical
-    supercomputer
+-   [Week 1](week_1/) -- interact with the command line, type in vim, and read
+    text files
+-   [Week 2](week_2/) -- make a simple python file in vim and execute it in the
+    shell, learn more advanced command line tools, and parse a computational
+    chemistry supercomputer program
+
+Older curriculum:
+
+-   [Spring 2018](spring_2018)
 
 We have guides for:
 
