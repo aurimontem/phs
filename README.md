@@ -14,6 +14,7 @@ our curriculum for:
 -   [Week 2](week_2/) -- make a simple python file in vim and execute it in the
     shell, learn more advanced command line tools, and parse a computational
     chemistry supercomputer program
+-   Test item
 
 Older curriculum:
 
