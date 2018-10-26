@@ -33,6 +33,38 @@ through the shell cheatsheet with `vim shell_cheatsheet.md`. Close the file in
 vim with `:q` or `:q!`. Now open and read through the vim cheatsheet file. Now
 move back to the week_2 directory with `cd ../week_2`.
 
+A Side Project: Installing LaTeX
+--------------------------------
+LaTeX ("lay-tek" or "la-tek", not "lay-tex") is a typesetting program that
+generates pretty files. Most physics textbooks and typed notes from your
+classes, for example, will have been created in LaTeX. However, this program is
+fairly hefty is size (.5 GB or so) and is typically not included by default.
+We will not use it this week, but we will next week, and it takes a while to
+install. So let's prepare, and install it now.
+
+Open up a separate terminal and run the following commands:
+
+On Windows or Ubuntu (in Windows Subsystem for Linux):
++ `sudo apt-get install texlive-latex-recommended`
+
+On Mac:
++ First install `homebrew`, a package manager for Mac OSX
+  (details at `http://brew.sh`), with `/usr/bin/ruby -e "$(curl -fsSL
+  https://raw.githubusercontent.com/Homebrew/install/master/install)"`
++ Install `mactex`, a package containing LaTeX and many of its commonly used
+  modules, with `brew cask install mactex`
++ Restart your terminal
+
+Once these downloads are completed, ensure you have `latex` and `pdflatex`
+installed with:
+```
+    % which latex
+    /usr/bin/latex
+    % which pdflatex
+    /usr/bin/pdflatex
+```
+
+
 Rearranging files in the shell
 ------------------------------
 Now that we're in week_2 (check with `pwd`), we're going to make a fake
