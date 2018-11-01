@@ -1,12 +1,11 @@
 TODO/Notes
 ----------
-+ Break up four two-hour sessions into six 90-minute sessions
-+ Add homework before LaTeX session of installing brew/LaTeX to save 45 minutes
 + Break up each session into clear parts; add 'summary' section for each part
   discussing which files we use and which commands we use
 + Add more common errors when introducing scripting (shbang location of
   bash/python especially)
-
++ Week 2-- didn't manipulate files with globbing; didn't show various shell
+  utilities; didn't introduce .bashrc
 
 Traffic
 -------
@@ -18,4 +17,7 @@ Spring 2018:
 
 Fall 2018:
 + 10/18 (week 1): 35 attended + 3 graduate students, 78 unique visitors,
-  370 views, 36 cloners
+  397 views, 37 cloners
++ 10/25 (week 2): 32 attended + 3 graduate students, 44 unique visitors,
+  315 views, 23 cloners
+

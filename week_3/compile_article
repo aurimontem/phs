@@ -1,0 +1,23 @@
+#!/usr/bin/bash
+# CALL:    compile_article filename.tex
+# RETURNS: filename.pdf
+
+# get filename without .tex extension
+filename=${1%.*}
+bibname=$filename".bib"
+
+if [ -e "$bibname" ]; then
+    pdflatex $filename
+    bibtex $filename
+    pdflatex $filename
+    pdflatex $filename
+    echo
+    echo "... Compiled LaTeX file w/ BiBTeX citations to "$filename".pdf"
+else
+    pdflatex $filename
+    echo
+    echo "... Compiled standard LaTeX file to "$filename".pdf"
+fi
+
+clean_up_files &> /dev/null
+#clean_up_files
