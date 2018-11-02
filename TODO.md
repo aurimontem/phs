@@ -6,6 +6,7 @@ TODO/Notes
   bash/python especially)
 + Week 2-- didn't manipulate files with globbing; didn't show various shell
   utilities; didn't introduce .bashrc
++ Week 3-- didn't do bibtex from RIS 
 
 Traffic
 -------
@@ -18,6 +19,6 @@ Spring 2018:
 Fall 2018:
 + 10/18 (week 1): 35 attended + 3 graduate students, 78 unique visitors,
   397 views, 37 cloners
-+ 10/25 (week 2): 32 attended + 3 graduate students, 44 unique visitors,
-  315 views, 23 cloners
++ 10/25 (week 2): 32 attended + 3 graduate students, 63 unique visitors,
+  393 views, 28 cloners
 

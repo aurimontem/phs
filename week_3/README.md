@@ -218,7 +218,7 @@ and do it in one bash command
 ```
     % echo PATH=$PATH:/home/your_username/bin >> ~/.bashrc
 ```
-which will append the command to the bash rc. Now you can restart bash, and
+which will append the command to the `.bashrc`. Now you can restart bash, and
 still use your script `my_bash_script` anywhere you wish.
 
 Compiling a simple skeleton document
@@ -254,8 +254,23 @@ If you `ls`, you should now see additional files, including
   `pdf skeleton_document.pdf`.
 + Windows: This is a little tricky. Windows Subsystem for Linux allows you to
   reproduce the command line aspects of Linux, but it doesn't allow for
-  convenient graphic interfacing. Instead, you will need to navigate to your
-  Linux files through your standard Windows file explorer. For details see
+  convenient graphic interfacing. If you have configured an X server (following
+  the instructions under "Graphical Applications" at
+  https://seanthegeek.net/234/graphical-linux-applications-bash-ubuntu-windows/),
+  then you can launch the program VcXsrv, update the bash variable `$DISPLAY`
+  with `export DISPLAY=localhost:0.0`, and run a graphical application. (You
+  will need to run this `export` command every time you have a new bash
+  session-- alternatively, add this line to your `.bashrc` with `echo "export
+  DISPLAY=localhost:0.0" >> ~/.bashrc`.
+
++ Windows on Broida 5223 lab computers: Open the X server on the desktop of
+  these computers, and accept the default settings (press Next) until you can't
+  anymore. You should now be able top open graphical applications on these
+  machines.
+
++ Windows, don't use graphics server method: If you don't configure an X
+  server, you will need to navigate to your Linux files through your standard
+  Windows file explorer. For details see
   [here](https://github.com/Microsoft/WSL/issues/2578). In your Windows file
   explorer, navigate to
   `C:\Users\%USERNAME%\AppData\Local\Packages\CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc\LocalState\rootfs\`,
@@ -263,10 +278,10 @@ If you `ls`, you should now see additional files, including
   Subsystem for Linux. Treat every file as 'read-only'. Once you are here,
   navigate to the `phs/week_3` folder, and double-click `skeleton_document.pdf`
   like you did in the old days. This incompatibility, which doesn't allow you
-  to natively use graphics from the shell, is a surface
-  defect of a deeper problem, is why I still urge you to dual-boot Ubuntu: you
-  are not truly using Linux, and so there will always be things like this that
-  break your user experience/immersion in Linux.
+  to natively use graphics from the shell, is a surface defect of a deeper
+  problem, is why I still urge you to dual-boot Ubuntu: you are not truly using
+  Linux, and so there will always be things like this that break your user
+  experience/immersion in Linux.
 
 
 In an adjacent window now, in vim open `skeleton_document.tex` to see the basic
@@ -277,7 +292,11 @@ You will notice that this generates a lot of extra files (`*.log`, `*.aux`)
 that we don't need. We can remove these files with the script
 `clean_up_files`-- look at its contents with vim, ensure it is executable with
 `ls -lah`, and run it with `./clean_up_files`. Note what your workspace looks
-like before and after.
+like before and after. Let's add this script to our bin, so that we can use it
+anywhere:
+```
+    % cp clean_up_files ~/bin
+```
 
 LaTeX with BiBTeX + adding scripts to your `bin`
 ------------------------------------------------
@@ -301,90 +320,62 @@ times (as in the script) in order for the program to learn what references go
 where correctly. Also, this script runs `clean_up_files` at the end, which
 removes any unnecessary files that are made during the compilation process.
 
-It would be nice to be able to call this script from anywhere, so we are going to
-place it in our `bin`, which is where user-made scripts go. To do this, ensure
-you have a `bin` in your home directory (if not, make one with `mkdir ~/bin`),
-and run `cp clean_up_files ~/bin` and `cp compile_article ~/bin`. To tell your
-computer to look in this directory when you run a command in the shell, we add
-it to the `$PATH` variable. See what your PATH looks like with `echo $PATH`. If
-it doesn't include the directory we just made (in `/home/your_username/bin`),
-add it to the path with `PATH=$PATH:/home/your_username/bin`. We want this
-`bin` to be accessible every time you are in the shell, so add the line
-`PATH=$PATH:/home/your_username/bin` to your `.bashrc` if it wasn't in your
-default path. Now you should be able to call the `clean_up_files` script and
-`compile_article` script from anywhere. Make sure this worked with `which
-clean_up_files` and `which compile_article`, which should return the location
-of the function. Try it!
+These scripts are useful in many different contexts. Therefore, we should make
+them accessible from anywhere! To do this we will copy the `compile_article` to
+our bin, where `clean_up_files` is already located:
+```
+    % cp compile_article ~/bin
+```
+
+Now, you can check to see that you can call these scripts from anywhere:
+```
+    % which clean_up_files
+    /home/eric/bin/clean_up_files
+    % which compile_article
+    /home/eric/bin/compile_article
+```
+
+Isn't having a personal `bin` wonderful!?
 
 Open both the `.tex` and the `.bib` file in vim, using `vim bibtex_file.tex`
 and then `:tabe bibtex_file.bib` in vim. Switch between these two files with
 `gt`, which stands for **g**oto **t**ab. Note the format of the `.bib` file.
 This citation is typically available for any scientific journal, look for the
-'download citation' link on the article website. Often, though, these journals
-only have a `.ris` (RIS) type of citations (like `pmcid-PMC5080291.ris` in this
-directory; `cat` this file to see what it looks like compared to the `.bib`
-file). Using shell commands, we can convert these RIS citations into BIB
-citations. We will need some commands in the `bibutils` package. Download it
-with `sudo apt install bibutils` (Windows/Ubuntu)  or `brew install bibutils`
-(Mac).
+'download citation' link on the article website.
 
-Now we can take a RIS citation and convert it to `.xml`, then take the `.xml`
-citation and convert it to `.bib`. To do this, run
-```
-    % cat pmcid-PMC5080291.ris | ris2xml | xml2bib
-    @Article{Edwards2016,
-    author="Edwards, Adrianne N.
-    and Karim, Samiha T.
-    and Pascual, Ricardo A.
-    and Jowhar, Lina M.
-    and Anderson, Sarah E.
-    and McBride, Shonna M.",
-    title="Chemical and Stress Resistances of Clostridium difficile Spores and Vegetative Cells",
-    journal="Front Microbiol",
-    year="2016",
-    month="Oct",
-    day="26",
-    publisher="Frontiers Media S.A.",
-    volume="7",
-    pages="1698",
-    <--- MANY MORE LINES --->
-    url="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC5080291/"
-    }
-```
-Now we can take this output and pipe it into your `.bib` entry, with `cat
-pmcid-PMC5080291.ris | ris2xml | xml2bib >> bibtex_file.bib`. Make sure you use
-the redirect `>>` instead of the overwrite `>`! Once you do this your `.bib`
-file may have a weird \<feff\> character before your BiBTeX entry, but you can
-delete it in the usual way in vim with `x`. I often delete the `abstract` field of the
-BiBTeX entry with `dd`, but it is up to you. (An alternative to redirecting
-this output is to copy it into the `bibtex_file.bib` file-- for me, I do this by
-highlighting the text in the shell with a mouse, then middle-clicking in insert
-mode in vim)
 
-Now we have a new `.bib` entry, so let's use it. Write a line in the
-`bibtex_file.tex` that includes the command `\cite{Edwards2016}`, then
-recompile this file with `compile_article bibtex_file.tex`, and view the
-resulting pdf to ensure your citation worked properly. With this method, you
-will never need to make your own citations ever again for scientific articles!
+Make presentations in Beamer, and formal research reports in LaTeX
+------------------------------------------------------------------
+Beamer is an open-source presentation software, which allows for LaTeX to be
+used as a presentation tool. An example presentation is `beamer_template.tex`,
+which can be compiled by executing `compile_article` in the same manner as
+above.
 
-I find myself converting citation styles quite often, since lots of medical
-journals don't support `.bib` export. Therefore, I have a command `makebib`
-defined in my `.bashrc`-- you can have it too! Add the following lines to your
-`.bashrc`:
-```
-    # convert .ris to .bib
-    function makebib() {
-        cat $1 | ris2xml | xml2bib
-    }
-```
-Then restart your shell, and test the output `makebib
-pmcid-PMC5080291.ris`-- it should act the same as before, and if you desire,
-you can redirect it to your bibtex file.
+Also in this document, you will see how to include graphics, how to draw in
+LaTeX using tikz, how to include sets of equations, and how to cite references
+without using BiBTeX.
 
-In this script, as in the `compile_article` command before, the `$1` is
-whatever the first parameter you pass to your function is; `$2` is the second
-variable; and `$@` is all of the variables you pass.
+To see an example research report (my final from Parallel Computing, where I
+parallelized matrix multiplication), look in the `example_tex_report`
+directory. Compile and view the document as usual.
 
+Build a resume in LaTeX
+-----------------------
+Finally look at a sample LaTeX resume/CV `cv_simple.tex`. Compile this in the
+usual way with `compile_article cv_simple.tex`, and take a look at how it
+looks. This uses the `res.cls` document style, which basically modifies a bunch
+of the default commands to make them look like a resume. Based on the pdf
+output, it should be self-explanatory to modify the appropriate sections of
+this CV with your own achievements, but hopefully this gives you a good
+framework to start from!
+
+In sum, you should have enough LaTeX resources that you can modify in order to
+fit any of your needs: view the basic `.tex` file structure in
+`skeleton_document.tex`, view a document with BiBTeX citations with
+`bibtex_file.tex` and `bibtex_file.bib`, view a humanities-style document with
+`writing_example.tex`, view a Beamer presentation with `beamer_template.tex`,
+and view a fully fleshed out report that includes figures in the
+`example_tex_report` directory.
 
 Humanities paper example + adding scripts to your `.vimrc`
 ----------------------------------------------------------
@@ -479,39 +470,6 @@ to throw away output (any minor errors that `mupdf` has, etc), and the final
 visible.
 
 
-Make presentations in Beamer, and formal research reports in LaTeX
-------------------------------------------------------------------
-Beamer is an open-source presentation software, which allows for LaTeX to be
-used as a presentation tool. An example presentation is `beamer_template.tex`,
-which can be compiled by executing `compile_beamer` in the same manner as
-above, or by running `@w` when you have `beamer_template.tex` open in vim.
-
-Also in this document, you will see how to include graphics, how to draw in
-LaTeX using tikz, how to include sets of equations, and how to cite references
-without using BiBTeX.
-
-To see an example research report (my final from Parallel Computing, where I
-parallelized matrix multiplication), look in the `example_tex_report`
-directory. Compile and view the document as usual.
-
-Build a resume in LaTeX
------------------------
-Finally look at a sample LaTeX resume/CV `cv_simple.tex`. Compile this in the
-usual way with `compile_article cv_simple.tex`, and take a look at how it
-looks. This uses the `res.cls` document style, which basically modifies a bunch
-of the default commands to make them look like a resume. Based on the pdf
-output, it should be self-explanatory to modify the appropriate sections of
-this CV with your own achievements, but hopefully this gives you a good
-framework to start from!
-
-In sum, you should have enough LaTeX resources that you can modify in order to
-fit any of your needs: view the basic `.tex` file structure in
-`skeleton_document.tex`, view a document with BiBTeX citations with
-`bibtex_file.tex` and `bibtex_file.bib`, view a humanities-style document with
-`writing_example.tex`, view a Beamer presentation with `beamer_template.tex`,
-and view a fully fleshed out report that includes figures in the
-`example_tex_report` directory.
-
 Customize your shell user experience with a `.bashrc`
 -----------------------------------------------------
 Files in your home directory that start with a `.` (they are 'hidden') and end
@@ -553,6 +511,75 @@ If you want more examples of what experienced users put in their `.bashrc`, try
 [this
 thread](https://serverfault.com/questions/3743/what-useful-things-can-one-add-to-ones-bashrc)
 for some ideas
+
+Convert .ris bibliography citations into .bib citations
+-------------------------------------------------------
+Often, journals only have a `.ris` (RIS) type of citations (like
+`pmcid-PMC5080291.ris` in this directory; `cat` this file to see what it looks
+like compared to the `.bib` file). Using shell commands, we can convert these
+RIS citations into BIB citations. We will need some commands in the `bibutils`
+package. Download it with `sudo apt install bibutils` (Windows/Ubuntu)  or
+`brew install bibutils` (Mac).
+
+Now we can take a RIS citation and convert it to `.xml`, then take the `.xml`
+citation and convert it to `.bib`. To do this, run
+```
+    % cat pmcid-PMC5080291.ris | ris2xml | xml2bib
+    @Article{Edwards2016,
+    author="Edwards, Adrianne N.
+    and Karim, Samiha T.
+    and Pascual, Ricardo A.
+    and Jowhar, Lina M.
+    and Anderson, Sarah E.
+    and McBride, Shonna M.",
+    title="Chemical and Stress Resistances of Clostridium difficile Spores and Vegetative Cells",
+    journal="Front Microbiol",
+    year="2016",
+    month="Oct",
+    day="26",
+    publisher="Frontiers Media S.A.",
+    volume="7",
+    pages="1698",
+    <--- MANY MORE LINES --->
+    url="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC5080291/"
+    }
+```
+Now we can take this output and pipe it into your `.bib` entry, with `cat
+pmcid-PMC5080291.ris | ris2xml | xml2bib >> bibtex_file.bib`. Make sure you use
+the redirect `>>` instead of the overwrite `>`! Once you do this your `.bib`
+file may have a weird \<feff\> character before your BiBTeX entry, but you can
+delete it in the usual way in vim with `x`. I often delete the `abstract` field of the
+BiBTeX entry with `dd`, but it is up to you. (An alternative to redirecting
+this output is to copy it into the `bibtex_file.bib` file-- for me, I do this by
+highlighting the text in the shell with a mouse, then middle-clicking in insert
+mode in vim)
+
+Now we have a new `.bib` entry, so let's use it. Write a line in the
+`bibtex_file.tex` that includes the command `\cite{Edwards2016}`, then
+recompile this file with `compile_article bibtex_file.tex`, and view the
+resulting pdf to ensure your citation worked properly. With this method, you
+will never need to make your own citations ever again for scientific articles!
+
+I find myself converting citation styles quite often, since lots of medical
+journals don't support `.bib` export. Therefore, I have a command `makebib`
+defined in my `.bashrc`-- you can have it too! Add the following lines to your
+`.bashrc`:
+```
+    # convert .ris to .bib
+    function makebib() {
+        cat $1 | ris2xml | xml2bib
+    }
+```
+Then restart your shell, and test the output `makebib
+pmcid-PMC5080291.ris`-- it should act the same as before, and if you desire,
+you can redirect it to your bibtex file.
+
+In this script, as in the `compile_article` command before, the `$1` is
+whatever the first parameter you pass to your function is; `$2` is the second
+variable; and `$@` is all of the variables you pass.
+
+
+
 
 
 Computing Collatz sequences in python
