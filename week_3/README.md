@@ -23,9 +23,9 @@ way to do this in the shell is with `rc` files, such as a `.bashrc` or a
 many programs (if you use matplotlib for plotting in python you can use a
 `.matplotlibrc` to customize default fontsizes or colors, or Linux users have
 an `.xinitrc` that configures their graphics). These files are called
-"dotfiles", since they begin with a `.`. These files are "hidden files", which
-means you need to use `ls -a` to see them (`-a` is the parameter for "all
-files").
+"dotfiles", since they begin with a `.`, and they are all located in your home
+directory. These files are "hidden files", which means you need to use `ls -a`
+to see them (`-a` is the parameter for "all files").
 
 I think of `rc` files as an abbreviation for "runtime configuration" (even though this
 is technically not what it stands for). The way a `.bashrc` file works, is that
@@ -264,9 +264,10 @@ If you `ls`, you should now see additional files, including
   DISPLAY=localhost:0.0" >> ~/.bashrc`.
 
 + Windows on Broida 5223 lab computers: Open the X server on the desktop of
-  these computers, and accept the default settings (press Next) until you can't
-  anymore. You should now be able top open graphical applications on these
-  machines.
+  these computers called XLaunch, and accept the default settings (press Next
+  three times + Finish) until you can't anymore. Restart any terminals you have
+  open, and you should now be able top
+  open graphical applications from the terminal on these machines.
 
 + Windows, don't use graphics server method: If you don't configure an X
   server, you will need to navigate to your Linux files through your standard
@@ -393,7 +394,13 @@ Wouldn't it be nice to be able to compile LaTeX documents without leaving vim?
 We'll record a [Vim macro](vim.wikia.com/wiki/Macros) which does this
 compilation for us. I like to use the macro `@w`, because to me this is like a
 'deep' write - not only am I writing the document, I'm compiling it to produce
-the output.
+the output. We use this by modifying our `.vimrc`, which is a list of commands
+that are executed in vim every time you open vim (things to include in your
+`.vimrc` include a preferred colorscheme, adding line numbers to vim, and
+various vim macros such as the one we are about to learn). Commands in `vim`
+are things that begin with `:`, so for example, you could add `:q` to your
+`.vimrc` and every time you opened vim, it would automatically close (don't do
+this, since how would you edit your `.vimrc` to undo it?).
 
 Place these lines in your `.vimrc`:
 
@@ -443,9 +450,10 @@ script `my_script` that accepts the file you are currently editing (`%`) and doe
 some task, put `:wa:!my_script %`.
 
 Wouldn't it be nice to open the resulting PDF from vim, too? This will not work
-for Windows users, as your Linux subsystem is not compatible with running
-graphics. This process is similar to compiling the document to PDF: we will
-define some macro that does it for us. I use `@o`.
+for Windows users unless they have installed an X server, as your Linux
+subsystem is not compatible with running graphics. This process is similar to
+compiling the document to PDF: we will define some macro that does it for us. I
+use `@o`.
 
 ```vim
 autocmd BufRead,BufNewFile *.tex let @o=':!EDITOR %:r.pdf &>/dev/null &'
