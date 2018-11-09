@@ -6,7 +6,9 @@ TODO/Notes
   bash/python especially)
 + Week 2-- didn't manipulate files with globbing; didn't show various shell
   utilities; didn't introduce .bashrc
-+ Week 3-- didn't do bibtex from RIS 
++ Week 3-- didn't do bibtex from RIS. Replace /bin/env with /usr/bin/env.
+  Install evince during week 2. Update ubuntu before installing evince or
+  pdflatex. Check eps2pdf, and also beamer .sty file.
 
 Traffic
 -------

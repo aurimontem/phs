@@ -14,9 +14,12 @@ our curriculum for:
 -   [Week 2](week_2/) -- make a simple python file in vim and execute it in the
     shell, learn more advanced command line tools, and parse a computational
     chemistry supercomputer program
--   [Week 3](week_3/) -- customize your shell environment with a .bashrc, learn
-    how to compile simple LaTeX files in the command line, and streamline your
-    LaTeX within vim with a .vimrc
+-   [Week 3](week_3/) -- learn how to write and use bash scripts, customize
+    your shell environment with a .bashrc, learn how to compile simple LaTeX
+    files in the command line
+-   [Week 4](week_4/) -- streamline your editing of LaTeX files with a .vimrc,
+    use markdown to seamlessly create attractive documents and websites, and
+    add helpful functions to your .bashrc
 
 Older curriculum:
 

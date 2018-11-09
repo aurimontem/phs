@@ -1,0 +1,80 @@
+### STARTER BASHRC ALIASES AND FUNCTIONS
+
+# coloring for files and directories
+alias ls='ls --color=auto' # for mac it should be alias ls='ls -G'
+
+# list files backwards in time since last edit
+alias lt='ls -cltrh'
+
+# automatically cd upon ls-ing
+function cd {
+    builtin cd "$@" && ls
+}
+
+# open the last text file you edited with vim
+function vv() {
+    temp=$(ls -tr *.(tex|md|py) | tail -n1)
+    echo $temp
+    vim $temp
+}
+
+# open last pdf file you edited with a pdf viewer
+function pp() {
+    temp=$(ls -tr | grep ".pdf" | tail -n1)
+    echo $temp
+    evince $temp
+}
+
+
+### OTHER BASHRC FUNCTIONS WE CAN USE LATER
+# save temp directory
+function S() {
+    temp=`$(echo pwd)`
+    echo $temp > /home/eric/.current_dir
+}
+
+# return to temp directory
+function s() {
+    temp=`$(echo cat /home/eric/.current_dir)`
+    cd $temp
+}
+
+# create templated markdown file
+function vmd() {
+    touch $1
+    echo '---' >> $1
+    echo 'title:' >> $1
+    echo 'author: Eric Jones' >> $1
+    echo '#format: beamer' >> $1
+    echo '#header-includes:' >> $1
+    echo "#- bslash.usepackage[]{algorithm2e}" >> $1
+    echo '...' >> $1
+    vim $1
+}
+
+# execute file in a directory called 'run'
+alias q='./run'
+# shorten commands
+alias v='vim'
+alias c='cd'
+alias l='ls'
+
+
+### FUNCTIONS
+# convert .ris to .bib
+function makebib() {
+    cat $1 | ris2xml | xml2bib
+}
+
+
+### COMMAND PROMPT
+# modify your command prompt (try it out in the shell with '$PS1=____' + Enter
+# possible options include:
+PS1='[\u@\h \W]\$ '
+#PS1='[\W]\$ '
+#PS1='[\t \u@\h \W]\$'
+#PS1='\A [\u@\h \W]$'
+
+### PERFORM AT THE START OF EVERY BASH SESSION 
+# start every bash session at your home directory
+cd ~
