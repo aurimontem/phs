@@ -363,6 +363,68 @@ into a git repository earlier:
     upstream	https://github.com/erijones/phs.git (fetch)
     upstream	https://github.com/erijones/phs.git (push)
 ```
+Lastly, we need to switch to **our** version of the repository (called
+**origin**), which we use with the `git fetch origin` command:
+```
+    % git fetch origin
+    From https://github.com/eric-alt/phs
+     * [new branch]      master     -> origin/master
+```
+Now we are working on our forked version of `phs`.
+
+You will be modifying a file in the `feedback` folder. Move into the feedback
+folder, and look around. You should see a file `feedback_form.md`, which I
+would like you to fill out (so that I can get your feedback!). First, copy it
+to a unique filename with `cp feedback_form.md my_unique_name`, where you
+choose some random name for `my_unique_name` (I don't want people's feedback
+forms to overwrite each other). Then, edit this feedback form in vim with `vim
+my_unique_name`. Use `j` and `k` to scroll to each line, then `A` to enter
+insert mode at the end of the line where you can enter your answer, then `Esc`
+to exit insert mode. Once you are done filling out the form, save and quit
+`:wq`.
+
+Now we need to push these changes to *your* `phs` repository, in the same way
+we did earlier, by adding our new file, committing the change, and pushing the
+change to our repository. However, since now we have two branches (or two
+versions of the repository) we are working with, origin and upstream, we need
+to specify which branch we push to. We must push to origin (our branch-- check
+with `git remote -v`), since you do not have access to upstream.
+```
+    % git add my_unique_name
+    % git commit -m "adding feedback"
+    [master bd61800] adding feedback
+     1 file changed, 35 insertions(+)
+     create mode 100644 week_5/feedback/my_feedback.md
+    % git push origin
+    Username for 'https://github.com': eric-alt
+    Password for 'https://eric-alt@github.com':
+    Enumerating objects: 27, done.
+    Counting objects: 100% (27/27), done.
+    Delta compression using up to 4 threads
+    Compressing objects: 100% (16/16), done.
+    Writing objects: 100% (24/24), 10.65 KiB | 10.65 MiB/s, done.
+    Total 24 (delta 10), reused 18 (delta 7)
+    remote: Resolving deltas: 100% (10/10), completed with 3 local objects.
+    To https://github.com/eric-alt/phs.git
+       e455527..bd61800  master -> master
+```
+
+Now, navigate to your forked version of `phs` on your github, and move to the
+`week_5/feedback` folder. You should see your new version of the
+`feedback_form.md` file. Finally, we need to merge this fork with the original
+repository (mine) with a "pull request".
+
+You will notice that on the main page of your forked `phs` on github, it will
+say "This branch is 1 commit ahead of erijones:master", and have an option for
+"Pull request" on the right-hand side. Click this  button, and it will take you
+to a "Comparing changes" page. The defaults should be correct-- the head fork
+is yours, and it is updating the base fork (mine). Click the "Create pull
+request" button, and you are done! I will receive an email that a pull request
+was submitted, and I can accept or deny them. As you submit your pull requests,
+I will approve them and merge your fork with the master fork (mine).
+
+Great! Now you have contributed to the programming help sessions. Thank you
+very much!!
 
 
 Some practice with vim and LaTeX
