@@ -23,4 +23,5 @@ Fall 2018:
   397 views, 37 cloners
 + 10/25 (week 2): 32 attended + 3 graduate students, 63 unique visitors,
   393 views, 28 cloners
-
++ 11/1 (week 3): 21 attended + 3 graduate students, 44 unique visitors, 202
+  views, 9 cloners

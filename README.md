@@ -20,6 +20,9 @@ our curriculum for:
 -   [Week 4](week_4/) -- streamline your editing of LaTeX files with a .vimrc,
     use markdown to seamlessly create attractive documents and websites, and
     add helpful functions to your .bashrc
+-   [Week 5](week_5/) -- log into a remote server with ssh, create your own
+    github repository, and contribute to these Programming Help Sessions with
+    git
 
 Older curriculum:
 
