@@ -1,4 +1,4 @@
-Programming Help Sessions (PHS): Week 4
+Programming Help Sessions (PHS): Week 5
 =======================================
 
 Welcome back!
