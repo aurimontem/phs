@@ -224,13 +224,17 @@ The fundamental git workflow is:
    message, which details what you did in this commit (e.g. "added files" or
    "added function my_func") These commits are the building blocks of git-- you
    can watch the evolution of a program through git commits that incrementally
-   add and delete lines of code. (Want to see the evolution of Linux? Check out
-   https://github.com/torvalds/linux/commits)
+   add and delete lines of code. Different versions of the code that
+   incorporate different commits are called *branches*.  (Want to see the
+   evolution of Linux? Check out https://github.com/torvalds/linux/commits)
 4. Push your changes to the github repository with `git push`. This takes any
    commits you have made and adds them to the github repository. The first time
    you run this command you must run `git push -u origin master` instead, which
    specifies the `origin` remote (defined earlier) as the `master` "upstream"
-   repository that we wish to push to. After this, we can just use `git push`
+   version of the repository that we wish to push to. After this, we can just
+   use `git push`. At any point, you can look at or revert to any branch (i.e.
+   any previous version of the code) using git. This is why git is called a
+   "version-control" program.
 
 All together, let's follow these steps to push our new files (`file_1` and
 `file_2` to our github repository `my_first_repo`:
@@ -286,6 +290,18 @@ Let's try this one more time, to get the hang of it better.
 Now, refresh the github repository and you should see new files, as well as a
 `README.md` file that displays on the "homepage" of your repository. 
 
+A common way to work on github is by creating a shared repository that multiple
+people can contribute to. This is useful in academic settings, where you know
+the one or two people that you will be working with. In this case, you can add
+them as "contributors" to a given repository, and they will be able to
+contribute (via `git add`, `git commit`, and `git push`) to the repository.
+Everytime you begin working or files in this repository, begin by running `git
+pull`-- this will download any modifications to the repository made by your
+collaborators, and ensure that you don't interfere with each other's work. (If
+you are unlucky and end up both modifying the same section of code and then
+committing those changes, you run into "merge conflicts" which are pesky to
+deal with but overall not too terrible with some help from google.) 
+
 Are you getting tired of entering your username and password each time you run
 `git push`? Luckily enough, you can use SSH (the same SSH we used earlier) to
 connect with github, and you can setup "passwordless" logins. In this way, you
@@ -301,11 +317,52 @@ Sessions
 Modifying the PHS repository
 ----------------------------
 Next, you will improve the programming help sessions by contributing to it with
-git.
+git. (Here I am loosely following https://gist.github.com/jagregory/710671,
+https://help.github.com/articles/fork-a-repo/, and
+https://help.github.com/articles/creating-a-pull-request-from-a-fork/)
 
-1. Go to the original PHS directory (github.com/erijones/phs) and click the
-   "Fork" button on the top-right of the page. 
+Begin by going to the original PHS directory (github.com/erijones/phs) and
+clicking the "Fork" button on the top-right of the page. Now you will have your
+own personal `phs` github repository at `https://github.com/uname/phs`.
 
+Move into the standard `phs` directory on your computer (local), and run the
+command `git remote -v`:
+```
+    % git remote -v
+    origin	https://github.com/erijones/phs.git (fetch)
+    origin	https://github.com/erijones/phs.git (push)
+```
+This is the same command from earlier, and it tells us that we are using the
+form of `phs` located on my personal github account `erijones`. We want to
+change this so that it references **your** fork on **your** github account,
+which you have the ability to modify (since you own the repo), unlike my
+version of `phs` (which you are unable to modify unless I add you as a
+contributor). At the same time, we also want to keep my original `phs` linked
+with your version, in case I add cool updates that you want to download (with
+`git pull`).
+
+To accomplish this, we will modify the `upstream` version of the repository
+(the branch that we pull from) to be my version of the code. Currently, my
+version of the code is named `origin` (see above command), so we will rename
+it:
+```
+    % git remote rename origin upstream
+    % git remote -v
+    upstream	https://github.com/erijones/phs.git (fetch)
+    upstream	https://github.com/erijones/phs.git (push)
+```
+
+Now we need to add the version that *you* will be modifying, which is your own
+personal fork, which we do in the same way as when we turned `my_first_repo`
+into a git repository earlier:
+```
+    % git remote add origin https://github.com/uname/phs.git
+    % git remote -v
+    origin	https://github.com/eric-alt/phs.git (fetch)
+    origin	https://github.com/eric-alt/phs.git (push)
+    upstream	https://github.com/erijones/phs.git (fetch)
+    upstream	https://github.com/erijones/phs.git (push)
+```
 
 
 Some practice with vim and LaTeX
