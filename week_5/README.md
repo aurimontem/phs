@@ -11,6 +11,32 @@ forces you to forget any changes you have made).  Now, if you list the files
 (`ls`) in this directory you should see a new `week_5` folder. Move into this
 directory.
 
+Convenient shell utilities
+--------------------------
+Install `ranger`:
++ Windows Subsystem for Linux/Linux: `sudo apt install ranger`
++ Mac: `brew install ranger`
+
+Open `ranger` from the command line. The result is a vim-influenced file
+manager. Use `hjkl` to move within and between directories. Use `Enter` to open
+files (ranger will guess the default program), and use `q` to quit ranger.
+
+Install `zsh` (similar to above). Execute it by typing the command `zsh` in the
+shell. You are now in `zsh` instead of `bash`. The original shell (from the old
+days) is `sh`, which you can open by executing `sh` on the command line. To
+exit any of these shells, use the command `exit`.
+
+As Unix systems have evolved, shells have evolved as well. In my mind, this
+evolution goes `sh` (the 'Bourne shell') -> `bash` (bourne-again shell) -> some
+newer variant such as `zsh` ('Z shell'), though others exist (e.g. `fish`, the
+'friendly interactive shell').
+
+In the `zsh` shell, check out the new autocomplete options. Type the command
+`head -` and then tab-complete after typing the hyphen, and you will see some
+of the most commonly used hyphens (such as `-n`). This tab-completion works for
+most commands (e.g. try `git ` then tab-complete after the space).
+
+
 Using `ssh` (secure shell)
 --------------------------
 `ssh` is a protocol that allows you to securely login to a remote server. Once
@@ -403,32 +429,6 @@ I will approve them and merge your fork with the master fork (mine).
 
 Great! Now you have contributed to the programming help sessions. Thank you
 very much!!
-
-Convenient shell utilities
---------------------------
-Install `ranger`:
-+ Windows Subsystem for Linux/Linux: `sudo apt install ranger`
-+ Mac: `brew install ranger`
-
-Open `ranger` from the command line. The result is a vim-influenced file
-manager. Use `hjkl` to move within and between directories. Use `Enter` to open
-files (ranger will guess the default program), and use `q` to quit ranger.
-
-Install `zsh` (similar to above). Execute it by typing the command `zsh` in the
-shell. You are now in `zsh` instead of `bash`. The original shell (from the old
-days) is `sh`, which you can open by executing `sh` on the command line. To
-exit any of these shells, use the command `exit`.
-
-As Unix systems have evolved, shells have evolved as well. In my mind, this
-evolution goes `sh` (the 'Bourne shell') -> `bash` (bourne-again shell) -> some
-newer variant such as `zsh` ('Z shell'), though others exist (e.g. `fish`, the
-'friendly interactive shell').
-
-In the `zsh` shell, check out the new autocomplete options. Type the command
-`head -` and then tab-complete after typing the hyphen, and you will see some
-of the most commonly used hyphens (such as `-n`). This tab-completion works for
-most commands (e.g. try `git ` then tab-complete after the space).
-
 
 Some practice with vim and LaTeX
 --------------------------------
