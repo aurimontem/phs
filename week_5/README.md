@@ -11,31 +11,6 @@ forces you to forget any changes you have made).  Now, if you list the files
 (`ls`) in this directory you should see a new `week_5` folder. Move into this
 directory.
 
-Convenient shell utilities
---------------------------
-Install `ranger`:
-+ Windows Subsystem for Linux/Linux: `sudo apt install ranger`
-+ Mac: `brew install ranger`
-
-Open `ranger` from the command line. The result is a vim-influenced file
-manager. Use `hjkl` to move within and between directories. Use `Enter` to open
-files (ranger will guess the default program), and use `q` to quit ranger.
-
-Install `zsh` (similar to above). Execute it by typing the command `zsh` in the
-shell. You are now in `zsh` instead of `bash`. The original shell (from the old
-days) is `sh`, which you can open by executing `sh` on the command line. To
-exit any of these shells, use the command `exit`.
-
-As Unix systems have evolved, shells have evolved as well. In my mind, this
-evolution goes `sh` (the 'Bourne shell') -> `bash` (bourne-again shell) -> some
-newer variant such as `zsh` ('Z shell'), though others exist (e.g. `fish`, the
-'friendly interactive shell').
-
-In the `zsh` shell, check out the new autocomplete options. Type the command
-`head -` and then tab-complete after typing the hyphen, and you will see some
-of the most commonly used hyphens (such as `-n`). This tab-completion works for
-most commands (e.g. try `git ` then tab-complete after the space).
-
 Using `ssh` (secure shell)
 --------------------------
 `ssh` is a protocol that allows you to securely login to a remote server. Once
@@ -195,17 +170,20 @@ just made. We do this with the command `git remote`:
 ```
     % git remote add origin https://github.com/uname/my_first_repo.git
     % git remote -v
+    origin	https://github.com/eric-alt/my_first_repo.git (fetch)
+    origin	https://github.com/eric-alt/my_first_repo.git (push)
+
 ```
 The above URL is also available in the "Quick setup" box of your my_first_repo page
 on github.
 
-Here, the first command creates a "remote" called **origin** that is
+Here, the first command creates a "remote repository" called **origin** that is
 https://github.com/uname/my_first_repo.git. This means, anytime you use the
 parameter `origin` in a git command, git will know that you really mean
 https://github.com/uname/my_first_repo.git. This knowledge (and much more) is
 stored in the .git directory (try `cat .git/config` to see). It turns out that
 `origin` is the default git parameter for many git commands-- that means, once
-you set this remote, any future git commands will automatically be applied to
+you set this remote repository, any future git commands will automatically be applied to
 your github repository `my_first_repo`.
 
 If you refresh your github repo page (`github.com/uname/my_first_repo`), you
@@ -230,7 +208,7 @@ The fundamental git workflow is:
 4. Push your changes to the github repository with `git push`. This takes any
    commits you have made and adds them to the github repository. The first time
    you run this command you must run `git push -u origin master` instead, which
-   specifies the `origin` remote (defined earlier) as the `master` "upstream"
+   specifies the `origin` remote repository (defined earlier) as the `master` "upstream"
    version of the repository that we wish to push to. After this, we can just
    use `git push`. At any point, you can look at or revert to any branch (i.e.
    any previous version of the code) using git. This is why git is called a
@@ -425,6 +403,31 @@ I will approve them and merge your fork with the master fork (mine).
 
 Great! Now you have contributed to the programming help sessions. Thank you
 very much!!
+
+Convenient shell utilities
+--------------------------
+Install `ranger`:
++ Windows Subsystem for Linux/Linux: `sudo apt install ranger`
++ Mac: `brew install ranger`
+
+Open `ranger` from the command line. The result is a vim-influenced file
+manager. Use `hjkl` to move within and between directories. Use `Enter` to open
+files (ranger will guess the default program), and use `q` to quit ranger.
+
+Install `zsh` (similar to above). Execute it by typing the command `zsh` in the
+shell. You are now in `zsh` instead of `bash`. The original shell (from the old
+days) is `sh`, which you can open by executing `sh` on the command line. To
+exit any of these shells, use the command `exit`.
+
+As Unix systems have evolved, shells have evolved as well. In my mind, this
+evolution goes `sh` (the 'Bourne shell') -> `bash` (bourne-again shell) -> some
+newer variant such as `zsh` ('Z shell'), though others exist (e.g. `fish`, the
+'friendly interactive shell').
+
+In the `zsh` shell, check out the new autocomplete options. Type the command
+`head -` and then tab-complete after typing the hyphen, and you will see some
+of the most commonly used hyphens (such as `-n`). This tab-completion works for
+most commands (e.g. try `git ` then tab-complete after the space).
 
 
 Some practice with vim and LaTeX
