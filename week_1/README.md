@@ -9,8 +9,7 @@ though, is that none of our names matter-- only the content does. So long
 as you act in this open-source manner, you and anyone you know may use,
 modify, and distribute this code.
 
-To participate in PHS, you will need to have access to a command line, also
-known as a **shell**:
+Generally speaking, the program that takes commands from the user and feeds them to the operating system, which then performs those commands, is called the **shell**.  Technically, it's possible to interact with the shell using a *graphical user interface (GUI)*.  Odds are this is the method you are currently familiar with.  However, as we'll soon discover, using such an interface with Linux negates much of the usefulness of using Linux at all!  In order to maximize your returns from this course, you will need to have access to a *command line interface (CLI)*, which allows you to talk to the shell via keyboard commands, as opposed to pointing and clicking.  In Linux and MacOS, the CLI is more commonly referred to as the *Terminal*.  Instructions for accessing the terminal are given below:
 - Windows 10: https://tutorials.ubuntu.com/tutorial/tutorial-ubuntu-on-windows,
   then open the program Ubuntu
 - Mac: Cmd + Spacebar, type Terminal
