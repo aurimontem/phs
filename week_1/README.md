@@ -3,8 +3,8 @@ Programming Help Sessions (PHS): Week 1
 
 Welcome to programming help sessions! The files in here were originally created
 for the Colorado School of Mines "Physics help sessions," a group founded by
-my friends (Everett Hildenbrandt, Alli Nilles, and David Grisham) and me
-(Eric Jones). The primary joy and utility of open-source programming,
+Everett Hildenbrandt, Alli Nilles, and David Grisham and, our own local Linux guru, 
+Eric Jones. My name is Dillon Cislo - a Physics graduate and Linux user. The primary joy and utility of open-source programming,
 though, is that none of our names matter-- only the content does. So long
 as you act in this open-source manner, you and anyone you know may use,
 modify, and distribute this code.
