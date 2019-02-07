@@ -1,0 +1,43 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+### ALIASES
+
+# list files backwards in time since last edit
+alias lt='ls -cltrh'
+# execute file in a directory called 'run'
+alias q='./run'
+# coloring for files and directories
+alias ls='ls --color=auto'
+# shorten commands
+alias v='vim'
+alias c='cd'
+alias l='ls'
+
+
+### FUNCTIONS
+# automatically cd upon ls-ing
+function cd {
+    builtin cd "$@" && ls
+}
+# convert .ris to .bib
+function makebib() {
+    cat $1 | ris2xml | xml2bib
+}
+
+
+### COMMAND PROMPT
+# modify your command prompt (try it out in the shell with '$PS1=____' + Enter
+# possible options include:
+PS1='[\u@\h \W]\$ '
+#PS1='[\W]\$ '
+#PS1='[\t \u@\h \W]\$'
+#PS1='\A [\u@\h \W]$'
+
+### PERFORM AT THE START OF EVERY BASH SESSION 
+# start every bash session at your home directory
+cd ~

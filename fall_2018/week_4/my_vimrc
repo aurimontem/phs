@@ -1,0 +1,40 @@
+" EASY COMPILATION OF LATEX
+"Latex files, @w compiles, @o opens
+autocmd BufRead,BufNewFile *.tex let @w=':wa:!compile_article %'
+"build_pdf to compile markdown and latex files into pdfs
+autocmd BufRead,BufNewFile *.md let @w=':wa:!build_pdf %:r'
+"use serv_tex, for compiling tex on a server"
+autocmd BufRead,BufNewFile *.tex let @o=':!evince %:r.pdf &> /dev/null &'
+autocmd BufRead,BufNewFile *.md let @o=':!evince %:r.pdf &> /dev/null &'
+
+
+" OTHER NICE VIM FEATURES
+" break compatibility with vi => use cool new vim features
+set nocompatible
+
+" read file filetype and use appropriate indentation
+filetype plugin indent on
+" turn on syntax highlighting
+syntax on
+" show line numbers
+set number 
+" choose your colorscheme (scroll through with ':colorscheme ' + Tab)
+colorscheme peachpuff
+
+" remember previous indentation when pressing enter
+set autoindent
+set smartindent
+set smarttab
+" replace tabs by 4 spaces
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+set expandtab
+
+" keep at least 12 lines above and below cursor at all times
+set scrolloff=12
+" start next line after 79 characters
+set textwidth=79
+
+" show all available options when scrolling through vim commands
+set wildmenu
