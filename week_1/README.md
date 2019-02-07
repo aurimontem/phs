@@ -38,7 +38,7 @@ your **w**orking **d**irectory with ```pwd```. I think of `pwd` as your
 'compass', since it will always tell you where you are in your file system. In
 this guide and elsewhere, shell commands will be formatted as:
 
-```
+```bash
     % ls 
     my_python_file.py   my_file_1.txt   my_image_1.pdf  my_webpage_1.html
     % pwd
