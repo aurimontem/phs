@@ -27,6 +27,7 @@ our curriculum for:
 Older curriculum:
 
 -   [Spring 2018](spring_2018)
+-   [Fall 2018](fall_2018)
 
 We have guides for:
 
