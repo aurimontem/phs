@@ -30,10 +30,10 @@ cheatsheet (shell_cheatsheet.md) in this directory instead.
 Basic shell commands
 --------------------
 
-With the command line installed, look to see what is in your current directory
+With the command line installed, we can now start to work with the shell.  This interface might seem intimidating, but in reality it's simply a different way of performing the same interactions with your computer that are already second nature to you in the GUI paradigm.  First off, lets try to get our bearings.   You can look to see what is contained in your current directory
 by **l**i**s**ting the files in this directory by typing ```ls``` (then Enter).
 Then, look to see where you were located in your file system by **p**rinting
-your **w**orking **d**irectory with ```pwd```. I think of `pwd` as your
+your **w**orking **d**irectory with ```pwd```. You can think of `pwd` as your
 'compass', since it will always tell you where you are in your file system. In
 this guide and elsewhere, shell commands will be formatted as:
 
