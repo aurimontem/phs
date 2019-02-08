@@ -66,7 +66,7 @@ Copy this line of text using `yy`.
 Then navigate to this line, and paste it using `p`.
 Then cut this line using `dd`, and place it at the top of this block.
 
-Then cut all four of 'these' lines by calling `4dd` on this line.
+Then cut all four of 'these' lines by calling `4dd` or 'd4d' on this line.
 This is a 'these' line.
 This is a 'these' line.
 This is a 'these' line.
@@ -103,7 +103,7 @@ Protip: Abuse `u` and `Ctrl-R`, they remember quite a bit for you.
 Copying and pasting multiple lines
 ----------------------------------
 
--   Ensure you are in 'Normal' mode by pressint Esc, then enter 'Visual' mode
+-   Ensure you are in 'Normal' mode by pressing Esc, then enter 'Visual' mode
     by pressing `v`.
 -   Use normal navigation to select the text you want to copy/cut
 -   `x` or `d` to cut the selected text
