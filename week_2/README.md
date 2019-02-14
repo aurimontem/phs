@@ -67,8 +67,10 @@ installed with:
 
 Rearranging files in the shell
 ------------------------------
-Now that we're in week_2 (check with `pwd`), we're going to make a fake
-directory that holds our classwork with `mkdir classes`. Now move into this
+Now that we are a little more familiar with the command line,
+and also with using ```vim```, we can start to be a little more adventurous.
+We're going to make a fake directory that holds our classwork with `mkdir classes`.
+ Now move into this
 directory, using tab complete. Let's make a new empty file for quantum with
 `touch quantum` (check to see that it is empty using `cat`, `head`, `tail`, or
 `ls -lah`). Print text in the shell using `echo` (try `echo "Hello, world"`).
@@ -80,9 +82,9 @@ overwrites. Therefore we can remind ourselves about more E&M things with `echo
 for classical mechanics with `vim classical`, write your favorite equation in
 insert mode (press `i` in regular mode), escape insert mode with Esc, and write
 and quit (= save and close) the file with `:wq` in regular mode.
-```
+```bash
     % pwd
-    /home/eric/phs/week_2/classes
+    /home/eric/phs/week_1/classes
     % touch quantum
     % echo "Maxwell's equations" > em
     % echo "everything is a multipole expansion" >> em
@@ -99,7 +101,7 @@ and quit (= save and close) the file with `:wq` in regular mode.
 ```
 
 What if we want to learn information from all of these files at once? We can
-use the wildcard operator `*`, which returns all matching entries. For example,
+use the wildcard operator ```*```, which returns all matching entries. For example,
 `ls *` will list all of the files, `ls e*` will only return entries that begin
 with e (this will return em), and `ls *m` will only return entries that end
 with m (this will return em and quantum). Try out these commands.
@@ -109,7 +111,7 @@ typically except a filename. For example, to list all of the contents of all of
 our files, we can use `cat *` (con**cat**enation). Even further, we can take
 all of our class information and turn it into one big file by **redirecting**
 the output of `cat *` to a new file with `>`:
-```
+```bash
     % cat * > all_my_classes
     % ls
     all_my_classes  classical  em  quantum
@@ -123,33 +125,34 @@ Let's say that `classical` is a well-made file, and we want to use it as a
 template for some other file. **C**o**p**y it to a new file with `cp classical
 new_classical`. Let's additionally say that we want our ``all_my_classes`` file
 to be more specific, so we can **m**o**v**e it to have a new name with `mv
-all_my_classes class_notes_fall_2018`.
+all_my_classes class_notes_winter_2019`.
 
 Let's say that you really didn't like quantum and didn't learn anything (hence
 why it is empty!). To **r**e**m**ove the file, we use `rm quantum`. Ensure we
 have removed it with `ls`. WARNING: This is not your childproofed delete from
 Windows or Mac-- when you remove something, it is gone for good. There is no
 recycle bin (unless you choose to make one). `rm` can be dangerous, especially
-when combined with the wildcard (be very careful before running `rm *`!).
+when combined with the wildcard (be very careful before running ```rm *``` !).
 
-Now it is falltime, and we need to do some fall cleaning to make our
+Suppose now that we want to due some file pruning to clean up for the new year
+and to make our
 classes directory relevant for this quarter. Let's make a separate directory in
-the parent directory for classes from fall 2018:
-```
-    % mkdir ../fall_2018
+the parent directory for classes from winter 2019:
+```bash
+    % mkdir ../winter_2019
     % ls ..
-    classes     README.md   fall_2018
+    classes     README.md   winter_2019
     % pwd
-    /home/eric/phs/week_2/classes
+    /home/eric/phs/week_1/classes
 ```
 
 Note that here we executed commands 'remotely' by using them with the
 parent directory variable `..`. Now, we wish to move all of our files to this
-`fall_2018` directory, which we can do with `mv * ../fall_2018`. Here the
+`winter_2019` directory, which we can do with `mv * ../winter_2019`. Here the
 wildcard selects all files, and moves them to our recently created directory.
-Ensure this is the case with `ls` and `ls ../fall_2018`. Finally move to the
-week_2 directory with `cd ..`. If you want, you can delete the two
-directories you created with `rm -r fall_2018 classes`, but you can also keep
+Ensure this is the case with `ls` and `ls ../winter_2019`. Finally move to the
+week_1 directory with `cd ..`. If you want, you can delete the two
+directories you created with `rm -r winter_2019 classes`, but you can also keep
 them if you want. Again, be careful! `rm -r` will delete without asking for
 your approval, and there is no 'undo'.
 
