@@ -684,8 +684,8 @@ commands you would use in python:
 
 ```python
 % python3
->>> print("Hello, world!")
-Hello, World!
+>>> print("Hello World!")
+Hello World!
 >>> 8*2
 16
 >>> 8**2
