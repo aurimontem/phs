@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 # CALL:    compile_article filename.tex
 # RETURNS: filename.pdf
 

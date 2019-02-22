@@ -4,10 +4,10 @@ Programming Help Sessions (PHS): Week 3
 Welcome back!
 
 If you were here last week and you have already cloned the github repository,
-you can update the phs directory with all of my new updates by navigating to
-the `phs` directory (by **c**hanging **d**irectories with `cd phs`), and then
+you can update the phs directory with all of the new updates by navigating to
+your `phs` directory (by **c**hanging **d**irectories with `cd phs`), and then
 running `git pull`. This command 'pulls' any updated files from the github
-repo into your own personal computer. Sometimes, `git` is worried about
+repo onto your own personal computer. Sometimes, `git` is worried about
 overwriting changes you've made to files, and so you won't be able to `pull`
 until you run `git reset --hard HEAD~`, after which you can run `git pull`.
 This deletes any changes you've made to your `phs/` directory since the last
@@ -17,22 +17,24 @@ the new version.
 Customize your Linux environment
 --------------------------------
 This week we are going to learn how to "customize" your shell environment. The
-way to do this in the shell is with `rc` files, such as a `.bashrc` or a
+way to do this in the shell is with *Run Command* or `rc` files, such as a `.bashrc` or a
 `.vimrc`. These are configuration files that customize a program-- in this case
 , the files configure bash or vim respectively. However, `rc` files exist for
 many programs (if you use matplotlib for plotting in python you can use a
 `.matplotlibrc` to customize default fontsizes or colors, or Linux users have
-an `.xinitrc` that configures their graphics). These files are called
+an `.xinitrc` that configures their graphics). These files are sometimes referred to as
 "dotfiles", since they begin with a `.`, and they are all located in your home
-directory. These files are "hidden files", which means you need to use `ls -a`
+directory. All dotfiles are files are "hidden", which means you need to use `ls -a`
 to see them (`-a` is the parameter for "all files").
 
-I think of `rc` files as an abbreviation for "runtime configuration" (even though this
-is technically not what it stands for). The way a `.bashrc` file works, is that
-when you open a bash shell, the commands in your `.bashrc` file are executed
-immediately, line by line. How do you check that your shell (terminal) is
-running bash? Check with:
-```
+Remembering the elaboration *Run Command*(s) is a useful mnemonic for understanding how
+`rc` files work.  Consider your `.bashrc` file. First off, bash is a \*nix shell and
+ command language that allows you to interact with your operating systems kernel from the command
+line. In other words, (for most people at least) bash is the actual program that interprets the
+commands you type in your shell and sends them to the kernel for execution.  Of course, there
+are other options for shell command languages that some people prefer to use.
+ How do you check that your shell is running bash? Check with:
+```bash
     % echo $SHELL
     bash
     % echo $0
@@ -44,16 +46,17 @@ are `$USER` (your username) and `$HOME` (your home directory). You can change
 directories to your home directory with `cd $HOME` (check with `pwd`), or you
 can use the shorthand `cd ~`. That's right-- `~` and `$HOME` store the same
 value:
-```
+```bash
     % echo ~
     /home/eric
     % echo $HOME
     /home/eric
 ```
 
-Anyways, we are getting off track. You are using a `bash` shell, so your
-`.bashrc` file is executed line by line in bash every time you start up bash or
-open a terminal. Let's test this. Move to your home directory with `cd ~`. Do
+Let's get back to `rc` files. We have now established that you are using a `bash` shell.
+ So what does your `.bashrc` file do?  Every time you open up an instance of your bash shell,
+the commands in your `.bashrc` are executed immediately and line-by-line.
+ Let's test this. Move to your home directory with `cd ~`. Do
 you have a `.bashrc` file already? If you `ls`, you will not see any dotfiles--
 use `ls -a` or `ls -lah` instead. Do you see a `.bashrc` file? In either case,
 let's open it in vim: `vim .bashrc`.
@@ -62,14 +65,14 @@ I'm going to add a few nonsense bash commands to demonstrate how the `.bashrc`
 works. If you have a `.bashrc` file that contains text, leave the existing text
 alone, but elsewhere add the lines (in vim use `hjkl` to move, `i` for insert
 mode, and `Esc` to escape, and `:wq` to write and quit):
-```
+```bash
     echo "hey there"
     cd phs
     pwd
 ```
 
 Now open and close your `bash` shell. What happened? To me, I see:
-```
+```bash
     hey there
     /home/eric/phs
     % 
@@ -89,32 +92,37 @@ we will revisit this at the end of the session.
 
 Creating simple bash scripts
 ----------------------------
-Now move back to the `week_3` directory with `cd phs/week_3`.  We learned last
-week how to make python scripts executable, with the sh-bang `#!/bin/env
-python3`. We can make `bash` scripts executable, by making a file in vim and
-adding the sh-bang `#!/bin/env bash`, and executing it. Let's make a file
+We are now going to learn how to create simple bash scripts.  A bash script is a list
+of bash commands in a file that are all exectuted when you call the file as an exectutable
+program.  Move back to the `week_3` directory with `cd phs/week_3`. Let's make a file
 `my_bash_script` in vim with `vim my_bash_script`, that contains
 ```bash
-    #!/bin/env bash
+    #!/bin/bash
     echo My name
     echo is
     echo INSERT YOUR NAME HERE
 ```
-Then, exit insert mode with `Esc` and write and quit vim with `:wq`.  As
-before, we need to make this file executable (`chmod`), and then execute it
+Take special notice of the first line.  A script must always begin with a "sh-bang"
+or "shebang", i.e, the number sign and exclamation mark `#!`.  In a \*nix system,
+whenever a text file is used as if it is an executable, the file's first line is parsed
+as an *interpreter directive*, which consists of a `#!` followed by a path to a specified
+interpreter program ( here we have `#!/bin/bash` ).  The interpreter program is then
+executed, passing it as an argument to the path that was initially used when attempting
+to run the script. Exit insert mode with `Esc` and write and quit vim with `:wq`.  We
+now need to change the scripts files permission so that it can be run as an executable.
+This is done using the command `chmod`. Only then can the file be executed
 (`./file_to_be_executed`). In the shell, run
-```
+```bash
     % chmod u+x my_bash_script
     % ./my_bash_script
     My name
     is
-    Eric
+    Dillon
 ```
-
 Let's be a little more creative: edit this file again with `vim
 my_bash_script`, but this time make it read:
 ```bash
-    #!/bin/env bash
+    #!/bin/bash
     echo This file has parameters 
     echo $0
     echo $1
@@ -123,7 +131,8 @@ my_bash_script`, but this time make it read:
 
 We can run the file immediately (without `chmod`) since it already has
 executable permissions. We find that by running it, it outputs:
-```
+
+```bash
     % ./my_bash_script
     This file has parameters
     ./my_bash_script
@@ -132,7 +141,7 @@ executable permissions. We find that by running it, it outputs:
 ```
 Interesting-- `$0` returns the name of the function that we are running. What
 do `$1` and `$2` do? Let's try running the file again, but pass parameters:
-```
+```bash
     % ./my_bash_script physics rules
     This file has parameters
     ./my_bash_script
@@ -151,7 +160,7 @@ physics rules`. This is inconvenient-- when we run the command `vim`, or
 `less`, or `head`, or `cat`, these functions all work without needing to
 explicitly state where they are located. Hey-- where are they located? Use the
 command `which` to figure it out:
-```
+```bash
     % which vim
     /usr/bin/vim
     % which cat
@@ -166,7 +175,7 @@ in the shell are located (try out `ls /usr/bin` and scroll through the list).
 Why is it that these programs can be executed from anywhere? The answer is in
 the shell variable `$PATH`, which is a list of directories that your shell
 searches through whenever you run a command. Look at what is in your path with
-```
+```bash
     % echo $PATH
     /usr/local/sbin:/usr/local/bin:/usr/bin
 ```
@@ -176,30 +185,28 @@ directories in the `$PATH` variable.  In general people will have different
 shell will look through every directory in `$PATH` looking for an executable
 program that is named `foo`, and once it finds one, it executes it. We want to
 make a **personal** `bin` directory in our home directory, in which we can
-place scripts that we have made. In my `bin` folder (located at `~/bin`, aka
-`/home/eric/bin`), I have 17 scripts that my friends and I have made and shared
-with each other.
+place scripts that we have made. Once we add this directory to our `$PATH` variable,
+ we will be able to execute them from anywhere.
 
-To make a personal bin folder, we need to add it to the $PATH. Find where your
-home directory is with `echo $HOME`-- I am assuming this returns
-`/home/your_username`. Then, to add a new personal `bin` folder to your
+Navigate to your `$HOME` folder by typing `cd`.  First check if a `bin`
+folder exists in the home directory with `ls ~`. If it does not, make it with
+`mkdir ~/bin`.  Now, we need to add this directory to the $PATH. 
+Remind yourself of the full path to this folder by typing `echo $HOME` or `pwd`.  For example,
+your output might be `/home/your_username`. To add your personal `bin` folder to your
 `$PATH`, in bash run the command
-```
+```bash
     % PATH=$PATH:/home/your_username/bin
 ```
-(for me I run `PATH=$PATH:/home/eric/bin`). If this `/home/your_username/bin`
+(for me I run `PATH=$PATH:/home/dillon/bin`). If this `/home/your_username/bin`
 is already in your `$PATH`, you don't need to do this.
 
-By redefining the `$PATH` variable, we can now create a new `bin` folder in our
-home directory, and move our script to that directory. First check if a `bin`
-folder exists in the home directory with `ls ~`. If it does not, make it with
-`mkdir ~/bin`. Then move our script to the new `bin` directory with `mv
+Now move your script to the new `bin` directory with `mv
 my_bash_script ~/bin`. `ls .` to ensure it is gone, and `ls ~/bin` to ensure it
 was moved.
 
 Now, we can run the command `my_bash_script` even without the `./` part, just
 like we would run `less` or `cat`! Try it out:
-```
+```bash
     % my_bash_script physics rules
     This file has parameters
     /home/eric/bin/my_bash_script
@@ -215,7 +222,7 @@ However, the crux was updating the `$PATH` variable. If we restarted bash,
 either with `vim ~/.bashrc`, and add the line
 `PATH=$PATH:/home/your_username/bin`, or we can use the redirect command `>>`
 and do it in one bash command
-```
+```bash
     % echo PATH=$PATH:/home/your_username/bin >> ~/.bashrc
 ```
 which will append the command to the `.bashrc`. Now you can restart bash, and
@@ -232,7 +239,7 @@ print out the document.
 
 Briefly look at the LaTeX syntax with `less skeleton_document.tex`. We will
 compile this document into a pdf using `pdflatex MY_FILE.tex`:
-```
+```bash
     % pdflatex skeleton_document.tex
     This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex)
      restricted \write18 enabled.
@@ -248,8 +255,8 @@ If you `ls`, you should now see additional files, including
 `skeleton_document.pdf`. Let's open this file with a pdf viewer:
 + Mac OSX: run `open skeleton_document.pdf`. `open` in Mac will automatically
   map to the proper program for whatever file type you are opening
-+ Ubuntu: run `evince skeleton_document.pdf`, or some other pdf viewer (I use
-  `mupdf skeleton_document`). If you want to make this feel more fluid, you can
++ Ubuntu: run `evince skeleton_document.pdf`, or some other pdf viewer (e.g.
+  `mupdf`). If you want to make this feel more fluid, you can
   add the line `alias pdf='evince'` to your `.bashrc`, and then use the command
   `pdf skeleton_document.pdf`.
 + Windows: This is a little tricky. Windows Subsystem for Linux allows you to
@@ -295,7 +302,7 @@ that we don't need. We can remove these files with the script
 `ls -lah`, and run it with `./clean_up_files`. Note what your workspace looks
 like before and after. Let's add this script to our bin, so that we can use it
 anywhere:
-```
+```bash
     % cp clean_up_files ~/bin
 ```
 
@@ -324,12 +331,12 @@ removes any unnecessary files that are made during the compilation process.
 These scripts are useful in many different contexts. Therefore, we should make
 them accessible from anywhere! To do this we will copy the `compile_article` to
 our bin, where `clean_up_files` is already located:
-```
+```bash
     % cp compile_article ~/bin
 ```
 
 Now, you can check to see that you can call these scripts from anywhere:
-```
+```bash
     % which clean_up_files
     /home/eric/bin/clean_up_files
     % which compile_article
@@ -356,7 +363,8 @@ Also in this document, you will see how to include graphics, how to draw in
 LaTeX using tikz, how to include sets of equations, and how to cite references
 without using BiBTeX.
 
-To see an example research report (my final from Parallel Computing, where I
+To see an example research report (Eric Jones' final report for 
+Parallel Computing, a class at Colorado School of Mines, where he
 parallelized matrix multiplication), look in the `example_tex_report`
 directory. Compile and view the document as usual.
 
@@ -458,8 +466,7 @@ use `@o`.
 ```vim
 autocmd BufRead,BufNewFile *.tex let @o=':!EDITOR %:r.pdf &>/dev/null &'
 ```
-You should replace the word EDITOR by the pdf viewer of your choice-- I like
-`mupdf`, but `evince` is another good choice. For Mac, I would recommend
+You should replace the word EDITOR by the pdf viewer of your choice.  For Mac, I would recommend
 replacing it by `open`. For me, this command reads
 ```vim
 autocmd BufRead,BufNewFile *.tex let @o=':!mupdf %:r.pdf &>/dev/null &'
@@ -489,8 +496,8 @@ and the shell organizes the input and output in a user-friendly command line).
 Your `.bashrc` file is executed line by line in bash every time you start up
 bash or open a terminal, which effectively personalizes your shell.
 
-Ensure you are in the `week_2` directory with `pwd`. A sample bashrc is already
-in this `week_2` directory as `my_bashrc`.  Investigate it with
+Ensure you are in the `week_3` directory with `pwd`. A sample bashrc is already
+in this `week_3` directory as `my_bashrc`.  Investigate it with
 `head`/`tail`/`cat`.  See if you have a `.bashrc` already located in your home
 directory. Since it is a dotfile, you need to specify the `-a` (all) command to
 ls: `ls -a ~`. Whether or not you already have one, open one in vim with `vim
