@@ -97,7 +97,7 @@ of bash commands in a file that are all exectuted when you call the file as an e
 program.  Move back to the `week_3` directory with `cd phs/week_3`. Let's make a file
 `my_bash_script` in vim with `vim my_bash_script`, that contains
 ```bash
-    #!/bin/bash
+    #!/usr/bin/env bash
     echo My name
     echo is
     echo INSERT YOUR NAME HERE
@@ -122,7 +122,7 @@ This is done using the command `chmod`. Only then can the file be executed
 Let's be a little more creative: edit this file again with `vim
 my_bash_script`, but this time make it read:
 ```bash
-    #!/bin/bash
+    #!/usr/bin/env bash
     echo This file has parameters 
     echo $0
     echo $1
