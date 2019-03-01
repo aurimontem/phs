@@ -281,23 +281,6 @@ BEWARE: If you have a compilation error, you won't return from vim until you
 ignore it (press `X` three times-- you need to press it three times since we
 are using pdflatex three times so that bibliographies are properly compiled).
 
-Some vim practice
------------------
-Let's get some practice modifying documents in vim. Open
-`skeleton_document.tex` in vim, and scroll down to line 24. Autocompile it
-regularly, open it as a pdf, and then every time you compile it refresh the pdf
-to see how you changed it. This is how latex is meant to be done. Get practice
-by doing the following tasks (autocompiling each time):
-
-+ Modify some of the math on lines 16 and 18
-+ Follow the instructions and fix the typos on lines 24-33
-+ Add an item to the itemize environment (line 49-ish) with your favorite type
-  of ice cream
-+ Make a sub-sub-list by making a new enumerate environment within the existing
-  ones on line 58
-+ Break the Pythagorean theorem by adding an extra constant (line 65-ish)
-+ Add a new row to the matrix (line 75-ish)
-
 
 Making LaTeX-quality documents simply with Markdown
 ---------------------------------------------------
@@ -380,8 +363,24 @@ markdown into a beamer document (it turns different headings into new slides).
 In fact, the document you are reading right now is actually a `README.md` file
 created in markdown!
 
-More vim practice
+
+Some vim practice
 -----------------
+Let's get some practice modifying documents in vim. Open
+`skeleton_document.tex` in vim, and scroll down to line 24. Autocompile it
+regularly, open it as a pdf, and then every time you compile it refresh the pdf
+to see how you changed it. This is how latex is meant to be done. Get practice
+by doing the following tasks (autocompiling each time):
+
++ Modify some of the math on lines 16 and 18
++ Follow the instructions and fix the typos on lines 24-33
++ Add an item to the itemize environment (line 49-ish) with your favorite type
+  of ice cream
++ Make a sub-sub-list by making a new enumerate environment within the existing
+  ones on line 58
++ Break the Pythagorean theorem by adding an extra constant (line 65-ish)
++ Add a new row to the matrix (line 75-ish)
+
 Make your own CV! Open the file `cv_simple.tex` in vim, and find all of the
 fake names (Ann Ersha) with `/Ann Ersha`, then `Enter`, and scroll between
 instances with `n` (forwards) or `N` (backwards). For each one, replace the
