@@ -14,7 +14,7 @@ directory.
 Last time, we installed LaTeX. We need to install a few other packages for this
 time, too. In a separate terminal, run the commands:
 
-On Windows or Ubuntu (in Windows Subsystem for Linux):
+On Windows (in Windows Subsystem for Linux) or Ubuntu:
 + `sudo apt-get install texlive-latex-recommended texlive-latex-extra
   texlive-font-utils pandoc evince`
 
@@ -24,9 +24,12 @@ On Mac:
   https://raw.githubusercontent.com/Homebrew/install/master/install)"`
 + Install `mactex`, a package containing LaTeX and many of its commonly used
   modules, with `brew cask install mactex`
-+ Install pandoc with `brew install pandoc`
++ Install `pandoc` with `brew install pandoc`. 
 + Restart your terminal
 
+Notice the new piece of software `pandoc`, which is capable of converting files
+between various markup formats.  We will use it today to convert Markdown files
+directly into PDF files.
 Once this download is complete, ensure you have `latex` and `pdflatex`
 installed with:
 ```
@@ -38,8 +41,8 @@ installed with:
 
 A sidenote for Mac users, and bash syntax for everyone:
 -------------------------------------------------------
-In the past we have modified a `.bashrc` file that configures our bash
-experience when we work in bash. However, when opening Terminal in Mac OS, bash
+Last week, we learned how to modify our `.bashrc` file that configures our bash
+experience. However, when opening Terminal in Mac OS, bash
 looks for the file `.bash_profile` instead of `.bashrc` (as it does in
 Linux/WSL).  Therefore, Mac users should ensure that their `.bash_profile` is
 'linked' to their `.bashrc`, which is accomplished by opening your
@@ -52,26 +55,41 @@ if [ -f ~/.bashrc ]; then
 fi
 ```
 
-The first line is your standard if statement, where the conditional `[ -f ~f
-~/.bashrc ]` is a little funky. The single brackets `[]` literally invoke the
-`test` command (see `man test`), which returns True or False depending on the
-expression. Here we are asking if a file exists (`-f`) called `~/.bashrc`.
+For those of you who are unfamiliar,
+this type of logical structre is called an `if` statement.
+ In the first line, the single brackets `[]` literally invoke the
+`test` command (see `man test`), which returns `true` or `false` depending on the
+expression. If the conditional `[ -f 
+~/.bashrc ]` is determined to be true, then the contents of the `if` statement are
+subsequently evaluated. 
+   Here we are asking if a file exists (`-f`) called `~/.bashrc`.
 
-The second line executes the `.bashrc` file-- remember, it is just a bash
-script, full of bash commands, and is therefore executable! The third line is
-the bash syntax for ending an if statement (`fi` is if backwards). In all,
-whenever a login shell is entered (such as when Terminal is opened in Mac OS),
+The content of the `if` statement  executes the `.bashrc` file-- remember, it is just a bash
+script, full of bash commands, and is therefore executable! The final line is
+the bash syntax for ending an if statement (`fi` is if backwards). 
+Whenever a login shell is entered (such as when Terminal is opened in Mac OS),
 `.bash_profile` will be called, and the above code will call the text in
 `.bashrc`. Therefore, you can now enter text into the `.bashrc` and it will
 customize your bash session as you would expect.
 
-Adding some tools to your `.bashrc`
------------------------------------
-Let's update our `.bashrc` files a little, with some of the functions I use on
-a daily basis. Open up my example file `my_bashrc` in this directory with `vim
+Customize your shell user experience with a `.bashrc`
+-----------------------------------------------------
+Files in your home directory that start with a `.` (they are 'hidden') and end
+in `rc` are configuration files for given program. Today we will modify a
+`.bashrc`, which gives options for bash (which is probably the shell you are
+using). You can ensure this with `echo $0` (every line you enter into the shell
+is literally passed to the `bash` function (or whatever this command returned),
+and the shell organizes the input and output in a user-friendly command line).
+Your `.bashrc` file is executed line by line in bash every time you start up
+bash or open a terminal, which effectively personalizes your shell.
+
+A sample `.bashrc` with some useful commands can be found in this `week_4`
+directory under the file name `my_bashrc`.
+ Open up my example file `my_bashrc` in this directory with `vim
 my_bashrc`. Once open, open your actual `.bashrc` file with `:vsplit ~/.bashrc`
-in vim. Switch between the two sides of vim with `Ctrl+w Ctrl+w`. Yank entire
-lines with `yy`; or sweep out whole lines with `V`, then sweep with `jk`, then
+in vim. Switch between the two sides of vim with `Ctrl+w Ctrl+w` or by using
+`Ctrl-h` and `Ctrl-l`.
+Yank entire lines with `yy`; or sweep out whole lines with `V`, then sweep with `jk`, then
 yank with `y`. Then switch windows with `Ctrl+w Ctrl+w`, then paste with `p`.
 Or, if you want, you can go into insert mode (`i`) and write the commands by
 hand.
@@ -84,9 +102,10 @@ files with `:wqa` in vim. To use the new `.bashrc`, either run `source
 Let's take a closer look at one of these functions, `vv`. When you call it, it
 makes a new variable called `temp` that is the output of a series of piped
 commands. Piece by piece, `ls -tr` lists files in time-reversed order, so
-that the most recently modified files are at the end. `*.(tex|md|py)` only
-lists the files that end in `.tex`, `.md`, or `.py` files (which are the text
-files I generally work with-- you can change this as needed). We pipe this
+that the most recently modified files are at the end. `*.+(tex|md|py)` only
+lists the files that end in `.tex`, `.md`, or `.py` files (these are just suggestions
+for type of text
+files people generally work with-- you can change this as needed). We pipe this
 output into tail, and take the final entry (i.e. the name of the file that was
 more recently modified). We store this file as the variable `temp`, and then
 state it in the terminal, and open it in vim. Try out the different pieces of
@@ -114,23 +133,18 @@ that your machine is up to date:
   executable scripts. Do you have this directory? Check with `ls ~/bin`-- if
   this gives an error, then you do not have it.
 + We added this bin to the `$PATH` bash local variable, but including a line in
-  our `.bashrc` that says `PATH=$PATH:/home/eric/bin`, where `/home/eric` on
+  our `.bashrc` that says `PATH=$PATH:/home/dillon/bin`, where `/home/dillon` on
   your machine should be your home directory (check `echo $HOME` if you're not
   sure what that is)
   + Check that this worked by looking at your `$PATH` variable with the
     command `echo $PATH`. At the end of it, you should see `<other
-    text>:/home/eric/bin`.
+    text>:/home/dillon/bin`.
   + Remind yourself that the `.bashrc` is the configuration file that is
     executed every time you open bash. Therefore, this reassignment of the
     `$PATH` variable occurs every time you open your computer.
 + We have some files in the `bin` from last week. They are included in this
   week's directory as well. Ensure they are in your path with `which
   compile_article` and `which clean_up_files`.
-+ However: I have made some changes to these files, the new version of which is
-  in the current directory. Replace the existing files with the new ones with
-```
-    % cp clean_up_files compile_article ~/bin
-```
 + Lastly, we will be viewing graphics in this session, so if you are running
   Windows, start your X graphics server, and then restart your terminals:
   + If you followed the guide last week and installed an X server, launch the
@@ -158,6 +172,35 @@ Run `lt` to list your files in time-reversed order (the `.pdf` file should be
 the newest file). Now you can open `lais_example.pdf` using your favorite pdf
 viewer (`open` in Mac, `evince` or `mupdf` in Ubuntu or Windows (assuming your
 X server is configured)).
+
+
+LaTeX with BiBTeX
+------------------------------------------------
+
+LaTeX is widely used, and accordingly has extensive documentation for nearly
+every need. In general, (as with most things) the fastest way to learn how to
+use LaTeX is google: en.wikibooks.org/wiki/LaTeX/ is an excellent resource for
+basic issues, and StackExchange typically has solutions to any more advanced or
+specific questions.
+
+Let's now look at a simple LaTeX report template that uses BibTeX, a
+bibliography manager.  A simple report file is in `bibtex_file.tex`, which uses
+the BibTex file `bibtex_file.bib`. Each of these files are comprised of text,
+and are compiled with LaTeX. The commands necessary to compile this article are
+in `compile_article`; you can either run this bash script (`./compile_article
+bibtex_file.tex`) or you can type out each command in the bash script, replacing
+the `$filename` by `bibtex_file`. The commands of this script are `pdflatex`--
+which we used earlier-- and `bibtex`, which is a command used to get your
+references right. When using `bibtex`, you need to compile the article multiple
+times (as in the script) in order for the program to learn what references go
+where correctly. Also, this script runs `clean_up_files` at the end, which
+removes any unnecessary files that are made during the compilation process.
+
+Open both the `.tex` and the `.bib` file in vim, using `vim bibtex_file.tex`
+and then `:tabe bibtex_file.bib` in vim. Switch between these two files with
+`gt`, which stands for **g**oto **t**ab. Note the format of the `.bib` file.
+This citation is typically available for any scientific journal, look for the
+'download citation' link on the article website.
 
 Easy latex compilation with your `.vimrc`
 -----------------------------------------
@@ -216,19 +259,18 @@ filename of the document you are currently editing.
 Lines 7 and 8 of `my_vimrc` allow us top open the file through vim. In the same
 way as before, it uses the editor `evince` to open the proper `pdf` file. In
 Mac, you should replace `evince` by `open` (which is the default Mac graphics
-viewer). In Windows/Ubuntu, if you prefer to use a different pdf viewer, use
-that (I like `mupdf`, and so I replace `evince` by `mupdf`).
+viewer). For all users, fee free to replace this command with whichever PDF viewer
+you prefer (`mupdf` for instance).
 
 Again, the formatting is weird due to the special character `^M`-- view this
 file in vim in order to copy and paste.  Here, we've simply added another macro
-for Vim to use when we open `.tex` files.  This macro calls the command `mupdf
-%:r.pdf &>/dev/null &`. `mupdf` is a pdf viewer (you may have `okular` or
-`evince` - check by running those commands in your terminal).  The `%:r` will
+for Vim to use when we open `.tex` files.  This macro calls the command `evince
+%:r.pdf &>/dev/null &`. The `%:r` will
 be replaced with the filename minus the extension (`report.tex` -> `report`),
 so that `%:r.pdf` will be replaced by the filename minus the initial extension
 plus `.pdf` (`report.tex` -> `report.pdf`).  The `&>/dev/null` tells the shell
-to throw away output (any minor errors that `mupdf` has, etc), and the final
-`&` tells `mupdf` to run in the background, so that Vim will stay open and
+to throw away output (any minor errors that `evince` has, etc), and the final
+`&` tells `evince` to run in the background, so that Vim will stay open and
 visible.
 
 Now compiling articles and viewing them are hotkeyed in vim as `@w` and `@o`.
@@ -326,14 +368,17 @@ often-confusing LaTeX syntax.
 
 Finally, open the file `beamer_in_markdown.md`. Compile it with `@w` and open
 it with `@o`. This is a beamer (latex-style) file, useful for presentations,
-made in markdown! Easy text produces beautiful slides. (This is how I do all of
-my slides!)
+made in markdown! This workflow makes it easy to produce high-quality slides for
+presentations with only a few lines of text.
 
-I use markdown as my go-to for casual note taking. For example, I annotate
-papers that I read in a `papers.md` document with headers and bullet points; I
-make notes for skype meetings with a collaborator using `pandoc` to turn my
-markdown into a beamer document (it turns different headings into new slides);
-and right now I am writing a PHS `README.md` file in markdown.
+This workflow also makes markdown extremely useful
+ for casual note taking. For example, You can annotate
+papers that you read in a `papers.md` document with headers and bullet points.
+Alternatively, you can 
+make notes for skype meetings with a collaborator using `pandoc` to turn your
+markdown into a beamer document (it turns different headings into new slides).
+In fact, the document you are reading right now is actually a `README.md` file
+created in markdown!
 
 More vim practice
 -----------------

@@ -4,11 +4,24 @@
 
 # get filename without .tex extension
 filename=${1%.*}
+bibname=$filename".bib"
 
-pdflatex $filename
-bibtex $filename
-pdflatex $filename
-pdflatex $filename
+# if there is a bibliography .bib file called $bibname, then:
+if [ -e "$bibname" ]; then
+    pdflatex $filename
+    bibtex $filename
+    pdflatex $filename
+    pdflatex $filename
+    echo
+    echo "... Compiled LaTeX file w/ BiBTeX citations to "$filename".pdf"
+# if the .bib file does not exist:
+else
+    pdflatex $filename
+    echo
+    echo "... Compiled standard LaTeX file to "$filename".pdf"
+fi
 
-clean_up_files &> /dev/null
-#clean_up_files
+# if clean_up_files is already in ~/bin:
+clean_up_files
+# if clean_up_files is not in the bin, and is only in this directory:
+# ./clean_up_files

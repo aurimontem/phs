@@ -6,14 +6,14 @@ alias ls='ls --color=auto' # for mac it should be alias ls='ls -G'
 # list files backwards in time since last edit
 alias lt='ls -cltrh'
 
-# automatically cd upon ls-ing
+# automatically ls upon cd-ing
 function cd {
     builtin cd "$@" && ls
 }
 
 # open the last text file you edited with vim
 function vv() {
-    temp=$(ls -tr *.(tex|md|py) | tail -n1)
+    temp=$(ls -tr *.+(tex|md|py) | tail -n1)
     echo $temp
     vim $temp
 }
