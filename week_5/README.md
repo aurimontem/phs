@@ -19,6 +19,130 @@ We will be viewing graphics in this session, so if you are running
   + If you are on a lab computer, launch the program XLaunch and accept the
     default settings (press Next three times + Finish)
 
+Using `ssh` (secure shell)
+--------------------------
+`ssh` is a protocol that allows you to securely login to a remote server. Once
+logged in, you can use the remote server in the same way that you have been
+using the shell in this course.  The security of ssh is ensured through
+cryptography, which is an entire field of study.  The idea is to encrypt
+the communication between you and the server, so that even if the communication
+is intercepted, it will be entirely indecipherable.
+
+It is common practice to use `ssh` to remotely access a different system. In
+the old days, Windows users would use the program Putty in order to `ssh` into
+Unix machines. I used to `ssh` into my college computers in order to have
+access to pay-walled research articles, or to use proprietary software (e.g.
+Mathematica) that I didn't have personal access to. My friend would `ssh` into
+his parent's computers, which allowed him to keep them updated and in good
+shape without being there in person.  Most commonly, I `ssh` into
+supercomputers, which are much faster (typically they have many more CPU or GPU
+cores) than my personal machine.
+
+I can't share my login to supercomputers that I have access to (liability,
+etc., etc.), and so we will be using a publicly available server at SDF
+(sdf.org). We will use a free account I made earlier, with username `eric2` and
+password `my_pass`. To login to the server, we use the command
+```
+    % ssh eric2@sdf.org
+```
+When prompted that "The authenticity of host 'sdf.org (205.166.94.16)' can't be
+established", type `yes` and continue. Then enter in the password `my_pass`
+when prompted, and press `Enter` a few times until you see the prompt
+```
+    sdf:/sdf/udd/e/eric2>
+```
+This is the same type of shell that we have been using all along! Try some
+familiar commands:
+```
+    % ls
+    .          ..         .history   .hushlogin .lesshst   .signature my_acct    my_file
+    % cat my_file
+    Hello
+    hello there
+    % pwd
+    /sdf/udd/e/eric2
+    % whoami
+    eric2
+```
+
+However, if you try to use different commands (like `head` or `tail`), they
+don't work. Even using `vim` doesn't work-- `vim` becomes `nano`, a different
+(equally ubiquitous) text editor. Try making a file with `vim my_name` where
+you replace my_name with your actual name. This will make the files unique--
+since everyone is logged in as the same user, if people open the same file at
+the same time, those files will be overwritten. In this text editor (which is
+not vim), you use the arrow keys to move around, and enter text normally (i.e.
+not like in vim). To save, use `Ctrl+O`, and to quit use `Ctrl+X`. In general,
+the caret `^` means `Ctrl`.
+
+Now let's explore the rest of this filesystem. With `ls -lah` we can see who
+owns which files. We can also run this on the parent directory (`..`). A sample
+of the output is:
+```
+    % pwd
+    /sdf/udd/e/eric2
+    % ls -lah
+    total 35K
+    drwx------     3 eric2  users  512B Nov 26 08:48 .
+    drwxr-xr-x  1229 new    wheel   24K Nov 25 12:36 ..
+    -rw-r--r--     1 eric2  users   10K Nov 26 09:01 .history
+    -rw-------     1 eric2  users    8B Nov 22 23:14 .hushlogin
+    -rw-------     1 eric2  users   44B Nov 26 08:14 .lesshst
+    -rw-------     1 eric2  users   61B Nov 22 22:57 .signature
+    drwxr-xr-x     2 eric2  users  512B Nov 22 22:58 my_acct
+    -rw-r--r--     1 eric2  users   18B Nov 26 08:52 my_file
+    % cd ..
+    % pwd
+    /sdf/udd/e
+    % ls -lah
+    <-- MANY OTHER DIRECTORIES -->
+    drwx------     2 erezbeyi          new    512B Sep 13 18:51 erezbeyi
+    drwx------     2 ergab             users  512B May 26  2010 ergab
+    drwxr-xr-x     2 erhjzuztert       new    512B May 22  2018 erhjzuztert
+    drwx------     2 eric13            users  512B Oct  1  2010 eric13
+    drwx------     3 eric2             users  512B Nov 26 08:48 eric2
+    drwx------     2 eric84            users  512B Aug 19  2010 eric84
+    drwx------     2 erica.parker      users  512B Oct  8 15:41 erica.parker
+    <-- MANY OTHER DIRECTORIES -->
+```
+Notice that our name and folder, `eric2`, is in this directory. We own this
+folder, but other users have their own personal folders, too. However, we
+aren't able to access most of these other people's folders:
+```
+    % cd eric84
+    /usr/local/bin/psh[622]: cd: /sdf/udd/e/eric84 - Permission denied
+```
+This is because their permissions forbid others from reading their data.
+However, some people have relaxed their permissions. `erhjzuztert`, for
+example, has a folder that others (such as us) are able to read:
+```
+    drwxr-xr-x     2 erhjzuztert       new    512B May 22  2018 erhjzuztert
+```
+Let's check out their directory with `cd erhjzuztert`. Explore with `ls`. This
+is a boring directory (only dotfiles), but you can read them with `cat` if you
+wish. If you try to make a file (e.g. with `touch my_file`), you won't be able
+to-- this is because you don't have 'write' permissions.
+
+This is the extent to which we will explore this remote server. Exit with the
+command `exit`, and press `Enter` and `Ctrl+C` a few times until you are back
+to your normal shell.
+
+Installing zsh
+--------------
+1. `sudo apt install zsh`
+2. `chsh -s /bin/zsh`
+
+Adding new functionality to your .bashrc
+----------------------------------------
++ Add `[[ -f ~/.bashrc]] && source ~/.bashrc` to your `.zshrc`
++ Augment your `.bashrc` with a new `cd`, `vv`, `pp`, `S`, and `s` functions
+
+Jeopardy
+--------
++ Let's play with a simple version of Jeopardy created at https://github.com/mph006/jeopardy 
+
+
+
 Installing Python
 -----------------
 Today we are going to be learning some basics about Python - a ubiquitous and
@@ -629,114 +753,6 @@ Simulating Random Walkers in 2D
 
 Documentation to come! Sorry for the delay!
 You might need `sudo apt-get install python3-tk` for this one.
-
-Using `ssh` (secure shell)
---------------------------
-`ssh` is a protocol that allows you to securely login to a remote server. Once
-logged in, you can use the remote server in the same way that you have been
-using the shell in this course.  The security of ssh is ensured through
-cryptography, which is an entire field of study.  The idea is to encrypt
-the communication between you and the server, so that even if the communication
-is intercepted, it will be entirely indecipherable.
-
-It is common practice to use `ssh` to remotely access a different system. In
-the old days, Windows users would use the program Putty in order to `ssh` into
-Unix machines. I used to `ssh` into my college computers in order to have
-access to pay-walled research articles, or to use proprietary software (e.g.
-Mathematica) that I didn't have personal access to. My friend would `ssh` into
-his parent's computers, which allowed him to keep them updated and in good
-shape without being there in person.  Most commonly, I `ssh` into
-supercomputers, which are much faster (typically they have many more CPU or GPU
-cores) than my personal machine.
-
-I can't share my login to supercomputers that I have access to (liability,
-etc., etc.), and so we will be using a publicly available server at SDF
-(sdf.org). We will use a free account I made earlier, with username `eric2` and
-password `my_pass`. To login to the server, we use the command
-```
-    % ssh eric2@sdf.org
-```
-When prompted that "The authenticity of host 'sdf.org (205.166.94.16)' can't be
-established", type `yes` and continue. Then enter in the password `my_pass`
-when prompted, and press `Enter` a few times until you see the prompt
-```
-    sdf:/sdf/udd/e/eric2>
-```
-This is the same type of shell that we have been using all along! Try some
-familiar commands:
-```
-    % ls
-    .          ..         .history   .hushlogin .lesshst   .signature my_acct    my_file
-    % cat my_file
-    Hello
-    hello there
-    % pwd
-    /sdf/udd/e/eric2
-    % whoami
-    eric2
-```
-
-However, if you try to use different commands (like `head` or `tail`), they
-don't work. Even using `vim` doesn't work-- `vim` becomes `nano`, a different
-(equally ubiquitous) text editor. Try making a file with `vim my_name` where
-you replace my_name with your actual name. This will make the files unique--
-since everyone is logged in as the same user, if people open the same file at
-the same time, those files will be overwritten. In this text editor (which is
-not vim), you use the arrow keys to move around, and enter text normally (i.e.
-not like in vim). To save, use `Ctrl+O`, and to quit use `Ctrl+X`. In general,
-the caret `^` means `Ctrl`.
-
-Now let's explore the rest of this filesystem. With `ls -lah` we can see who
-owns which files. We can also run this on the parent directory (`..`). A sample
-of the output is:
-```
-    % pwd
-    /sdf/udd/e/eric2
-    % ls -lah
-    total 35K
-    drwx------     3 eric2  users  512B Nov 26 08:48 .
-    drwxr-xr-x  1229 new    wheel   24K Nov 25 12:36 ..
-    -rw-r--r--     1 eric2  users   10K Nov 26 09:01 .history
-    -rw-------     1 eric2  users    8B Nov 22 23:14 .hushlogin
-    -rw-------     1 eric2  users   44B Nov 26 08:14 .lesshst
-    -rw-------     1 eric2  users   61B Nov 22 22:57 .signature
-    drwxr-xr-x     2 eric2  users  512B Nov 22 22:58 my_acct
-    -rw-r--r--     1 eric2  users   18B Nov 26 08:52 my_file
-    % cd ..
-    % pwd
-    /sdf/udd/e
-    % ls -lah
-    <-- MANY OTHER DIRECTORIES -->
-    drwx------     2 erezbeyi          new    512B Sep 13 18:51 erezbeyi
-    drwx------     2 ergab             users  512B May 26  2010 ergab
-    drwxr-xr-x     2 erhjzuztert       new    512B May 22  2018 erhjzuztert
-    drwx------     2 eric13            users  512B Oct  1  2010 eric13
-    drwx------     3 eric2             users  512B Nov 26 08:48 eric2
-    drwx------     2 eric84            users  512B Aug 19  2010 eric84
-    drwx------     2 erica.parker      users  512B Oct  8 15:41 erica.parker
-    <-- MANY OTHER DIRECTORIES -->
-```
-Notice that our name and folder, `eric2`, is in this directory. We own this
-folder, but other users have their own personal folders, too. However, we
-aren't able to access most of these other people's folders:
-```
-    % cd eric84
-    /usr/local/bin/psh[622]: cd: /sdf/udd/e/eric84 - Permission denied
-```
-This is because their permissions forbid others from reading their data.
-However, some people have relaxed their permissions. `erhjzuztert`, for
-example, has a folder that others (such as us) are able to read:
-```
-    drwxr-xr-x     2 erhjzuztert       new    512B May 22  2018 erhjzuztert
-```
-Let's check out their directory with `cd erhjzuztert`. Explore with `ls`. This
-is a boring directory (only dotfiles), but you can read them with `cat` if you
-wish. If you try to make a file (e.g. with `touch my_file`), you won't be able
-to-- this is because you don't have 'write' permissions.
-
-This is the extent to which we will explore this remote server. Exit with the
-command `exit`, and press `Enter` and `Ctrl+C` a few times until you are back
-to your normal shell.
 
 Some practice with vim and LaTeX
 --------------------------------
